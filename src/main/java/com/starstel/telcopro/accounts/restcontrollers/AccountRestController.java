@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.starstel.telcopro.accounts.entities.AppMenu;
 import com.starstel.telcopro.accounts.entities.AppRole;
 import com.starstel.telcopro.accounts.entities.AppUser;
+import com.starstel.telcopro.accounts.entities.AppUserModel;
 import com.starstel.telcopro.accounts.services.AccountService;
 import com.starstel.telcopro.rh.entities.Employee;
 
@@ -27,8 +28,8 @@ public class AccountRestController
 
 	
 	@RequestMapping(value="/users", method=RequestMethod.POST)
-	public AppUser saveUser(@RequestBody AppUser user) {
-		return accountService.saveUser(user);
+	public AppUser saveUser(@RequestBody AppUserModel userModel) {
+		return accountService.saveUser(userModel);
 	}
 
 	@RequestMapping(value="/users/{id}", method=RequestMethod.DELETE)
@@ -77,7 +78,13 @@ public class AccountRestController
 	@RequestMapping(value = "/roles", method = RequestMethod.POST)
 	public AppRole createRole(@RequestBody AppRole role)
 	{
-		return accountService.createRole(role);
+		return accountService.saveRole(role);
+	}
+	
+	@RequestMapping(value = "/roles", method = RequestMethod.PUT)
+	public AppRole editRole(@RequestBody AppRole role)
+	{
+		return accountService.saveRole(role);
 	}
 	
 	@RequestMapping(value = "/roles-count", method = RequestMethod.GET)
@@ -92,10 +99,10 @@ public class AccountRestController
 		return accountService.getRole(id);
 	}
 	
-	@RequestMapping(value="/roles/{id}", method=RequestMethod.PUT)
-	public AppRole editRole(@RequestBody AppRole role)
+	@RequestMapping(value = "/menus-of-role/{id}", method = RequestMethod.GET)
+	public List<AppMenu> getMenusOfRole(@PathVariable Long id)
 	{
-		return accountService.editRole(role);
+		return accountService.getMenusOfRole(id);
 	}
 	
 	@RequestMapping(value="/roles/{id}", method=RequestMethod.DELETE)

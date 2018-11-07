@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,6 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "appmenu")
 @Data @AllArgsConstructor @NoArgsConstructor
 public class AppMenu implements Serializable 
 {
@@ -30,13 +32,15 @@ public class AppMenu implements Serializable
     private String icon;
     private String description;
     private String color;
+    private String link;
     
-    @ManyToMany
+    @ManyToMany(mappedBy="menus")
     @JsonIgnore
     private List<AppRole> roles = new ArrayList<>();
 
     
-	public AppMenu(String name, String icon, String description) {
+	public AppMenu(String name, String icon, String description) 
+	{
 		this.name = name;
 		this.icon = icon;
 		this.description = description;

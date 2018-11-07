@@ -7,15 +7,20 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starstel.telcopro.rh.entities.Employee;
 
 import lombok.AllArgsConstructor;
@@ -41,10 +46,18 @@ public class AppUser implements Serializable
     private String email;
     private Boolean lockStatus;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "appUser")
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @JoinColumn(name = "EMPL_ID")
+    @JsonIgnore
     private Employee employee;
-
-    @ManyToMany(fetch = FetchType.EAGER)
+    
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, 
+    		fetch = FetchType.EAGER )
+    @JoinTable(name = "APPUSER_APPROLE",
+    		inverseJoinColumns = @JoinColumn(name = "ROLE_ID", nullable = false, updatable = false),
+    		joinColumns = @JoinColumn(name = "USER_ID", nullable = false, updatable = false),
+    		foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+    		inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private List<AppRole> roles = new ArrayList<>();
 
 	public AppUser(String username, String password, String email, Boolean lockStatus) {
@@ -54,6 +67,5 @@ public class AppUser implements Serializable
 		this.email = email;
 		this.lockStatus = lockStatus;
 	}
-    
     
 }

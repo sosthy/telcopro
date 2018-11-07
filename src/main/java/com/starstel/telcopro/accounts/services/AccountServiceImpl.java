@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.starstel.telcopro.accounts.entities.AppMenu;
 import com.starstel.telcopro.accounts.entities.AppRole;
 import com.starstel.telcopro.accounts.entities.AppUser;
+import com.starstel.telcopro.accounts.entities.AppUserModel;
 import com.starstel.telcopro.accounts.repositories.AppMenuRepository;
 import com.starstel.telcopro.accounts.repositories.AppRoleRepository;
 import com.starstel.telcopro.accounts.repositories.AppUserRepository;
@@ -69,13 +70,7 @@ public class AccountServiceImpl implements AccountService
 	}
 	
 	@Override
-	public AppRole createRole(AppRole role) 
-	{
-		return appRoleRepository.save(role);
-	}
-	
-	@Override
-	public AppRole editRole(AppRole role) 
+	public AppRole saveRole(AppRole role) 
 	{
 		return appRoleRepository.save(role);
 	}
@@ -83,7 +78,11 @@ public class AccountServiceImpl implements AccountService
 	@Override
 	public boolean deleteRole(Long id) 
 	{
-		appRoleRepository.deleteById(id);
+		AppRole role = appRoleRepository.findById(id).get();
+		role.getUsers().forEach(user -> {
+			user.getRoles().remove(role);
+		});
+		appRoleRepository.delete(role);
 		return true;
 	}
 	
@@ -106,10 +105,17 @@ public class AccountServiceImpl implements AccountService
 	}
 
 	@Override
-	public AppUser saveUser(AppUser user) 
+	public AppUser saveUser(AppUserModel userModel) 
 	{
-		String hashPW = passwordEncoder.encode(user.getPassword());
-		user.setPassword(hashPW);
+		AppUser user = new AppUser();
+		user.setId(userModel.getId());
+		user.setUsername(userModel.getUsername());
+		user.setPassword(passwordEncoder.encode(userModel.getPassword()));
+		user.setEmail(userModel.getEmail());
+		user.setEmployee(userModel.getEmployee());
+		user.setLockStatus(userModel.getLockStatus());
+		user.setRoles(userModel.getRoles());
+		
 		return appUserRepository.save(user);
 	}
 
@@ -167,6 +173,19 @@ public class AccountServiceImpl implements AccountService
 	@Override
 	public AppMenu getAppMenu(Long id) {
 		return appMenuRepository.findById(id).get();
+	}
+
+	@Override
+	public List<AppMenu> getMenusOfRole(Long id) 
+	{
+		AppRole role = appRoleRepository.findById(id).get();
+		
+		if(role != null) 
+		{
+			return role.getMenus();
+		}
+		
+		return null;
 	}
 
 }

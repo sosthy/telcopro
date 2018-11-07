@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.starstel.telcopro.accounts.entities.AppMenu;
 import com.starstel.telcopro.accounts.entities.AppRole;
 import com.starstel.telcopro.accounts.entities.AppUser;
+import com.starstel.telcopro.accounts.entities.AppUserModel;
 import com.starstel.telcopro.accounts.services.AccountService;
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.services.EmployeeService;
@@ -80,6 +81,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		
 		AppMenu menuProduct= new AppMenu("Inventory", "fa-building-o", "Manage stocks");
 		AppMenu menuRh= new AppMenu("Resources", "fa-tachometer", "Manage resources");
+		menuRh=accountService.createAppMenu(menuRh);
+		menuProduct=accountService.createAppMenu(menuProduct);
 		
 		AppRole admin = new AppRole();
 		admin.setRoleName("ADMIN");
@@ -88,39 +91,31 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		AppRole magasinier = new AppRole();
 		magasinier.setRoleName("MAGASINIER");
 		magasinier.setDescription("employé s'occupant d'un magasin de l'entreprise");
+		magasinier.getMenus().add(menuProduct);
 		
 		AppRole humanRessource = new AppRole();
 		humanRessource.setRoleName("RH");
 		humanRessource.setDescription("employé travaillant aux ressources humaines de l'entreprise");
+		humanRessource.getMenus().add(menuRh);
 		
 		AppRole simple = new AppRole();
 		simple.setRoleName("SIMPLE");
 		simple.setDescription("No Description");
 		
-		
-		admin = accountService.createRole(admin);
-		magasinier = accountService.createRole(magasinier);
-		humanRessource = accountService.createRole(humanRessource);
-		simple = accountService.createRole(simple);
+		admin = accountService.saveRole(admin);
+		magasinier = accountService.saveRole(magasinier);
+		humanRessource = accountService.saveRole(humanRessource);
+		simple = accountService.saveRole(simple);
 
-
-		menuProduct.getRoles().add(magasinier);
-		menuRh.getRoles().add(humanRessource);
-		
-		menuRh=accountService.createAppMenu(menuRh);
-		menuProduct=accountService.createAppMenu(menuProduct);
-		
-		
-		
-		AppUser user = new AppUser("admin","admin","sosthenegolden@gmail.com",Boolean.FALSE);
+		AppUserModel user = new AppUserModel("admin","admin","sosthenegolden@gmail.com",Boolean.FALSE);
 		user.getRoles().add(admin);
 		user.getRoles().add(simple);
 		
-		AppUser user2 = new AppUser("admin2","admin2","romeo@gmail.com",Boolean.FALSE);
-		user.getRoles().add(magasinier);
+		AppUserModel user2 = new AppUserModel("admin2","admin2","romeo@gmail.com",Boolean.FALSE);
+		user2.getRoles().add(magasinier);
 		
-		AppUser user3 = new AppUser("admin3","admin3","fabien@gmail.com",Boolean.FALSE);
-		user.getRoles().add(humanRessource);
+		AppUserModel user3 = new AppUserModel("admin3","admin3","fabien@gmail.com",Boolean.FALSE);
+		user3.getRoles().add(humanRessource);
 		
 		Employee employee = new Employee(null,"NOUEBISSI NGHEMNIN","Sosthene","693936236","rsosthenegolden@gmail.com",
 				"M","KIT272","655321007","XXXX",new Date(),new Date(),Integer.valueOf(4));
@@ -131,22 +126,18 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		Employee employee3 = new Employee(null,"Fabien","DUBUISSON","52481234","fabien.@gmail.com","M","475JHk5","78221242",
 				"romeo.png",new Date(),new Date(),Integer.valueOf(1));
 		
+		employee=employeeService.createEmployee(employee);
+		employee2=employeeService.createEmployee(employee2);
+		employee3=employeeService.createEmployee(employee3);
+		
 		user.setEmployee(employee);
 		user2.setEmployee(employee2);
 		user3.setEmployee(employee3);
 		
-		user=accountService.saveUser(user);
-		user2=accountService.saveUser(user2);
-		user3=accountService.saveUser(user3);
-
-
-		employee.setAppUser(user);
-		employee.setAppUser(user2);
-		employee.setAppUser(user3);
+		AppUser cuser=accountService.saveUser(user);
+		AppUser cuser2=accountService.saveUser(user2);
+		AppUser cuser3=accountService.saveUser(user3);
 		
-		employee=employeeService.createEmployee(employee);
-		employee2=employeeService.createEmployee(employee2);
-		employee3=employeeService.createEmployee(employee3);
 		
 		RecipientGroupe groupe1 = new RecipientGroupe(null, "FOURNISSEURS", null);
 		RecipientGroupe groupe2 = new RecipientGroupe(null, "CLIENTS", null);
