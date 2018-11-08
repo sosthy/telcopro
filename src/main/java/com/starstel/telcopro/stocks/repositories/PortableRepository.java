@@ -35,7 +35,8 @@ public interface PortableRepository extends JpaRepository<Portable, Long> {
 
 	@Query("select p from Portable p where lower(p.appColor.name) like lower(:x) or "
 			+ "lower(p.designation) like lower(:x) or lower(p.connection) like lower(:x) or "
-			+ "lower(p.battery) like lower(:x) or lower(p.ipRating) like lower(:x)")
+			+ "lower(p.battery) like lower(:x) or lower(p.ipRating) like lower(:x) or lower(concat(p.quantity,'')) like lower(:x) or " 
+			+ "lower(p.emplacement.name) like lower(:x) or lower(p.emplacement.entrepot.name) like lower(:x)")
 	public List<Portable> searchPortable(@Param("x") String motCle);
 	
 }

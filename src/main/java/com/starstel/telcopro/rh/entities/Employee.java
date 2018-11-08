@@ -31,18 +31,14 @@ import lombok.Setter;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Employee extends Person implements Serializable 
 {
-	@Id
-	@SequenceGenerator(initialValue = 1, sequenceName = "EMP_SEQ", allocationSize = 1, name = "emp_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_id")
-	private Long id;
-	
     private Date hiring_date;
     private Integer anciennete;
     @JsonIgnore
     @OneToMany(mappedBy="user")
     private Set<Mouvment> mouvments;
-    
-    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE}, mappedBy = "employee")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "USER_ID")
+    @JsonIgnore
     private AppUser appUser;
     
     
@@ -69,6 +65,16 @@ public class Employee extends Person implements Serializable
 		super(id, name, surname, portable, website, sex, cni, phone, photo, birthday);
 		this.hiring_date = hiring_date;
 		this.anciennete = anciennete;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + getId() + ", hiring_date=" + hiring_date + ", anciennete=" + anciennete + ", hashCode()="
+				+ hashCode() + ", getName()=" + getName() + ", getSurname()=" + getSurname() + ", getPortable()="
+				+ getPortable() + ", getWebsite()=" + getWebsite() + ", getSex()=" + getSex() + ", getCni()=" + getCni()
+				+ ", getPhone()=" + getPhone() + ", getPhoto()=" + getPhoto() + ", getBirthday()=" + getBirthday()
+				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + "]";
 	}
     
 }

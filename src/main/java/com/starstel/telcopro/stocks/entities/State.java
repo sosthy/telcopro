@@ -31,4 +31,11 @@ public class State implements Serializable
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="state")
 	@JsonIgnore
 	private Set<Product> productList = new HashSet<>();
+	
+	public State(String name) {
+		super();
+		this.name = name;
+	}
+	
+	
 }

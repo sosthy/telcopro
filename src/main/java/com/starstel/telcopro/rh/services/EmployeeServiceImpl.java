@@ -57,4 +57,9 @@ public class EmployeeServiceImpl implements EmployeeService
 		return employeeRepository.findById(id).get();
 	}
 
+	@Override
+	public List<Employee> createEmployee(List<Employee> employees) {
+		return employeeRepository.saveAll(employees);
+	}
+
 }

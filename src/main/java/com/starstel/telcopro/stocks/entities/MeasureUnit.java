@@ -31,4 +31,11 @@ public class MeasureUnit implements Serializable
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="measureUnit")
 	@JsonIgnore
 	private Set<Product> productList = new HashSet<>();
+	
+	public MeasureUnit(String unity) {
+		super();
+		this.unity = unity;
+	}
+	
+	
 }

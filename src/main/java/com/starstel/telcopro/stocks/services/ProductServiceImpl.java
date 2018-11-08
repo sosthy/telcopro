@@ -27,6 +27,7 @@ import com.starstel.telcopro.stocks.repositories.MeasureUnitRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentLineRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentTypeRepository;
+import com.starstel.telcopro.stocks.repositories.ProductCategoryRepository;
 import com.starstel.telcopro.stocks.repositories.ProductRepository;
 import com.starstel.telcopro.stocks.repositories.RecipientGroupeRepository;
 import com.starstel.telcopro.stocks.repositories.RecipientRepository;
@@ -54,6 +55,9 @@ public class ProductServiceImpl implements ProductService
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductCategoryRepository productCategoryRepository;
 	
 	
 	@Override
@@ -87,20 +91,20 @@ public class ProductServiceImpl implements ProductService
 		return stateRepository.findById(id).get();
 	}
 	@Override
-	public List<MeasureUnit> listMeasueUnits() {
+	public List<MeasureUnit> listMeasureUnits() {
 		return measureUnitRepository.findAll();
 	}
 	@Override
-	public MeasureUnit saveMeasueUnit(MeasureUnit measureUnit) {
+	public MeasureUnit saveMeasureUnit(MeasureUnit measureUnit) {
 		return measureUnitRepository.save(measureUnit);
 	}
 	@Override
-	public Boolean deleteMeasueUnit(Long id) {
+	public Boolean deleteMeasureUnit(Long id) {
 		measureUnitRepository.deleteById(id);
 		return true;
 	}
 	@Override
-	public MeasureUnit getMeasueUnit(Long id) {
+	public MeasureUnit getMeasureUnit(Long id) {
 		return measureUnitRepository.findById(id).get();
 	}
 
@@ -119,5 +123,22 @@ public class ProductServiceImpl implements ProductService
 	@Override
 	public List<Product> searchProducts(String keyWords) {
 		return productRepository.searchProducts(keyWords);
+	}
+	@Override
+	public List<ProductCategory> listProductCategorys() {
+		return productCategoryRepository.findAll();
+	}
+	@Override
+	public ProductCategory saveProductCategory(ProductCategory productCategory) {
+		return productCategoryRepository.save(productCategory);
+	}
+	@Override
+	public Boolean deleteProductCategory(Long id) {
+		productCategoryRepository.deleteById(id);
+		return true;
+	}
+	@Override
+	public ProductCategory getProductCategory(Long id) {
+		return productCategoryRepository.findById(id).get();
 	}
 }

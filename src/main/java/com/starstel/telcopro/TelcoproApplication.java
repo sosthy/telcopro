@@ -37,6 +37,7 @@ import com.starstel.telcopro.stocks.services.MouvmentService;
 import com.starstel.telcopro.stocks.services.PortableService;
 import com.starstel.telcopro.stocks.services.ProductService;
 import com.starstel.telcopro.stocks.services.RecipientService;
+import com.starstel.telcopro.storage.Storageable;
 
 @SpringBootApplication
 public class TelcoproApplication extends SpringBootServletInitializer implements CommandLineRunner
@@ -59,6 +60,9 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	@Autowired
 	private AppColorService appColorService;
 	
+	@Autowired
+	private Storageable storageable;
+	
 	public static void main(String[] args) 
 	{
 		SpringApplication.run(TelcoproApplication.class, args);
@@ -78,6 +82,7 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	@Override
 	public void run(String... args) throws Exception 
 	{	
+		storageable.readEmployesFile(false);
 		
 		AppMenu menuProduct= new AppMenu("Inventory", "fa-building-o", "Manage stocks");
 		AppMenu menuRh= new AppMenu("Resources", "fa-tachometer", "Manage resources");
@@ -243,6 +248,5 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		mouvmentService.saveMouvmentLine(mouvmentLine4);	
 		mouvmentService.saveMouvmentLine(mouvmentLine5);
 		
-		entrepotService.deleteEntrepot(1L);
 	}
 }

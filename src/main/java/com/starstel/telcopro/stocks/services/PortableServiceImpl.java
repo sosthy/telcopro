@@ -1,11 +1,8 @@
 package com.starstel.telcopro.stocks.services;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.starstel.telcopro.stocks.entities.Camera;
@@ -13,7 +10,6 @@ import com.starstel.telcopro.stocks.entities.Cpu;
 import com.starstel.telcopro.stocks.entities.Emplacement;
 import com.starstel.telcopro.stocks.entities.Memory;
 import com.starstel.telcopro.stocks.entities.Mouvment;
-import com.starstel.telcopro.stocks.entities.MouvmentLine;
 import com.starstel.telcopro.stocks.entities.Portable;
 import com.starstel.telcopro.stocks.entities.PortableCategory;
 import com.starstel.telcopro.stocks.entities.PortableUnit;
@@ -55,6 +51,9 @@ public class PortableServiceImpl implements PortableService {
 	@Autowired
 	private CpuRepository cpuRepository;
 	
+	@Autowired
+	private ProductService productService;
+	
 	@Override
 	public Portable save(Portable portable) {
 		
@@ -64,10 +63,20 @@ public class PortableServiceImpl implements PortableService {
 			portable.setMemory(saveMemory(portable.getMemory()));
 		if(portable.getCpu() != null)
 			portable.setCpu(saveCpu(portable.getCpu()));
-		if(portable.getAppColor() != null)
-			portable.setAppColor(appColorRepository.save(portable.getAppColor()));
+		if(portable.getOs() != null)
+			portable.setOs(saveSystemOS(portable.getOs()));
 		if(portable.getPortableCategory() != null)
 			portable.setPortableCategory(savePortableCategory(portable.getPortableCategory()));
+		
+		if(portable.getAppColor() != null)
+			portable.setAppColor(appColorRepository.save(portable.getAppColor()));
+		
+		if(portable.getState() != null)
+			portable.setState(productService.saveState(portable.getState()));
+		if(portable.getProductCategory() != null)
+			portable.setProductCategory(productService.saveProductCategory(portable.getProductCategory()));
+		if(portable.getMeasureUnit() != null)
+			portable.setMeasureUnit(productService.saveMeasureUnit(portable.getMeasureUnit()));
 
 		return portableRepository.save(portable);
 	}

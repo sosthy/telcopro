@@ -20,4 +20,10 @@ public class ProductCategory extends Category
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="productCategory")
 	@JsonIgnore
 	private Set<Product> products = new HashSet<>();
+
+	public ProductCategory(String name, String notes) {
+		super(name, notes);
+	}
+	
+	
 }

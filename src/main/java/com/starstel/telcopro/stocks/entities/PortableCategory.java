@@ -25,4 +25,10 @@ public class PortableCategory extends Category
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="portableCategory")
 	@JsonIgnore
 	public Set<Portable> portables = new HashSet<>();
+
+	public PortableCategory(Long id, String name, String notes) {
+		super(id, name, notes);
+	}
+	
+	
 }

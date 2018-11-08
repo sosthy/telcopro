@@ -37,4 +37,12 @@ public class SystemOS implements Serializable
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="os")
 	@JsonIgnore
 	private Set<Portable> portableList = new HashSet<>();
+	
+	public SystemOS(String name, String version) {
+		super();
+		this.name = name;
+		this.version = version;
+	}
+	
+	
 }

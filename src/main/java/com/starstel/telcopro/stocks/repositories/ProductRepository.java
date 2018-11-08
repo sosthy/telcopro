@@ -16,7 +16,9 @@ public interface ProductRepository extends JpaRepository<Product, Long>
 	@Query("select m from Mouvment m")
 	List<Mouvment> getAllMouvmentOfEmployee(Long id);
 
-	@Query("select p from Product p where lower(p.appColor.name) like lower(:x) or lower(p.designation) like lower(:x)")
+	@Query("select p from Product p where lower(p.appColor.name) like lower(:x) or lower(p.designation) like lower(:x) or "
+			+ "lower(concat(p.quantity,'')) like lower(:x) or lower(p.emplacement.name) like lower(:x) or "
+			+ "lower(p.emplacement.entrepot.name) like lower(:x)")
 	List<Product> searchProducts(@Param("x") String keyWords);
 	
-}
+} 

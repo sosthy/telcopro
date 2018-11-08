@@ -129,22 +129,48 @@ public class StockRestController
 	}
 
 	@RequestMapping(value="/measure-units",method=RequestMethod.GET)
-	public List<MeasureUnit> listMeasueUnits() {
-		return productService.listMeasueUnits();
+	public List<MeasureUnit> listMeasureUnits() {
+		return productService.listMeasureUnits();
 	}
 
 	@RequestMapping(value="/measure-units",method=RequestMethod.POST)
-	public MeasureUnit saveMeasueUnit(@RequestBody MeasureUnit measureUnit) {
-		return productService.saveMeasueUnit(measureUnit);
+	public MeasureUnit saveMeasureUnit(@RequestBody MeasureUnit measureUnit) {
+		return productService.saveMeasureUnit(measureUnit);
 	}
 
 	@RequestMapping(value="/measure-units/{id}",method=RequestMethod.DELETE)
-	public Boolean deleteMeasueUnit(@PathVariable Long id) {
-		return productService.deleteMeasueUnit(id);
+	public Boolean deleteMeasureUnit(@PathVariable Long id) {
+		return productService.deleteMeasureUnit(id);
 	}
 
 	@RequestMapping(value="/measure-units/{id}",method=RequestMethod.GET)
-	public MeasureUnit getMeasueUnit(@PathVariable Long id) {
-		return productService.getMeasueUnit(id);
+	public MeasureUnit getMeasureUnit(@PathVariable Long id) {
+		return productService.getMeasureUnit(id);
 	}
+
+	@RequestMapping(value="/categories",method=RequestMethod.GET)
+	public List<ProductCategory> listProductCategorys() {
+		return productService.listProductCategorys();
+	}
+
+	@RequestMapping(value="/categories",method=RequestMethod.POST)
+	public ProductCategory saveProductCategory(@RequestBody ProductCategory productCategory) {
+		return productService.saveProductCategory(productCategory);
+	}
+
+	@RequestMapping(value="/categories/{id}",method=RequestMethod.GET)
+	public ProductCategory getProductCategory(@PathVariable Long id) {
+		return productService.getProductCategory(id);
+	}
+
+	@RequestMapping(value="/categories/{id}",method=RequestMethod.DELETE)
+	public Boolean deleteProductCategory(@PathVariable Long id) {
+		return productService.deleteProductCategory(id);
+	}
+
+	@RequestMapping(value="/search",method=RequestMethod.GET)
+	public List<Product> searchProducts(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return productService.searchProducts(keyWords);
+	}
+	
 }

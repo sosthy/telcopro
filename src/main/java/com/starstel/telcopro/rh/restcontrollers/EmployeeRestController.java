@@ -17,6 +17,7 @@ import com.starstel.telcopro.stocks.entities.Mouvment;
 
 @CrossOrigin("*")
 @RestController
+@RequestMapping("rh")
 public class EmployeeRestController 
 {
 	@Autowired

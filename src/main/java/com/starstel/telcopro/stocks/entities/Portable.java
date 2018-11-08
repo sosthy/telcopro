@@ -164,6 +164,15 @@ public class Portable extends Product
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Portable [id="+getId()+"connection=" + connection + ", screen=" + screen + ", battery=" + battery + ", sim=" + sim
+				+ ", dimension=" + dimension + ", weight=" + weight + ", ipRating=" + ipRating + ", fingerprint="
+				+ fingerprint + ", waterproof=" + waterproof + ", splashproof=" + splashproof + ", dushproof="
+				+ dushproof + ", portableItem=" + portableItem + ", memory=" + memory + ", camera=" + camera + ", cpu="
+				+ cpu + ", os=" + os + ", portableCategory=" + portableCategory + "]";
+	}
 	
 	
 }
