@@ -23,14 +23,19 @@ import com.starstel.telcopro.stocks.entities.Camera;
 import com.starstel.telcopro.stocks.entities.Cpu;
 import com.starstel.telcopro.stocks.entities.Emplacement;
 import com.starstel.telcopro.stocks.entities.Entrepot;
+import com.starstel.telcopro.stocks.entities.MeasureUnit;
 import com.starstel.telcopro.stocks.entities.Memory;
 import com.starstel.telcopro.stocks.entities.Mouvment;
 import com.starstel.telcopro.stocks.entities.MouvmentLine;
 import com.starstel.telcopro.stocks.entities.MouvmentType;
 import com.starstel.telcopro.stocks.entities.Portable;
+import com.starstel.telcopro.stocks.entities.PortableCategory;
 import com.starstel.telcopro.stocks.entities.PortableItem;
+import com.starstel.telcopro.stocks.entities.ProductCategory;
 import com.starstel.telcopro.stocks.entities.Recipient;
 import com.starstel.telcopro.stocks.entities.RecipientGroupe;
+import com.starstel.telcopro.stocks.entities.State;
+import com.starstel.telcopro.stocks.entities.SystemOS;
 import com.starstel.telcopro.stocks.services.AppColorService;
 import com.starstel.telcopro.stocks.services.EntrepotService;
 import com.starstel.telcopro.stocks.services.MouvmentService;
@@ -185,8 +190,13 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		Camera camera = new Camera(null, 8.0, 13.0);
 		Camera camera2 = new Camera(null, 10.0, 13.0);
 		Camera camera3 = new Camera(null, 10.0, 16.0);
+		
 
-		Cpu cpu = new Cpu("GHZ", 13.0);
+		State state = new State("Disponible");
+		State state2 = new State("Indisponible");
+		State state3= new State("En attente de livraison");
+
+		Cpu cpu = new Cpu("MT1658M Quad-core", 13.0);
 		Cpu cpu2 = new Cpu("MHZ", 13.0);
 		Cpu cpu3 = new Cpu("KHZ", 16.0);
 
@@ -194,31 +204,45 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		Memory memory2 = new Memory(14.5,75.5,"MHZ");
 		Memory memory3 = new Memory(12.0,12.5,"KHZ");
 
+		MeasureUnit measureUnit = new MeasureUnit("dm");
+		MeasureUnit measureUnit2 = new MeasureUnit("mm");
+		MeasureUnit measureUnit3 = new MeasureUnit("m");
+		
+		SystemOS os = new SystemOS("Android Oreo","7.0");
+
+		ProductCategory productCategory = new ProductCategory("Téléphone","RAS");
+		
 		AppColor redColor = new AppColor("RED");
 		AppColor blueColor = new AppColor("BLUE");
 		AppColor blackColor = new AppColor("BLACK");
-		AppColor whiteColor = new AppColor("WHITE");
+		AppColor whiteColor = new AppColor("WHITE"); 
+
+		PortableCategory portableCategory = new PortableCategory(null,"SMART FAMILLY","Un pack complet pour la famille");
+		PortableCategory portableCategory2 = new PortableCategory(null,"XTouch Robot Family","Un pack complet pour les futuristes");
+		PortableCategory portableCategory3 = new PortableCategory(null,"SMART FAMILLY","GHZ");
+		PortableCategory portableCategory4 = new PortableCategory(null,"XTouch Robot Family","GHZ");
 		
 		
-		Portable portable= new Portable(null, 0.0, new Date(), "TECHNO Y2", null, 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", null, 
-				emplacement1, null, null, null,"C",2D,"B","Sim",2D,2D,"Ip",true,true,true,true,
-				null,memory,camera,cpu,null,null,blueColor);
+		Portable portable= new Portable(null, 2.0, new Date(), "XTOUCH X9", "XTOUCH_X9.jpeg", 85000.0, 75000.0, 800000.0, 
+				20.0, 50.0, 20.0, "FACE ID UNLOCK", state, emplacement1, measureUnit, productCategory, null,"C",5.5,"2400mAh", 
+				"Dual Sim 3G NetWork",960.0,138.0,"Ip64",false,false,false,false, null,memory,camera,cpu,os,
+				portableCategory,blueColor);
 		
-		Portable portable1= new Portable(null, 0.0, new Date(), "ALCATEL Z3", null, 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
-				null, emplacement2, null, null, null,"C",2D,"B","Sim",2D,2D,"Ip",false,false,false,
-				true,null,memory2,camera2,cpu2,null,null,redColor);
+		Portable portable1= new Portable(null, 0.0, new Date(), "Xbot Senior", "XTOUCH_Xbot_Senior.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
+				state, emplacement2, measureUnit3, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,false,false,
+				true,null,memory2,camera2,cpu2,os,portableCategory2,redColor);
 		
-		Portable portable2= new Portable(null, 0.0, new Date(), "SAMSUNG S2", null, 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
-				null, emplacement2, null, null, null,"C",2D,"B","Sim",2D,2D,"Ip",false,true,false,
-				true,null,memory3,camera2,cpu,null,null,blueColor);
+		Portable portable2= new Portable(null, 0.0, new Date(), "XTOUCH X10", "XTOUCH_X10.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
+				state2, emplacement2, measureUnit, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,false,
+				true,null,memory3,camera2,cpu,os,portableCategory3,blueColor);
 		
-		Portable portable3= new Portable(null, 0.0, new Date(), "INFINIX", null, 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
-				null, emplacement1, null, null, null,"C",2D,"B","Sim",2D,2D,"Ip",true,false,true,
-				false,null,memory2,camera3,cpu3,null,null,blackColor);
+		Portable portable3= new Portable(null, 0.0, new Date(), "Xbot Senior", "XTOUCH_Xbot_Senior.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
+				state2, emplacement1, measureUnit2, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",true,false,true,
+				false,null,memory2,camera3,cpu3,os,portableCategory4,blackColor);
 		
-		Portable portable4= new Portable(null, 0.0, new Date(), "TECHNO Y3", null, 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", null,
-				emplacement1, null, null, null,"C",2D,"B","Sim",2D,2D,"Ip",false,true,true,false,
-				null,memory2,camera,cpu2,null,null,whiteColor);
+		Portable portable4= new Portable(null, 0.0, new Date(), "XTOUCH E4", "XTOUCH_E4.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", state3,
+				emplacement1, measureUnit3, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,true,false,
+				null,memory2,camera,cpu2,os,portableCategory4,whiteColor);
 		
 		
 		System.err.println("ready to save first product");
@@ -247,6 +271,5 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		mouvmentService.saveMouvmentLine(mouvmentLine3);	
 		mouvmentService.saveMouvmentLine(mouvmentLine4);	
 		mouvmentService.saveMouvmentLine(mouvmentLine5);
-		
 	}
 }

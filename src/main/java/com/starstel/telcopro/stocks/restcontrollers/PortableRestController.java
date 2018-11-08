@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.starstel.telcopro.stocks.entities.Camera;
 import com.starstel.telcopro.stocks.entities.Cpu;
@@ -29,6 +30,7 @@ import com.starstel.telcopro.stocks.entities.SystemOS;
 import com.starstel.telcopro.stocks.services.AppColorService;
 import com.starstel.telcopro.stocks.services.PortableItemService;
 import com.starstel.telcopro.stocks.services.PortableService;
+import com.starstel.telcopro.storage.Storageable;
 
 @CrossOrigin("*")
 @RestController
@@ -41,6 +43,8 @@ public class PortableRestController {
 	private AppColorService appColorService;
 	@Autowired
 	private PortableItemService portableItemService;
+	@Autowired
+	private Storageable storageable;
 	
 
 	@RequestMapping(value="", method = RequestMethod.GET)
@@ -50,7 +54,8 @@ public class PortableRestController {
 	}
 
 	@RequestMapping(value="", method = RequestMethod.POST)
-	public Portable save(@RequestBody Portable portable) {
+	public Portable save(@RequestBody Portable portable, @RequestParam(name="photo") MultipartFile photo) {
+		storageable.store(photo);
 		return portableService.save(portable);
 	}
 

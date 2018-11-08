@@ -40,15 +40,18 @@ public class StorageImpl implements Storageable
 	@Override
 	public void store(MultipartFile file)
 	{
-		try
+		if(file != null)
 		{
-			Files.copy(file.getInputStream(), 
-					this.rootLocation.resolve(file.getOriginalFilename()), 
-					StandardCopyOption.REPLACE_EXISTING);
-		}
-		catch(Exception e)
-		{
-			throw new RuntimeException("FAIL ! -> Message = " + e.getMessage());
+			try
+			{
+				Files.copy(file.getInputStream(), 
+						this.rootLocation.resolve(file.getOriginalFilename()), 
+						StandardCopyOption.REPLACE_EXISTING);
+			}
+			catch(Exception e)
+			{
+				throw new RuntimeException("FAIL ! -> Message = " + e.getMessage());
+			}
 		}
 	}
 
@@ -93,6 +96,7 @@ public class StorageImpl implements Storageable
 		}
 		catch(IOException e)
 		{
+			System.err.println(e.getMessage());
 			throw new RuntimeException("Could Not Initialize Storage !");
 		}
 	}
