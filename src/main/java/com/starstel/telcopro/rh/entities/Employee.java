@@ -31,7 +31,7 @@ import lombok.Setter;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Employee extends Person implements Serializable 
 {
-    private Date hiring_date;
+    private Date hiringDate;
     private Integer anciennete;
     @JsonIgnore
     @OneToMany(mappedBy="user")
@@ -63,14 +63,14 @@ public class Employee extends Person implements Serializable
 	public Employee(Long id, String name, String surname, String portable, String website, String sex, String cni,
 			String phone, String photo, Date birthday, Date hiring_date, Integer anciennete) {
 		super(id, name, surname, portable, website, sex, cni, phone, photo, birthday);
-		this.hiring_date = hiring_date;
+		this.hiringDate = hiring_date;
 		this.anciennete = anciennete;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + getId() + ", hiring_date=" + hiring_date + ", anciennete=" + anciennete + ", hashCode()="
+		return "Employee [id=" + getId() + ", hiring_date=" + hiringDate + ", anciennete=" + anciennete + ", hashCode()="
 				+ hashCode() + ", getName()=" + getName() + ", getSurname()=" + getSurname() + ", getPortable()="
 				+ getPortable() + ", getWebsite()=" + getWebsite() + ", getSex()=" + getSex() + ", getCni()=" + getCni()
 				+ ", getPhone()=" + getPhone() + ", getPhoto()=" + getPhoto() + ", getBirthday()=" + getBirthday()

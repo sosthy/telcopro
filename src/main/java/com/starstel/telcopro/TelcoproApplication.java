@@ -87,7 +87,6 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	@Override
 	public void run(String... args) throws Exception 
 	{	
-		storageable.readEmployesFile(false);
 		
 		AppMenu menuProduct= new AppMenu("Inventory", "fa-building-o", "Manage stocks");
 		AppMenu menuRh= new AppMenu("Resources", "fa-tachometer", "Manage resources");

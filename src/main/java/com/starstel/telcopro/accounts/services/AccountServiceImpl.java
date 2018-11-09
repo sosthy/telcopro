@@ -38,6 +38,7 @@ public class AccountServiceImpl implements AccountService
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+
 	
 	@Override
 	public boolean lockEmployee(Long id) 
@@ -186,6 +187,12 @@ public class AccountServiceImpl implements AccountService
 		}
 		
 		return null;
+	}
+
+	@Override
+	public List<AppUser> searchUsers(String keyWords) {
+		System.err.println("%"+keyWords+"%");
+		return appUserRepository.search("%"+keyWords+"%");
 	}
 
 }

@@ -15,4 +15,5 @@ public interface EmployeeService
 	Employee editEmployee(Employee employee);
 	Boolean deleteEmployee(Long id);
 	Set<Mouvment> listMouvmentOfEmployee(Long id);
+	List<Employee> searchEmployee(String keyWords);
 }

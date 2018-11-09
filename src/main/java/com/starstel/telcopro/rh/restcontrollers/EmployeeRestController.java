@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.starstel.telcopro.rh.entities.Employee;
@@ -27,6 +28,12 @@ public class EmployeeRestController
 	public List<Employee> getAllEmployee()
 	{
 		return employeeService.listEmployee();
+	}
+	
+	@RequestMapping(value="/employees/search", method = RequestMethod.GET)
+	public List<Employee> searchEmployee(@RequestParam(name="mc", defaultValue="") String keyWords)
+	{
+		return employeeService.searchEmployee(keyWords);
 	}
 	
 	@RequestMapping(value="/employees/{id}", method = RequestMethod.GET)

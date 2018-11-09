@@ -20,11 +20,4 @@ public interface Storageable
 	public void init();
 	
 	public Stream<Path> loadFiles();
-	
-	public List<Employee> readExcelEmployesFile(String path);
-		
-
-	public void updateExcelEmployesFile(String path, List<Employee> employees);
-
-	public void readEmployesFile(boolean updateFile);
 }

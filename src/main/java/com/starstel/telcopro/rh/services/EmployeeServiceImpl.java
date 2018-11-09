@@ -62,4 +62,9 @@ public class EmployeeServiceImpl implements EmployeeService
 		return employeeRepository.saveAll(employees);
 	}
 
+	@Override
+	public List<Employee> searchEmployee(String keyWords) {
+		return employeeRepository.search("%"+keyWords+"%");
+	}
+
 }

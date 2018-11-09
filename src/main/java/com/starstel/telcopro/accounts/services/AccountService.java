@@ -35,5 +35,6 @@ public interface AccountService
 	public boolean deleteAppMenu(Long id);
 	public List<AppMenu> getAppMenus();
 	public AppMenu getAppMenu(Long id);
+	List<AppUser> searchUsers(String keyWords);
 	
 }
