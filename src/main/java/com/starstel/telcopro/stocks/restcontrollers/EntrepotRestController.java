@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.starstel.telcopro.stocks.entities.Emplacement;
 import com.starstel.telcopro.stocks.entities.Entrepot;
 import com.starstel.telcopro.stocks.entities.Mouvment;
+import com.starstel.telcopro.stocks.entities.PointOfSale;
 import com.starstel.telcopro.stocks.entities.Product;
 import com.starstel.telcopro.stocks.services.EntrepotService;
+import com.starstel.telcopro.stocks.services.PointOfSaleService;
 
 @CrossOrigin("*")
 @RestController

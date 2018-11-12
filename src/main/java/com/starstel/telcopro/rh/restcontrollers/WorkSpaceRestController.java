@@ -13,57 +13,53 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.starstel.telcopro.rh.entities.Employee;
+import com.starstel.telcopro.rh.entities.WorkSpace;
 import com.starstel.telcopro.rh.services.EmployeeService;
+import com.starstel.telcopro.rh.services.WorkSpaceService;
 import com.starstel.telcopro.stocks.entities.Mouvment;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("rh/employees")
-public class EmployeeRestController 
+@RequestMapping("rh/workSpaces")
+public class WorkSpaceRestController 
 {
 	@Autowired
-	private EmployeeService employeeService;
+	private WorkSpaceService workSpaceService;
 	
 	@RequestMapping(value="", method = RequestMethod.GET)
-	public List<Employee> getAllEmployee()
+	public List<WorkSpace> getAllWorkSpace()
 	{
-		return employeeService.listEmployee();
+		return workSpaceService.listWorkSpace();
 	}
 	
 	@RequestMapping(value="/search", method = RequestMethod.GET)
-	public List<Employee> searchEmployee(@RequestParam(name="mc", defaultValue="") String keyWords)
+	public List<WorkSpace> searchWorkSpace(@RequestParam(name="mc", defaultValue="") String keyWords)
 	{
-		return employeeService.searchEmployee(keyWords);
+		return workSpaceService.searchWorkSpace(keyWords);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public Employee getEmployee(@PathVariable Long id)
+	public WorkSpace getWorkSpace(@PathVariable Long id)
 	{
-		return employeeService.employee(id);
+		return workSpaceService.getWorkSpace(id);
 	}
 	
-	@RequestMapping(value="/mouvment-of-employee/{id}", method = RequestMethod.GET)
-	public Set<Mouvment> getAllMouvmentOfEmployee(@PathVariable Long id)
+	@RequestMapping(value="/mouvment-of-workSpace/{id}", method = RequestMethod.GET)
+	public List<Mouvment> getAllMouvmentOfWorkSpace(@PathVariable Long id)
 	{
-		return employeeService.listMouvmentOfEmployee(id);
+		return workSpaceService.listMouvmentOfWorkSpace(id);
 	}
 	
 	@RequestMapping(value="", method = RequestMethod.POST)
-	public Employee createEmployee(@RequestBody Employee employee)
+	public WorkSpace saveWorkSpace(@RequestBody WorkSpace workSpace)
 	{
-		System.err.println(employee);
-		return employeeService.createEmployee(employee);
-	}
-	
-	@RequestMapping(value="", method = RequestMethod.PUT)
-	public Employee editEmployee(@RequestBody Employee employee)
-	{
-		return employeeService.editEmployee(employee);
+		System.err.println(workSpace);
+		return workSpaceService.saveWorkSpace(workSpace);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-	public Boolean deleteEmployee(@PathVariable Long id)
+	public Boolean deleteWorkSpace(@PathVariable Long id)
 	{
-		return employeeService.deleteEmployee(id);
+		return workSpaceService.deleteWorkSpace(id);
 	}
 }

@@ -15,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starstel.telcopro.rh.entities.Employee;
+import com.starstel.telcopro.rh.entities.WorkSpace;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,9 +35,9 @@ public class Mouvment implements Serializable
 	private Double quantity;
 	private Double priceTotal;
 	@ManyToOne
-	private Entrepot entrepotSource;
+	private WorkSpace workSpaceSource;
 	@ManyToOne
-	private Entrepot entrepotRecipient;
+	private WorkSpace workSpaceRecipient;
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="mouvment")
 	private Set<MouvmentLine> mouvmentLines = new HashSet<>();

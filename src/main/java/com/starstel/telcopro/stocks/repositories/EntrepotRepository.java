@@ -15,7 +15,7 @@ public interface EntrepotRepository extends JpaRepository<Entrepot, Long>
 	@Query("SELECT product FROM Product product WHERE product.emplacement.entrepot.id = :id")
 	public List<Product> getAllStockOfEntrepot(@Param("id") Long id);
 	
-	@Query("SELECT mouvment FROM Mouvment mouvment WHERE mouvment.entrepotSource.id = :id")
+	@Query("SELECT mouvment FROM Mouvment mouvment WHERE mouvment.workSpaceSource.id = :id")
 	public List<Mouvment> getAllMouvmentOfEntrepot(@Param("id") Long id);
 	
 	@Query("SELECT COUNT(item) FROM PortableItem item WHERE item.portable.emplacement.entrepot.id = :id")

@@ -17,7 +17,9 @@ import com.starstel.telcopro.accounts.entities.AppUser;
 import com.starstel.telcopro.accounts.entities.AppUserModel;
 import com.starstel.telcopro.accounts.services.AccountService;
 import com.starstel.telcopro.rh.entities.Employee;
+import com.starstel.telcopro.rh.entities.WorkSpace;
 import com.starstel.telcopro.rh.services.EmployeeService;
+import com.starstel.telcopro.rh.services.WorkSpaceService;
 import com.starstel.telcopro.stocks.entities.AppColor;
 import com.starstel.telcopro.stocks.entities.Camera;
 import com.starstel.telcopro.stocks.entities.Cpu;
@@ -28,6 +30,7 @@ import com.starstel.telcopro.stocks.entities.Memory;
 import com.starstel.telcopro.stocks.entities.Mouvment;
 import com.starstel.telcopro.stocks.entities.MouvmentLine;
 import com.starstel.telcopro.stocks.entities.MouvmentType;
+import com.starstel.telcopro.stocks.entities.PointOfSale;
 import com.starstel.telcopro.stocks.entities.Portable;
 import com.starstel.telcopro.stocks.entities.PortableCategory;
 import com.starstel.telcopro.stocks.entities.PortableItem;
@@ -39,6 +42,7 @@ import com.starstel.telcopro.stocks.entities.SystemOS;
 import com.starstel.telcopro.stocks.services.AppColorService;
 import com.starstel.telcopro.stocks.services.EntrepotService;
 import com.starstel.telcopro.stocks.services.MouvmentService;
+import com.starstel.telcopro.stocks.services.PointOfSaleService;
 import com.starstel.telcopro.stocks.services.PortableService;
 import com.starstel.telcopro.stocks.services.ProductService;
 import com.starstel.telcopro.stocks.services.RecipientService;
@@ -52,6 +56,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
+	private WorkSpaceService workSpaceService;
+	@Autowired
 	private ProductService productService;
 	@Autowired
 	private RecipientService recipientService;
@@ -61,6 +67,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	private EntrepotService entrepotService;
 	@Autowired
 	private PortableService portableService;
+	@Autowired
+	private PointOfSaleService pointOfSaleService;
 	
 	@Autowired
 	private AppColorService appColorService;
@@ -126,18 +134,44 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		AppUserModel user3 = new AppUserModel("admin3","admin3","fabien@gmail.com",Boolean.FALSE);
 		user3.getRoles().add(humanRessource);
 		
-		Employee employee = new Employee(null,"NOUEBISSI NGHEMNIN","Sosthene","693936236","rsosthenegolden@gmail.com",
-				"M","KIT272","655321007","XXXX",new Date(),new Date(),Integer.valueOf(4));
+		PointOfSale boutique = new PointOfSale("Boutique 2B","Douala Marché central");
+		PointOfSale boutique2 = new PointOfSale("Boutique 14M","Douala Marché Dakar");
+		PointOfSale boutique3 = new PointOfSale("Boutique 75FG","Douala Marché Bonamoussadi");
 		
-		Employee employee2 = new Employee(null,"TCHECHE","Romeo","693936236","romeo.@gmail.com","M","475JHk5","78221242",
-				"romeo.png",new Date(),new Date(),Integer.valueOf(1));
+		boutique= pointOfSaleService.save(boutique);
+		boutique2= pointOfSaleService.save(boutique2);
+		boutique3= pointOfSaleService.save(boutique3);
 		
-		Employee employee3 = new Employee(null,"Fabien","DUBUISSON","52481234","fabien.@gmail.com","M","475JHk5","78221242",
-				"romeo.png",new Date(),new Date(),Integer.valueOf(1));
+		WorkSpace space = new WorkSpace("Startel Deido","Douala Deido rue kotto à 100m d'ecoMarche");
+		WorkSpace space2 = new WorkSpace("Startel Nyalla","Douala Nyalla à 100m de total Nyalla");
+		
+		space=workSpaceService.saveWorkSpace(space);
+		space2=workSpaceService.saveWorkSpace(space2);
+		
+		Employee employee = new Employee(null,"NOUEBISSI NGHEMNIN","Sosthene","78221242","rsosthenegolden@gmail.com",
+				"M","KIT272","XXXX",new Date(),new Date(),Integer.valueOf(4),space);
+		
+		Employee employee2 = new Employee(null,"TCHECHE","Romeo","693936236","romeo.@gmail.com","M","475JHk5",
+				"romeo.png",new Date(),new Date(),Integer.valueOf(1),space2);
+		
+		Employee employee3 = new Employee(null,"NZUKO","QUEVIN","52481234","fabien.@gmail.com","M","785427JKDF3",
+				"romeo.png",new Date(),new Date(),Integer.valueOf(1),space);
+		
+		Employee employee4 = new Employee(null,"unknow","FRANCIS","6952478625","francis.@gmail.com","M","8966J245M",
+				"francis.png",new Date(),new Date(),Integer.valueOf(1),boutique);
+		
+		Employee employee5 = new Employee(null,"unknow","GAELLE","52244452524","gaelle.@gmail.com","F","4513GJDJ7",
+				"gaelle.png",new Date(),new Date(),Integer.valueOf(1),boutique2);
+		
+		Employee employee6 = new Employee(null,"EBOUA","OSE","5282283","ose.@gmail.com","M","782LLM3",
+				"ose.png",new Date(),new Date(),Integer.valueOf(1),boutique3);
 		
 		employee=employeeService.createEmployee(employee);
 		employee2=employeeService.createEmployee(employee2);
 		employee3=employeeService.createEmployee(employee3);
+		employee4=employeeService.createEmployee(employee4);
+		employee5=employeeService.createEmployee(employee5);
+		employee6=employeeService.createEmployee(employee6);
 		
 		user.setEmployee(employee);
 		user2.setEmployee(employee2);
@@ -146,7 +180,7 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		AppUser cuser=accountService.saveUser(user);
 		AppUser cuser2=accountService.saveUser(user2);
 		AppUser cuser3=accountService.saveUser(user3);
-		
+		accountService.deleteAppUser(cuser3.getId());
 		
 		RecipientGroupe groupe1 = new RecipientGroupe(null, "FOURNISSEURS", null);
 		RecipientGroupe groupe2 = new RecipientGroupe(null, "CLIENTS", null);
@@ -175,8 +209,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		mouvmentType3 = mouvmentService.saveMouvmentType(mouvmentType3);
 		mouvmentType4 = mouvmentService.saveMouvmentType(mouvmentType4);
 		
-		Entrepot entrepot1 = new Entrepot(null, "Deido Plage", 0.0, 0.0, 100.0, 70.0, null, null);
-		Entrepot entrepot2 = new Entrepot(null, "Akwa", 0.0, 0.0, 170.0, 100.0, null, null);
+		Entrepot entrepot1 = new Entrepot("Entrepot Douala", "Rond point 4ème", 0.0, 0.0, 100.0, 70.0);
+		Entrepot entrepot2 = new Entrepot("Entrepot Douala2", "Maképe Saint tropèze", 0.0, 0.0, 100.0, 70.0);
 		entrepot1 = entrepotService.saveEntrepot(entrepot1);
 		entrepot2 = entrepotService.saveEntrepot(entrepot2);
 		

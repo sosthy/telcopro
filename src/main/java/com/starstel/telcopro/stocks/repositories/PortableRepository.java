@@ -14,7 +14,7 @@ import com.starstel.telcopro.stocks.entities.MouvmentLine;
 import com.starstel.telcopro.stocks.entities.Portable;
 
 public interface PortableRepository extends JpaRepository<Portable, Long> {
-	@Query("SELECT mouvment FROM Mouvment mouvment WHERE mouvment.entrepotSource.id = :id")
+	@Query("SELECT mouvment FROM Mouvment mouvment WHERE mouvment.workSpaceSource.id = :id")
 	public List<Mouvment> getMouvments(@Param("id") Long id);
 	
 	@Query("SELECT portable.emplacement  FROM Portable portable WHERE portable.id = :id")

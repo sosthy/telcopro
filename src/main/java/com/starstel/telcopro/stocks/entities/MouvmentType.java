@@ -31,5 +31,5 @@ public class MouvmentType implements Serializable
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="mouvmentType")
 	private Set<Mouvment> mouvments = new HashSet<>();
-	private String note;
+	private String description;
 }

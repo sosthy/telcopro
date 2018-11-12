@@ -30,11 +30,10 @@ public class Person implements Serializable
 	
     private String name;
     private String surname;
-    private String portable;
+    private String phone;
     private String website;
     private String sex;
     private String cni;
-    private String phone;
     private String photo;
     
     @Temporal(TemporalType.DATE)
@@ -79,11 +78,6 @@ public class Person implements Serializable
 				return false;
 		} else if (!photo.equals(other.photo))
 			return false;
-		if (portable == null) {
-			if (other.portable != null)
-				return false;
-		} else if (!portable.equals(other.portable))
-			return false;
 		if (sex == null) {
 			if (other.sex != null)
 				return false;
@@ -112,7 +106,6 @@ public class Person implements Serializable
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((photo == null) ? 0 : photo.hashCode());
-		result = prime * result + ((portable == null) ? 0 : portable.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		result = prime * result + ((website == null) ? 0 : website.hashCode());

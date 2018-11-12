@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.starstel.telcopro.rh.entities.WorkSpace;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,29 +21,20 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class Entrepot implements Serializable 
+public class Entrepot extends WorkSpace
 {
-	@Id
-	@SequenceGenerator(initialValue = 1, sequenceName = "ENTR_SEQ", allocationSize = 1, name = "entr_id")
-    @GeneratedValue(generator = "entr_id")
-	private Long id;
-	private String name;
 	private Double nbOfProduct;
 	private Double priceTotal;
 	private Double volume;
 	private Double volumeSecurity;
-	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="entrepotSource")
-	private Set<Mouvment> mouvments = new HashSet<>();
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="entrepot")
 	private Set<Emplacement> emplacements = new HashSet<>();
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((emplacements == null) ? 0 : emplacements.hashCode());
 		result = prime * result + ((nbOfProduct == null) ? 0 : nbOfProduct.hashCode());
 		result = prime * result + ((priceTotal == null) ? 0 : priceTotal.hashCode());
 		result = prime * result + ((volume == null) ? 0 : volume.hashCode());
@@ -53,20 +45,15 @@ public class Entrepot implements Serializable
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Entrepot other = (Entrepot) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (emplacements == null) {
+			if (other.emplacements != null)
 				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		} else if (!emplacements.equals(other.emplacements))
 			return false;
 		if (nbOfProduct == null) {
 			if (other.nbOfProduct != null)
@@ -90,11 +77,25 @@ public class Entrepot implements Serializable
 			return false;
 		return true;
 	}
+	
+	
 	@Override
 	public String toString() {
-		return "Entrepot [id=" + id + ", name=" + name + ", nbOfProduct=" + nbOfProduct + ", priceTotal=" + priceTotal
-				+ ", volume=" + volume + ", volumeSecurity=" + volumeSecurity + "]";
+		return "Entrepot [id=" + getId() + ", name=" + getName() + ", localisation=" + getLocalisation()
+				+", nbOfProduct=" + nbOfProduct + ", priceTotal=" + priceTotal + ", volume=" + volume
+				+ ", volumeSecurity=" + volumeSecurity + ", emplacements=" + emplacements
+				+ ", id=" + getId() + ", name=" + getName() + ", localisation=" + getLocalisation()+ "]";
 	}
+	public Entrepot(String name, String localisation, Double nbOfProduct, Double priceTotal, Double volume,
+			Double volumeSecurity) {
+		super(name, localisation);
+		this.nbOfProduct = nbOfProduct;
+		this.priceTotal = priceTotal;
+		this.volume = volume;
+		this.volumeSecurity = volumeSecurity;
+	}
+	
+	
 	
 	
 }
