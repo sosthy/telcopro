@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.starstel.telcopro.accounts.services.AccountService;
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.repositories.EmployeeRepository;
 import com.starstel.telcopro.stocks.entities.Mouvment;
@@ -15,6 +16,8 @@ public class EmployeeServiceImpl implements EmployeeService
 {
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	@Autowired
+	private AccountService accountService;
 	
 	@Override
 	public List<Employee> listEmployee() 
@@ -31,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public Employee editEmployee(Employee employee) 
 	{
-		return null;
+		return createEmployee(employee);
 	}
 
 	@Override

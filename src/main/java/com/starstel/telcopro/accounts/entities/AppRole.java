@@ -40,8 +40,7 @@ public class AppRole implements Serializable
     private String roleName;
     private String description;
     
-    //@ManyToMany(cascade= {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade= {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinTable(name = "APPROLE_APPMENU",
     		inverseJoinColumns = @JoinColumn(name = "MENU_ID", nullable = false, updatable = false),
     		joinColumns = @JoinColumn(name = "ROLE_ID", nullable = false, updatable = false),

@@ -46,14 +46,12 @@ public class AppUser implements Serializable
     private String email;
     private Boolean lockStatus;
 
-    // @OneToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    @OneToOne(cascade = CascadeType.REMOVE) 
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE })
     @JoinColumn(name = "EMPL_ID")
     @JsonIgnore
     private Employee employee;
     
-    // @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH },
-    @ManyToMany(cascade = CascadeType.REMOVE, 
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE },
     		fetch = FetchType.EAGER )
     @JoinTable(name = "APPUSER_APPROLE",
     		inverseJoinColumns = @JoinColumn(name = "ROLE_ID", nullable = false, updatable = false),

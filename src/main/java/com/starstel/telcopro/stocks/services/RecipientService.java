@@ -14,6 +14,7 @@ public interface RecipientService
 	RecipientGroupe editRecipientGroupe(RecipientGroupe recipientGroupe);
 	Boolean deleteRecipientGroupe(Long id);
 	RecipientGroupe getRecipientGroupe(Long id);
+	List<RecipientGroupe> searchGroupe(String keyWords);
 	
 	// Recipient
 	List<Recipient> listRecipient();
@@ -23,4 +24,5 @@ public interface RecipientService
 	Recipient getRecipient(Long id);
 	Set<Recipient> listRecipientOfGroupe(Long id);
 	Boolean addRecipientToGroupe(Long idRecipient,Long idGroupe);
+	List<Recipient> search(String keyWords);
 }

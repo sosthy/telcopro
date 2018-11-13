@@ -180,7 +180,6 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		AppUser cuser=accountService.saveUser(user);
 		AppUser cuser2=accountService.saveUser(user2);
 		AppUser cuser3=accountService.saveUser(user3);
-		accountService.deleteAppUser(cuser3.getId());
 		
 		RecipientGroupe groupe1 = new RecipientGroupe(null, "FOURNISSEURS", null);
 		RecipientGroupe groupe2 = new RecipientGroupe(null, "CLIENTS", null);

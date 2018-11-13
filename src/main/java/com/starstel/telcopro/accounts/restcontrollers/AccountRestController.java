@@ -18,6 +18,7 @@ import com.starstel.telcopro.accounts.entities.AppUser;
 import com.starstel.telcopro.accounts.entities.AppUserModel;
 import com.starstel.telcopro.accounts.services.AccountService;
 import com.starstel.telcopro.rh.entities.Employee;
+import com.starstel.telcopro.stocks.entities.Product;
 
 
 @CrossOrigin("*")
@@ -69,6 +70,11 @@ public class AccountRestController
 		} catch (Exception e) {
 			throw new  RuntimeException("Nom d'utilisateur dupliqué.");
 		}
+	}
+	
+	@RequestMapping(value="/users/produts-of-workspace", method=RequestMethod.POST)
+	public List<Product> getProductsOfWorkSpace(@RequestBody AppUser user) {
+		return accountService.getProductsOfWorkSpace(user);
 	}
 	
 	@RequestMapping(value = "/user-with-username/{username}", method = RequestMethod.GET)

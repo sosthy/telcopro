@@ -14,5 +14,9 @@ public interface MouvmentLineRepository extends JpaRepository<MouvmentLine, Long
 	public List<MouvmentLine> getAllMouvmentLineOfMouvmentType(@Param("id") Long id);
 	@Query("SELECT mouvmentLine FROM MouvmentLine mouvmentLine WHERE mouvmentLine.mouvment.recipient.id = :id")
 	public List<MouvmentLine> getAllMouvmentLineOfRecipient(@Param("id") Long id);
+	@Query("select m from MouvmentLine m where lower(m.note) like lower(:x) or lower(m.mouvment.reference) like lower(:x) or "
+			+ "lower(m.product.designation) like lower(:x) or concat(m.quantity,'') like lower(:x) or "
+			+ " concat(m.priceTotal,'') like lower(:x) or concat(m.priceUnit,'') like lower(:x)")
+	List<MouvmentLine> search(@Param("x") String keyWords);
 	
 }

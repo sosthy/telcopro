@@ -37,35 +37,41 @@ public interface PortableService
 	Boolean deleteCamera(Long id);
 	List<Camera> getCameras();
 	Camera getCamera(Long id);
+	List<Camera> searchCameras(String keyWords);
 
 	// SystemOS
 	SystemOS saveSystemOS(SystemOS systemOS);
 	Boolean deleteSystemOS(Long id);
 	List<SystemOS> getSystemOSs();
 	SystemOS getSystemOS(Long id);
+	List<SystemOS> searchSystemOS(String keyWords);
 
 	// PortableCategory
 	PortableCategory savePortableCategory(PortableCategory portableCategory);
 	Boolean deletePortableCategory(Long id);
 	List<PortableCategory> getPortableCategories();
 	PortableCategory getPortableCategory(Long id);
+	List<PortableCategory> searchPortableCategories(String keyWords);
 
 	// PortableUnit
 	PortableUnit savePortableUnit(PortableUnit portableCategory);
 	Boolean deletePortableUnit(Long id);
 	List<PortableUnit> getPortableUnits();
 	PortableUnit getPortableUnit(Long id);
+	List<PortableUnit> searchPortableUnits(String keyWords);
 
 	// Memory
 	Memory saveMemory(Memory memory);
 	Boolean deleteMemory(Long id);
 	List<Memory> getMemories();
 	Memory getMemory(Long id);
+	List<Memory> searchMemories(String keyWords);
 
 	// Cpu
 	Cpu saveCpu(Cpu cpu);
 	Boolean deleteCpu(Long id);
 	List<Cpu> getCpus();
 	Cpu getCpu(Long id);
+	List<Cpu> searchCpus(String keyWords);
 
 }

@@ -8,6 +8,7 @@ import com.starstel.telcopro.accounts.entities.AppRole;
 import com.starstel.telcopro.accounts.entities.AppUser;
 import com.starstel.telcopro.accounts.entities.AppUserModel;
 import com.starstel.telcopro.rh.entities.Employee;
+import com.starstel.telcopro.stocks.entities.Product;
 
 public interface AccountService 
 {
@@ -23,7 +24,8 @@ public interface AccountService
 	public AppUser findUserByUsername(String username);
 	public Long usersCount();
 	public Long rolesCount();
-	public AppUser saveUser(AppUserModel userModel) ;
+	public AppUser saveUser(AppUserModel userModel);
+	public List<Product> getProductsOfWorkSpace(AppUser user);
 	
 	public List<AppUser> listAppUsers();
 	public AppUser getAppUser(Long id);

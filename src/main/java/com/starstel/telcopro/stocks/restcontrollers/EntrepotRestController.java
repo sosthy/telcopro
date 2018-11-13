@@ -49,6 +49,11 @@ public class EntrepotRestController {
 		return entrepotService.deleteEntrepot(id);
 	}
 
+	@RequestMapping(value="/search",method=RequestMethod.GET)
+	public List<Entrepot> search(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return entrepotService.search(keyWords);
+	}
+
 	@RequestMapping(value="/emplacements",method=RequestMethod.GET)
 	public List<Emplacement> listEmplacement() {
 		return entrepotService.listEmplacement();
@@ -76,7 +81,7 @@ public class EntrepotRestController {
 
 	@RequestMapping(value="/products-of-entrepot/{id}",method=RequestMethod.GET)
 	public List<Product> getAllStockOfEntrepot(@PathVariable Long id) {
-		return entrepotService.getAllStockOfEntrepot(id);
+		return entrepotService.getProductsOfEntrepot(id);
 	}
 
 	@RequestMapping(value="/count-product-of-entrepot/{id}",method=RequestMethod.GET)
@@ -127,5 +132,10 @@ public class EntrepotRestController {
 	public Boolean isAddPossible(@PathVariable Long id, @RequestBody Set<Product> product) {
 		Entrepot entrepot=entrepotService.getEntrepot(id);
 		return entrepotService.isAddPossible(entrepot, product);
+	}
+
+	@RequestMapping(value="/emplacements/search",method=RequestMethod.GET)
+	public List<Emplacement> searchEmplacement(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return entrepotService.searchEmplacement(keyWords);
 	}
 }

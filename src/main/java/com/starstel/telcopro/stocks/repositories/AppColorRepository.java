@@ -20,5 +20,7 @@ public interface AppColorRepository extends JpaRepository<AppColor, Long>
 	List<Portable> getPortableByColor(@Param("x") String string);
 	@Query("select distinct p.appColor.name from Portable p")
 	List<String> getPortableColor();
+	@Query("select a from AppColor a where lower(a.name) like lower(:x)")
+	List<AppColor> search(@Param("x") String keyWords);
 	
 }

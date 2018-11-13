@@ -122,7 +122,7 @@ public class ProductServiceImpl implements ProductService
 	}
 	@Override
 	public List<Product> searchProducts(String keyWords) {
-		return productRepository.searchProducts(keyWords);
+		return productRepository.searchProducts("%"+keyWords+"%");
 	}
 	@Override
 	public List<ProductCategory> listProductCategorys() {
@@ -140,5 +140,17 @@ public class ProductServiceImpl implements ProductService
 	@Override
 	public ProductCategory getProductCategory(Long id) {
 		return productCategoryRepository.findById(id).get();
+	}
+	@Override
+	public List<State> searchStates(String keyWords) {
+		return stateRepository.search(keyWords);
+	}
+	@Override
+	public List<ProductCategory> searchProductCategories(String keyWords) {
+		return productCategoryRepository.search(keyWords);
+	}
+	@Override
+	public List<MeasureUnit> searchMeasureUnits(String keyWords) {
+		return measureUnitRepository.search(keyWords);
 	}
 }

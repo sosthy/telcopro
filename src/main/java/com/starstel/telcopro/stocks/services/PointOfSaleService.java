@@ -16,5 +16,5 @@ public interface PointOfSaleService
 	Boolean delete(Long id);
 	List<PointOfSale> getPointOfSales();
 	PointOfSale getPointOfSale(Long id);
-	List<PointOfSale> searchItems(String mc);
+	List<PointOfSale> search(String mc);
 }

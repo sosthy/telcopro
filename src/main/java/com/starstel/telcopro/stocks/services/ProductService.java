@@ -24,18 +24,21 @@ public interface ProductService
 	State saveState(State state);
 	Boolean deleteState(Long id);
 	State getState(Long id);
+	List<State> searchStates(String keyWords);
 	
 	// ProductCategory
 	List<ProductCategory> listProductCategorys();
 	ProductCategory saveProductCategory(ProductCategory productCategory);
 	Boolean deleteProductCategory(Long id);
 	ProductCategory getProductCategory(Long id);
+	List<ProductCategory> searchProductCategories(String keyWords);
 	
 	// MeasureUnit
 	List<MeasureUnit> listMeasureUnits();
 	MeasureUnit saveMeasureUnit(MeasureUnit measureUnit);
 	Boolean deleteMeasureUnit(Long id);
 	MeasureUnit getMeasureUnit(Long id);
+	List<MeasureUnit> searchMeasureUnits(String keyWords);
 
 	List<Mouvment> getAllMouvmentOfProduct(Long id);
 	List<Mouvment> getAllMouvmentOfEmployee(Long id);

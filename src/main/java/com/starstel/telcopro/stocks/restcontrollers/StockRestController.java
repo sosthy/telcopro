@@ -98,6 +98,11 @@ public class StockRestController
 		return appColorService.getAppColor(id);
 	}
 
+	@RequestMapping(value="/app-colors/search",method=RequestMethod.GET)
+	public List<AppColor> searchAppColor(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return appColorService.search(keyWords);
+	}
+
 	@RequestMapping(value="/colors",method=RequestMethod.GET)
 	public List<String> getColors() {
 		return appColorService.getColors();
@@ -172,5 +177,19 @@ public class StockRestController
 	public List<Product> searchProducts(@RequestParam(name="mc", defaultValue="") String keyWords) {
 		return productService.searchProducts(keyWords);
 	}
-	
+
+	@RequestMapping(value="/states/search",method=RequestMethod.GET)
+	public List<State> searchStates(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return productService.searchStates(keyWords);
+	}
+
+	@RequestMapping(value="/categories/search",method=RequestMethod.GET)
+	public List<ProductCategory> searchProductCategories(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return productService.searchProductCategories(keyWords);
+	}
+
+	@RequestMapping(value="/measure-units/search",method=RequestMethod.GET)
+	public List<MeasureUnit> searchMeasureUnits(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return productService.searchMeasureUnits(keyWords);
+	}
 }

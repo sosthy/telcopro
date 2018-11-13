@@ -88,4 +88,14 @@ public class RecipientRestController {
 			@RequestParam(name="groupe") Long idGroupe) {
 		return recipientService.addRecipientToGroupe(idRecipient, idGroupe);
 	}
+
+	@RequestMapping(value="/groupes/search",method=RequestMethod.GET)
+	public List<RecipientGroupe> searchGroupe(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return recipientService.searchGroupe(keyWords);
+	}
+
+	@RequestMapping(value="/search",method=RequestMethod.GET)
+	public List<Recipient> search(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return recipientService.search(keyWords);
+	}
 }

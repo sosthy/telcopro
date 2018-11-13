@@ -131,4 +131,19 @@ public class MouvmentServiceImpl implements MouvmentService
 	public Mouvment getMouvment(Long id) {
 		return mouvmentRepository.findById(id).get();
 	}
+
+	@Override
+	public List<MouvmentType> searchType(String keyWords) {
+		return mouvmentTypeRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<Mouvment> search(String keyWords) {
+		return mouvmentRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<MouvmentLine> searchLine(String keyWords) {
+		return mouvmentLineRepository.search("%"+keyWords+"%");
+	}
 }

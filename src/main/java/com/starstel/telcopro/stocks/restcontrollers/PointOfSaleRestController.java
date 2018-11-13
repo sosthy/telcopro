@@ -45,4 +45,9 @@ public class PointOfSaleRestController {
 	public Boolean deletePointOfSale(@PathVariable Long id) {
 		return pointOfSaleService.delete(id);
 	}
+
+	@RequestMapping(value="/search",method=RequestMethod.GET)
+	public List<PointOfSale> searchLine(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return pointOfSaleService.search(keyWords);
+	}
 }

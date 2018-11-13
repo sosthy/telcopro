@@ -34,7 +34,7 @@ public class RecipientServiceImpl implements RecipientService
 	@Override
 	public RecipientGroupe editRecipientGroupe(RecipientGroupe recipientGroupe) 
 	{
-		return null;
+		return createRecipientGroupe(recipientGroupe);
 	}
 
 	@Override
@@ -95,6 +95,16 @@ public class RecipientServiceImpl implements RecipientService
 	@Override
 	public RecipientGroupe getRecipientGroupe(Long id) {
 		return recipientGroupeRepository.findById(id).get();
+	}
+
+	@Override
+	public List<RecipientGroupe> searchGroupe(String keyWords) {
+		return recipientGroupeRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<Recipient> search(String keyWords) {
+		return recipientRepository.search("%"+keyWords+"%");
 	}
 	
 }

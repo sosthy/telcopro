@@ -16,4 +16,5 @@ public interface AppColorService
 	List<String> getPortableColor();
 	List<Product> getProductByColor(String name);
 	List<Portable> getPortableByColor(String name);
+	List<AppColor> search(String keyWords);
 }

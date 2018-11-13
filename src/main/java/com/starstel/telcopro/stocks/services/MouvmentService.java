@@ -17,12 +17,14 @@ public interface MouvmentService
 	Boolean deleteMouvmentType(Long id);
 	Set<Mouvment> getAllMouvmentOfMouvmentType(Long id);
 	Set<Mouvment> getAllMouvmentOfEmployee(Long id);
+	List<MouvmentType> searchType(String keyWords);
 	
 	// Mouvment
 	List<Mouvment> listMouvment();
 	Mouvment saveMouvment(Mouvment mouvment);
 	Boolean deleteMouvment(Long id);
 	Set<Product> getProducts(Mouvment mouvment);
+	List<Mouvment> search(String keyWords);
 
 	// MouvmentLine
 	List<MouvmentLine> listMouvmentLine();
@@ -30,4 +32,5 @@ public interface MouvmentService
 	Boolean deleteMouvmentLine(Long id);
 	Set<MouvmentLine> getAllMouvmentLineOfMouvmentType(Long id);
 	Mouvment getMouvment(Long id);
+	List<MouvmentLine> searchLine(String keyWords);
 }

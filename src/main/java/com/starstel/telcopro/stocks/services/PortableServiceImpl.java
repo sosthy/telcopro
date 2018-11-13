@@ -248,4 +248,34 @@ public class PortableServiceImpl implements PortableService {
 		
 		return portableRepository.searchPortable(portable);
 	}
+
+	@Override
+	public List<Camera> searchCameras(String keyWords) {
+		return cameraRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<SystemOS> searchSystemOS(String keyWords) {
+		return systemOSRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<PortableCategory> searchPortableCategories(String keyWords) {
+		return portableCategoryRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<PortableUnit> searchPortableUnits(String keyWords) {
+		return portableUnitRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<Memory> searchMemories(String keyWords) {
+		return memoryRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<Cpu> searchCpus(String keyWords) {
+		return cpuRepository.search("%"+keyWords+"%");
+	}
 }

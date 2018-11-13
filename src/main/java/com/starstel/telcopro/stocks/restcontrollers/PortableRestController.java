@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.starstel.telcopro.stocks.entities.AppColor;
 import com.starstel.telcopro.stocks.entities.Camera;
 import com.starstel.telcopro.stocks.entities.Cpu;
 import com.starstel.telcopro.stocks.entities.Emplacement;
@@ -26,6 +27,7 @@ import com.starstel.telcopro.stocks.entities.Portable;
 import com.starstel.telcopro.stocks.entities.PortableCategory;
 import com.starstel.telcopro.stocks.entities.PortableItem;
 import com.starstel.telcopro.stocks.entities.PortableUnit;
+import com.starstel.telcopro.stocks.entities.Product;
 import com.starstel.telcopro.stocks.entities.SystemOS;
 import com.starstel.telcopro.stocks.services.AppColorService;
 import com.starstel.telcopro.stocks.services.PortableItemService;
@@ -104,6 +106,11 @@ public class PortableRestController {
 		return portableService.getCameras();
 	}
 
+	@RequestMapping(value="/cameras/search",method=RequestMethod.GET)
+	public List<Camera> searchCameras(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return portableService.searchCameras(keyWords);
+	}
+
 	@RequestMapping(value="/cameras/{id}", method = RequestMethod.GET)
 	public Camera getCamera(@PathVariable Long id) {
 		return portableService.getCamera(id);
@@ -122,6 +129,11 @@ public class PortableRestController {
 	@RequestMapping(value="/systemos", method = RequestMethod.GET)
 	public List<SystemOS> getSystemOSs() {
 		return portableService.getSystemOSs();
+	}
+
+	@RequestMapping(value="/systemos/search",method=RequestMethod.GET)
+	public List<SystemOS> searchSystemOS(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return portableService.searchSystemOS(keyWords);
 	}
 
 	@RequestMapping(value="/systemos/{id}", method = RequestMethod.GET)
@@ -149,6 +161,11 @@ public class PortableRestController {
 		return portableService.getPortableCategory(id);
 	}
 
+	@RequestMapping(value="/categories/search",method=RequestMethod.GET)
+	public List<PortableCategory> searchPortableCategories(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return portableService.searchPortableCategories(keyWords);
+	}
+
 	@RequestMapping(value="/units", method = RequestMethod.POST)
 	public PortableUnit savePortableUnit(@RequestBody PortableUnit portableCategory) {
 		return portableService.savePortableUnit(portableCategory);
@@ -167,6 +184,11 @@ public class PortableRestController {
 	@RequestMapping(value="/units/{id}", method = RequestMethod.GET)
 	public PortableUnit getPortableUnit(@PathVariable Long id) {
 		return portableService.getPortableUnit(id);
+	}
+
+	@RequestMapping(value="/units/search",method=RequestMethod.GET)
+	public List<PortableUnit> searchPortableUnits(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return portableService.searchPortableUnits(keyWords);
 	}
 
 	@RequestMapping(value="/colors-of-portable", method = RequestMethod.GET)
@@ -230,6 +252,11 @@ public class PortableRestController {
 		return portableService.getMemory(id);
 	}
 
+	@RequestMapping(value="/memories/search",method=RequestMethod.GET)
+	public List<Memory> searchMemories(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return portableService.searchMemories(keyWords);
+	}
+
 	@RequestMapping(value="/cpus", method = RequestMethod.POST)
 	public Cpu saveCpu(@RequestBody Cpu cpu) {
 		return portableService.saveCpu(cpu);
@@ -248,5 +275,15 @@ public class PortableRestController {
 	@RequestMapping(value="/cpus/{id}", method = RequestMethod.GET)
 	public Cpu getCpu(@PathVariable Long id) {
 		return portableService.getCpu(id);
+	}
+
+	@RequestMapping(value="/lines/search",method=RequestMethod.GET)
+	public List<Cpu> searchCpus(@RequestParam(name="mc", defaultValue="") String keyWords) {
+		return portableService.searchCpus(keyWords);
+	}
+
+	@RequestMapping(value="/colors",method=RequestMethod.POST)
+	public AppColor saveAppColor(@RequestBody AppColor appColor) {
+		return appColorService.saveAppColor(appColor);
 	}
 }

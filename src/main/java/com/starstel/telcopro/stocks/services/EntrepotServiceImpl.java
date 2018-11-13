@@ -5,16 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.starstel.telcopro.stocks.entities.Emplacement;
 import com.starstel.telcopro.stocks.entities.Entrepot;
 import com.starstel.telcopro.stocks.entities.Mouvment;
-import com.starstel.telcopro.stocks.entities.PortableItem;
-import com.starstel.telcopro.stocks.entities.Product;
 import com.starstel.telcopro.stocks.entities.Product;
 import com.starstel.telcopro.stocks.repositories.EmplacementRepository;
 import com.starstel.telcopro.stocks.repositories.EntrepotRepository;
@@ -93,7 +88,7 @@ public class EntrepotServiceImpl implements EntrepotService
 	}
 
 	@Override
-	public List<Product> getAllStockOfEntrepot(Long id) 
+	public List<Product> getProductsOfEntrepot(Long id) 
 	{
 		List<Product> list=entrepotRepository.getAllStockOfEntrepot(id);
 		return list;
@@ -181,5 +176,14 @@ public class EntrepotServiceImpl implements EntrepotService
 		
 		return (entrepot.getVolume() + volumeProducts) <= entrepot.getVolumeSecurity();
 	}
-	
+
+	@Override
+	public List<Entrepot> search(String keyWords) {
+		return entrepotRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public List<Emplacement> searchEmplacement(String keyWords) {
+		return emplacementRepository.search("%"+keyWords+"%");
+	}
 }

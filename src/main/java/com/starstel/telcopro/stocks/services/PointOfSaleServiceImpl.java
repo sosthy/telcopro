@@ -37,8 +37,8 @@ public class PointOfSaleServiceImpl implements PointOfSaleService {
 	}
 
 	@Override
-	public List<PointOfSale> searchItems(String mc) {
-		return pointOfSaleRepository.searchItems("%"+mc+"%");
+	public List<PointOfSale> search(String mc) {
+		return pointOfSaleRepository.search("%"+mc+"%");
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.starstel.telcopro.accounts.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +20,10 @@ import com.starstel.telcopro.accounts.repositories.AppRoleRepository;
 import com.starstel.telcopro.accounts.repositories.AppUserRepository;
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.repositories.EmployeeRepository;
+import com.starstel.telcopro.rh.services.EmployeeService;
+import com.starstel.telcopro.stocks.entities.Entrepot;
+import com.starstel.telcopro.stocks.entities.Product;
+import com.starstel.telcopro.stocks.services.EntrepotService;
 
 @Service
 @Transactional 
@@ -34,7 +39,10 @@ public class AccountServiceImpl implements AccountService
 	private AppMenuRepository appMenuRepository;
 	
 	@Autowired
-	private EmployeeRepository employeeRepository;
+	private EmployeeService employeeService;
+	
+	@Autowired
+	private EntrepotService entrepotService;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -43,18 +51,18 @@ public class AccountServiceImpl implements AccountService
 	@Override
 	public boolean lockEmployee(Long id) 
 	{
-		Employee employee = employeeRepository.findById(id).get();
+		Employee employee = employeeService.employee(id);
 		employee.getAppUser().setLockStatus(true);
-		employeeRepository.save(employee);
+		employeeService.createEmployee(employee); // Mis à jour de l'employé
 		return true;
 	}
 	
 	@Override
 	public boolean unlockEmployee(Long id) 
 	{
-		Employee employee = employeeRepository.findById(id).get();
+		Employee employee = employeeService.employee(id);
 		employee.getAppUser().setLockStatus(false);
-		employeeRepository.save(employee);
+		employeeService.createEmployee(employee); // Mis à jour de l'employé
 		return true;
 	}
 	
@@ -117,7 +125,12 @@ public class AccountServiceImpl implements AccountService
 		user.setLockStatus(userModel.getLockStatus());
 		user.setRoles(userModel.getRoles());
 		
-		return appUserRepository.save(user);
+		user= appUserRepository.save(user);
+		
+		user.getEmployee().setAppUser(user);
+		employeeService.createEmployee(user.getEmployee()); // Mis à jour de l'employé
+		
+		return user;
 	}
 
 	@Override
@@ -139,9 +152,9 @@ public class AccountServiceImpl implements AccountService
 		appUser=appUserRepository.save(appUser);
 		
 		employee.setAppUser(appUser);
-		employee= employeeRepository.save(employee);
+		employee= employeeService.createEmployee(employee); // Mis à jour de l'employé
 		
-		return employee.getAppUser();
+		return appUser;
 	}
 
 	@Override
@@ -195,4 +208,8 @@ public class AccountServiceImpl implements AccountService
 		return appUserRepository.search("%"+keyWords+"%");
 	}
 
+	@Override
+	public List<Product> getProductsOfWorkSpace(AppUser user) {
+		return entrepotService.getProductsOfEntrepot(user.getEmployee().getWorkSpace().getId());
+	}
 }

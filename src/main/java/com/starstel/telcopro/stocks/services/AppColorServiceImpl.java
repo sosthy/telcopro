@@ -56,5 +56,10 @@ public class AppColorServiceImpl implements AppColorService
 	public List<String> getPortableColor() {
 		return appColorRepository.getPortableColor();
 	}
+
+	@Override
+	public List<AppColor> search(String keyWords) {
+		return appColorRepository.search("%"+keyWords+"%");
+	}
 	
 }
