@@ -18,6 +18,8 @@ public class EmployeeServiceImpl implements EmployeeService
 	private EmployeeRepository employeeRepository;
 	@Autowired
 	private AccountService accountService;
+	@Autowired
+	private WorkSpaceService workSpaceService;
 	
 	@Override
 	public List<Employee> listEmployee() 
@@ -28,6 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public Employee createEmployee(Employee employee) 
 	{
+		employee.setWorkSpace(workSpaceService.saveWorkSpace(employee.getWorkSpace()));
 		return employeeRepository.save(employee);
 	}
 
