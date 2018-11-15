@@ -208,8 +208,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		mouvmentType3 = mouvmentService.saveMouvmentType(mouvmentType3);
 		mouvmentType4 = mouvmentService.saveMouvmentType(mouvmentType4);
 		
-		Entrepot entrepot1 = new Entrepot("Entrepot Douala", "Rond point 4ème", 0.0, 0.0, 100.0, 70.0);
-		Entrepot entrepot2 = new Entrepot("Entrepot Douala2", "Maképe Saint tropèze", 0.0, 0.0, 100.0, 70.0);
+		Entrepot entrepot1 = new Entrepot("Akwa", "Rond point 4ème", 0.0, 0.0, 100.0, 70.0);
+		Entrepot entrepot2 = new Entrepot("Deido", "Maképe Saint tropèze", 0.0, 0.0, 100.0, 70.0);
 		entrepot1 = entrepotService.saveEntrepot(entrepot1);
 		entrepot2 = entrepotService.saveEntrepot(entrepot2);
 		
@@ -236,9 +236,9 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		Memory memory2 = new Memory(14.5,75.5,"MHZ");
 		Memory memory3 = new Memory(12.0,12.5,"KHZ");
 
-		MeasureUnit measureUnit = new MeasureUnit("dm");
-		MeasureUnit measureUnit2 = new MeasureUnit("mm");
-		MeasureUnit measureUnit3 = new MeasureUnit("m");
+		MeasureUnit measureUnit = new MeasureUnit("Piece(s)");
+		MeasureUnit measureUnit2 = new MeasureUnit("Sac(s)");
+		MeasureUnit measureUnit3 = new MeasureUnit("Carton(s)");
 		
 		SystemOS os = new SystemOS("Android Oreo","7.0");
 
@@ -269,11 +269,11 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 				true,null,memory3,camera2,cpu,os,portableCategory3,blueColor);
 		
 		Portable portable3= new Portable(null, 0.0, new Date(), "Xbot Senior", "XTOUCH_Xbot_Senior.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
-				state2, emplacement1, measureUnit2, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",true,false,true,
+				state2, emplacement1, measureUnit, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",true,false,true,
 				false,null,memory2,camera3,cpu3,os,portableCategory4,blackColor);
 		
 		Portable portable4= new Portable(null, 0.0, new Date(), "XTOUCH E4", "XTOUCH_E4.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", state3,
-				emplacement1, measureUnit3, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,true,false,
+				emplacement1, measureUnit, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,true,false,
 				null,memory2,camera,cpu2,os,portableCategory4,whiteColor);
 		
 		
