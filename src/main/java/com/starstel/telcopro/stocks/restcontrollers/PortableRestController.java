@@ -116,27 +116,27 @@ public class PortableRestController {
 		return portableService.getCamera(id);
 	}
 
-	@RequestMapping(value="/systemos", method = RequestMethod.POST)
+	@RequestMapping(value="/system-os", method = RequestMethod.POST)
 	public SystemOS saveSystemOS(@RequestBody SystemOS systemOS) {
 		return portableService.saveSystemOS(systemOS);
 	}
 
-	@RequestMapping(value="/systemos/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value="/system-os/{id}", method = RequestMethod.DELETE)
 	public Boolean deleteSystemOS(@PathVariable Long id) {
 		return portableService.deleteSystemOS(id);
 	}
 
-	@RequestMapping(value="/systemos", method = RequestMethod.GET)
+	@RequestMapping(value="/system-os", method = RequestMethod.GET)
 	public List<SystemOS> getSystemOSs() {
 		return portableService.getSystemOSs();
 	}
 
-	@RequestMapping(value="/systemos/search",method=RequestMethod.GET)
+	@RequestMapping(value="/system-os/search",method=RequestMethod.GET)
 	public List<SystemOS> searchSystemOS(@RequestParam(name="mc", defaultValue="") String keyWords) {
 		return portableService.searchSystemOS(keyWords);
 	}
 
-	@RequestMapping(value="/systemos/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/system-os/{id}", method = RequestMethod.GET)
 	public SystemOS getSystemOS(@PathVariable Long id) {
 		return portableService.getSystemOS(id);
 	}
@@ -277,7 +277,7 @@ public class PortableRestController {
 		return portableService.getCpu(id);
 	}
 
-	@RequestMapping(value="/lines/search",method=RequestMethod.GET)
+	@RequestMapping(value="/cpus/search",method=RequestMethod.GET)
 	public List<Cpu> searchCpus(@RequestParam(name="mc", defaultValue="") String keyWords) {
 		return portableService.searchCpus(keyWords);
 	}

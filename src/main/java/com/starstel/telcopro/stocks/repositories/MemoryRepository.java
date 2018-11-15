@@ -10,7 +10,7 @@ import com.starstel.telcopro.stocks.entities.Memory;
 
 public interface MemoryRepository extends JpaRepository<Memory, Long>
 {
-	@Query("select m from Memory m inner join m.portableList p where lower(m.brand) like lower(:x) or "
+	@Query("select distinct m from Memory m inner join m.portableList p where lower(m.brand) like lower(:x) or "
 			+ "lower(p.designation) like lower(:x) or  concat(m.rom,'') like lower(:x) or "
 			+ "concat(m.ram,'') like lower(:x)")
 	List<Memory> search(@Param("x") String keyWords);

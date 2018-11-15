@@ -10,7 +10,7 @@ import com.starstel.telcopro.stocks.entities.RecipientGroupe;
 
 public interface RecipientGroupeRepository extends JpaRepository<RecipientGroupe, Long>
 {
-	@Query("select r from RecipientGroupe r inner join r.recipients rr where lower(r.name) like lower(:x) or "
+	@Query("select distinct r from RecipientGroupe r inner join r.recipients rr where lower(r.name) like lower(:x) or "
 			+ "lower(rr.name) like lower(:x) or lower(rr.surname) like lower(:x)")
 	List<RecipientGroupe> search(@Param("x") String keyWords);
 }

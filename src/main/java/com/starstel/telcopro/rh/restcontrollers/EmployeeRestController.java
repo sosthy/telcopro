@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.services.EmployeeService;
 import com.starstel.telcopro.stocks.entities.Mouvment;
@@ -47,6 +50,28 @@ public class EmployeeRestController
 	{
 		return employeeService.listMouvmentOfEmployee(id);
 	}
+	
+	/*
+	@RequestMapping(value="", method=RequestMethod.POST)
+	public Employee save(@RequestParam("photo") MultipartFile file, 
+								@RequestParam("employee") String obj)
+	{
+		System.err.println("UploadFile name: "+file.getName());
+		
+		ObjectMapper mapper = new ObjectMapper();
+		Employee employee = new Employee();
+		
+		try 
+		{
+			employee = mapper.readValue(obj, Employee.class);
+			return employeeService.createEmployee(employee);
+		} 
+		catch (Exception e) 
+		{
+			throw new RuntimeException(e);
+		}
+		
+	}*/
 	
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public Employee createEmployee(@RequestBody Employee employee)

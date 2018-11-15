@@ -11,7 +11,7 @@ import com.starstel.telcopro.stocks.entities.ProductCategory;
 public interface CategoryRepository extends JpaRepository<ProductCategory, Long>
 {
 
-	@Query("select p from ProductCategory p inner join p.products pp where lower(p.name) like lower(:x) or "
+	@Query("select distinct p from ProductCategory p inner join p.products pp where lower(p.name) like lower(:x) or "
 			+ "lower(p.notes) like lower(:x) or lower(pp.designation) like lower(:x)")
 	List<ProductCategory> search(@Param("x") String keyWords);
 }

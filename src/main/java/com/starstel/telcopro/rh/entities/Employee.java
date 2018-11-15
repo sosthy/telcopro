@@ -62,8 +62,8 @@ public class Employee extends Person implements Serializable
     }
 
 
-	public Employee(Long id, String name, String surname, String website, String sex, String cni,
-			String phone, String photo, Date birthday, Date hiring_date, Integer seniority, WorkSpace workSpace) {
+	public Employee(Long id, String name, String surname, String phone, String website, String sex, String cni,
+			 String photo, Date birthday, Date hiring_date, Integer seniority, WorkSpace workSpace) {
 		super(id, name, surname, phone, website, sex, cni, photo, birthday);
 		this.hiringDate = hiring_date;
 		this.seniority = seniority;

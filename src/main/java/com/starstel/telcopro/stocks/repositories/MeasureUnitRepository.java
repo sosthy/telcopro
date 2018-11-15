@@ -10,7 +10,7 @@ import com.starstel.telcopro.stocks.entities.MeasureUnit;
 
 public interface MeasureUnitRepository extends JpaRepository<MeasureUnit, Long>
 {
-	@Query("select m from MeasureUnit m inner join m.productList p where lower(m.unity) like lower(:x) or "
+	@Query("select distinct m from MeasureUnit m inner join m.productList p where lower(m.unity) like lower(:x) or "
 			+ "lower(p.designation) like lower(:x)")
 	List<MeasureUnit> search(@Param("x") String keyWords);
 }
