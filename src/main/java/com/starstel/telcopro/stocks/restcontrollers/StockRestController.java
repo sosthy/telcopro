@@ -78,12 +78,12 @@ public class StockRestController
 		return productService.getAllMouvmentOfEmployee(id);
 	}
 
-	@RequestMapping(value="/colors",method=RequestMethod.POST)
+	@RequestMapping(value="/app-colors",method=RequestMethod.POST)
 	public AppColor saveAppColor(@RequestBody AppColor appColor) {
 		return appColorService.saveAppColor(appColor);
 	}
 
-	@RequestMapping(value="/colors/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/app-colors/{id}",method=RequestMethod.DELETE)
 	public Boolean deleteAppColor(@PathVariable Long id) {
 		return appColorService.deleteAppColor(id);
 	}

@@ -10,7 +10,7 @@ import com.starstel.telcopro.stocks.entities.PortableCategory;
 
 public interface PortableCategoryRepository extends JpaRepository<PortableCategory, Long>
 {
-	@Query("select p from PortableCategory p inner join p.portables pp where lower(p.name) like lower(:x) or "
+	@Query("select distinct p from PortableCategory p inner join p.portables pp where lower(p.name) like lower(:x) or "
 			+ "lower(p.notes) like lower(:x) or lower(pp.designation) like lower(:x)")
 	List<PortableCategory> search(@Param("x") String keyWords);
 }

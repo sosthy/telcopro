@@ -1,5 +1,9 @@
 package com.starstel.telcopro;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,6 +148,9 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		
 		WorkSpace space = new WorkSpace("Startel Deido","Douala Deido rue kotto à 100m d'ecoMarche");
 		WorkSpace space2 = new WorkSpace("Startel Nyalla","Douala Nyalla à 100m de total Nyalla");
+
+		space= workSpaceService.saveWorkSpace(space);
+		space2= workSpaceService.saveWorkSpace(space2);
 		
 		Employee employee = new Employee(null,"NOUEBISSI NGHEMNIN","Sosthene","78221242","rsosthenegolden@gmail.com",
 				"M","KIT272","XXXX",new Date(),new Date(),Integer.valueOf(4),space);

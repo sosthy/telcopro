@@ -1,5 +1,8 @@
 package com.starstel.telcopro.rh.services;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Set;
 
@@ -16,10 +19,6 @@ public class EmployeeServiceImpl implements EmployeeService
 {
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	@Autowired
-	private AccountService accountService;
-	@Autowired
-	private WorkSpaceService workSpaceService;
 	
 	@Override
 	public List<Employee> listEmployee() 
@@ -30,7 +29,10 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public Employee createEmployee(Employee employee) 
 	{
-		employee.setWorkSpace(workSpaceService.saveWorkSpace(employee.getWorkSpace()));
+		
+	    Period period = Period.between(employee.getHiringDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), 
+	    						LocalDate.now());
+	    employee.setSeniority(period.getYears());
 		return employeeRepository.save(employee);
 	}
 

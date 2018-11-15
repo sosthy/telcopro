@@ -10,7 +10,7 @@ import com.starstel.telcopro.stocks.entities.Cpu;
 
 public interface CpuRepository extends JpaRepository<Cpu, Long>
 {
-	@Query("select c from Cpu c inner join c.portableList p where lower(c.brand) like lower(:x) or  concat(c.frequency) like lower(:x) or "
+	@Query("select distinct c from Cpu c inner join c.portableList p where lower(c.brand) like lower(:x) or  concat(c.frequency,'') like lower(:x) or "
 			+ "lower(p.designation) like lower(:x)")
 	List<Cpu> search(@Param("x") String keyWords);
 }

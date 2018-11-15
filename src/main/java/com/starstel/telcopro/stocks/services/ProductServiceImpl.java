@@ -143,14 +143,14 @@ public class ProductServiceImpl implements ProductService
 	}
 	@Override
 	public List<State> searchStates(String keyWords) {
-		return stateRepository.search(keyWords);
+		return stateRepository.search("%"+keyWords+"%");
 	}
 	@Override
 	public List<ProductCategory> searchProductCategories(String keyWords) {
-		return productCategoryRepository.search(keyWords);
+		return productCategoryRepository.search("%"+keyWords+"%");
 	}
 	@Override
 	public List<MeasureUnit> searchMeasureUnits(String keyWords) {
-		return measureUnitRepository.search(keyWords);
+		return measureUnitRepository.search("%"+keyWords+"%");
 	}
 }

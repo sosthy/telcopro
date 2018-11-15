@@ -10,7 +10,7 @@ import com.starstel.telcopro.stocks.entities.Camera;
 
 public interface CameraRepository extends JpaRepository<Camera, Long>
 {
-	@Query("select c from Camera c inner join c.portableList p where concat(c.frontCamera,'') like lower(:x) or "
+	@Query("select distinct c from Camera c inner join c.portableList p where concat(c.frontCamera,'') like lower(:x) or "
 			+ "concat(c.backCamera,'') like lower(:x) or lower(p.designation) like lower(:x)")
 	List<Camera> search(@Param("x") String keyWords);
 }
