@@ -29,11 +29,21 @@ public class Emplacement implements Serializable
     @GeneratedValue(generator = "emplac_id")
 	private Long id;
 	private String name;
+	private String nbOfProduct;
+	private String priceTotalOfProduct;
 	@ManyToOne
 	private Entrepot entrepot;
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="emplacement")
 	private Set<Product> products = new HashSet<>();
+	
+	public Emplacement(Long id, String name, Entrepot entrepot, Set<Product> products) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.entrepot = entrepot;
+		this.products = products;
+	}
 	
 	@Override
 	public String toString() {
@@ -70,6 +80,5 @@ public class Emplacement implements Serializable
 			return false;
 		return true;
 	}
-	
 	
 }
