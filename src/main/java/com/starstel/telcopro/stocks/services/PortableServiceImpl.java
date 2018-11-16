@@ -56,28 +56,6 @@ public class PortableServiceImpl implements PortableService {
 	
 	@Override
 	public Portable save(Portable portable) {
-		
-		if(portable.getCamera() != null)
-			portable.setCamera(saveCamera(portable.getCamera()));
-		if(portable.getMemory() != null)
-			portable.setMemory(saveMemory(portable.getMemory()));
-		if(portable.getCpu() != null)
-			portable.setCpu(saveCpu(portable.getCpu()));
-		if(portable.getOs() != null)
-			portable.setOs(saveSystemOS(portable.getOs()));
-		if(portable.getPortableCategory() != null)
-			portable.setPortableCategory(savePortableCategory(portable.getPortableCategory()));
-		
-		if(portable.getAppColor() != null)
-			portable.setAppColor(appColorRepository.save(portable.getAppColor()));
-		
-		if(portable.getState() != null)
-			portable.setState(productService.saveState(portable.getState()));
-		if(portable.getProductCategory() != null)
-			portable.setProductCategory(productService.saveProductCategory(portable.getProductCategory()));
-		if(portable.getMeasureUnit() != null)
-			portable.setMeasureUnit(productService.saveMeasureUnit(portable.getMeasureUnit()));
-
 		return portableRepository.save(portable);
 	}
 	

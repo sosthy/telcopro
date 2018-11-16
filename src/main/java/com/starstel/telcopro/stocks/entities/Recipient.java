@@ -6,8 +6,13 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starstel.telcopro.rh.entities.Person;
 
@@ -18,12 +23,17 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class Recipient extends Person implements Serializable 
+public class Recipient implements Serializable 
 {
-	private String civility;
-    private String enterprise;
-    private String service;
-    private String fonction;
+	@Id
+	@SequenceGenerator(initialValue = 1, sequenceName = "REC_SEQ", allocationSize = 1, name = "rec_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rec_id")
+    private Long id;
+	
+	private String designation;
+    private String location;
+    private String website;
+    private String phone;
     @ManyToOne
     private RecipientGroupe groupe;
     @JsonIgnore
@@ -33,10 +43,10 @@ public class Recipient extends Person implements Serializable
 	public int hashCode() {
 		final int prime = 37;
 		int result = super.hashCode();
-		result = prime * result + ((civility == null) ? 0 : civility.hashCode());
-		result = prime * result + ((enterprise == null) ? 0 : enterprise.hashCode());
-		result = prime * result + ((fonction == null) ? 0 : fonction.hashCode());
-		result = prime * result + ((service == null) ? 0 : service.hashCode());
+		result = prime * result + ((designation == null) ? 0 : designation.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((website == null) ? 0 : website.hashCode());
 		return result;
 	}
 	@Override
@@ -48,27 +58,34 @@ public class Recipient extends Person implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		Recipient other = (Recipient) obj;
-		if (civility == null) {
-			if (other.civility != null)
+		if (designation == null) {
+			if (other.designation != null)
 				return false;
-		} else if (!civility.equals(other.civility))
+		} else if (!designation.equals(other.designation))
 			return false;
-		if (enterprise == null) {
-			if (other.enterprise != null)
+		if (location == null) {
+			if (other.location != null)
 				return false;
-		} else if (!enterprise.equals(other.enterprise))
+		} else if (!location.equals(other.location))
 			return false;
-		if (fonction == null) {
-			if (other.fonction != null)
+		if (phone == null) {
+			if (other.phone != null)
 				return false;
-		} else if (!fonction.equals(other.fonction))
+		} else if (!phone.equals(other.phone))
 			return false;
-		if (service == null) {
-			if (other.service != null)
+		if (website == null) {
+			if (other.website != null)
 				return false;
-		} else if (!service.equals(other.service))
+		} else if (!website.equals(other.website))
 			return false;
 		return true;
+	}
+	public Recipient(String designation, String location, String website, String phone) {
+		super();
+		this.designation = designation;
+		this.location = location;
+		this.website = website;
+		this.phone = phone;
 	}
     
     

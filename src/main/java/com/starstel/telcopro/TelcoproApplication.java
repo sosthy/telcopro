@@ -161,10 +161,10 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		Employee employee3 = new Employee(null,"NZUKO","QUEVIN","52481234","fabien.@gmail.com","M","785427JKDF3",
 				"romeo.png",new Date(),new Date(),Integer.valueOf(1),space);
 		
-		Employee employee4 = new Employee(null,"unknow","FRANCIS","6952478625","francis.@gmail.com","M","8966J245M",
+		Employee employee4 = new Employee(null,"TAMO","FRANCIS","6952478625","francis.@gmail.com","M","8966J245M",
 				"francis.png",new Date(),new Date(),Integer.valueOf(1),boutique);
 		
-		Employee employee5 = new Employee(null,"unknow","GAELLE","52244452524","gaelle.@gmail.com","F","4513GJDJ7",
+		Employee employee5 = new Employee(null,"MAMI","GAELLE","52244452524","gaelle.@gmail.com","F","4513GJDJ7",
 				"gaelle.png",new Date(),new Date(),Integer.valueOf(1),boutique2);
 		
 		Employee employee6 = new Employee(null,"EBOUA","OSE","5282283","ose.@gmail.com","M","782LLM3",
@@ -185,22 +185,30 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		AppUser cuser2=accountService.saveUser(user2);
 		AppUser cuser3=accountService.saveUser(user3);
 		
-		RecipientGroupe groupe1 = new RecipientGroupe(null, "FOURNISSEURS", null);
-		RecipientGroupe groupe2 = new RecipientGroupe(null, "CLIENTS", null);
+		RecipientGroupe groupe1 = new RecipientGroupe(null, "FOURNISSEUR", null);
+		RecipientGroupe groupe2 = new RecipientGroupe(null, "CLIENT", null);
 		groupe1 = recipientService.createRecipientGroupe(groupe1);
 		groupe2 = recipientService.createRecipientGroupe(groupe2);
 		
-		Recipient recipient1 = new Recipient("Citoyen", "SOREPCO", "Maintenance", "Surveillant", null, null);
-		recipient1.setGroupe(groupe1);
+		Recipient recipient1 = new Recipient("SOREPCO", "Bepanda double balle", "sorepco-bepanda.com", "22452389");
+		recipient1.setGroupe(groupe2);
 		recipient1 = recipientService.createRecipient(recipient1);
 		
-		Recipient recipient2 = new Recipient("Etranger", "Orange", "Reseau", "Adminitrateur", null, null);
+		Recipient recipient2 = new Recipient("ORANGE CAMEROUN", "Akwa boulevard de la liberté", "orangecameroon.com", "699548147");
 		recipient2.setGroupe(groupe2);
 		recipient2 = recipientService.createRecipient(recipient2);
 		
-		Recipient recipient3 = new Recipient("Etranger", "Nokia", "Telecom", "Technicien", null, null);
-		recipient3.setGroupe(groupe2);
+		Recipient recipient3 = new Recipient("NOKIA", "Allemagne", "nokia.fr", "+023 0234875632");
+		recipient3.setGroupe(groupe1);
 		recipient3 = recipientService.createRecipient(recipient3);
+		
+		Recipient recipient4 = new Recipient("XTOUCH", "DUBAÏ", "xtouchdevice.com", "+730 6533478");
+		recipient4.setGroupe(groupe1);
+		recipient4 = recipientService.createRecipient(recipient4);
+		
+		Recipient recipient5 = new Recipient("TCHECHE ROMEO", "Logpom andem", "romeo@gmail.com", "693936236");
+		recipient5.setGroupe(groupe2);
+		recipient5 = recipientService.createRecipient(recipient5);
 		
 		MouvmentType mouvmentType1 = new MouvmentType(null, "APPROVISIONNEMENT", null, "No Description");
 		MouvmentType mouvmentType2 = new MouvmentType(null, "RETOUR", null, "No Description");
@@ -212,86 +220,130 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		mouvmentType3 = mouvmentService.saveMouvmentType(mouvmentType3);
 		mouvmentType4 = mouvmentService.saveMouvmentType(mouvmentType4);
 		
-		Entrepot entrepot1 = new Entrepot("Entrepot Douala", "Rond point 4ème", 0.0, 0.0, 100.0, 70.0);
-		Entrepot entrepot2 = new Entrepot("Entrepot Douala2", "Maképe Saint tropèze", 0.0, 0.0, 100.0, 70.0);
+		Entrepot entrepot1 = new Entrepot("Akwa", "Rond point 4ème", 0.0, 0.0, 100.0, 70.0);
+		Entrepot entrepot2 = new Entrepot("Deido", "Maképe Saint tropèze", 0.0, 0.0, 100.0, 70.0);
 		entrepot1 = entrepotService.saveEntrepot(entrepot1);
 		entrepot2 = entrepotService.saveEntrepot(entrepot2);
 		
-		Emplacement emplacement1 = new Emplacement(null, "Magasin Sabba", entrepot1, null);
-		Emplacement emplacement2 = new Emplacement(null, "Etage", entrepot1, null);
+		Emplacement emplacement1 = new Emplacement(null, "ZONE A", entrepot1, null);
+		Emplacement emplacement2 = new Emplacement(null, "ZONE B", entrepot1, null);
+		Emplacement emplacement3 = new Emplacement(null, "RED PLACE", entrepot2, null);
+		Emplacement emplacement4 = new Emplacement(null, "BLACK PLACE", entrepot2, null);
+		
 		emplacement1 = entrepotService.saveEmplacement(emplacement1);
 		emplacement2 = entrepotService.saveEmplacement(emplacement2);
+		emplacement3 = entrepotService.saveEmplacement(emplacement3);
+		emplacement4 = entrepotService.saveEmplacement(emplacement4);
 		
 
 		Camera camera = new Camera(null, 8.0, 13.0);
 		Camera camera2 = new Camera(null, 10.0, 13.0);
 		Camera camera3 = new Camera(null, 10.0, 16.0);
+		Camera camera4 = new Camera(null, 0.0, 0.6);
 		
+		camera = portableService.saveCamera(camera);
+		camera2 = portableService.saveCamera(camera2);
+		camera3 = portableService.saveCamera(camera3);
+		camera4 = portableService.saveCamera(camera4);
 
 		State state = new State("Disponible");
 		State state2 = new State("Indisponible");
 		State state3= new State("En attente de livraison");
 
+		state = productService.saveState(state);
+		state2 = productService.saveState(state2);
+		state3 = productService.saveState(state3);
+
 		Cpu cpu = new Cpu("MT1658M Quad-core", 13.0);
-		Cpu cpu2 = new Cpu("MHZ", 13.0);
-		Cpu cpu3 = new Cpu("KHZ", 16.0);
+		Cpu cpu2 = new Cpu("MT6261D", 13.0);
+		Cpu cpu3 = new Cpu("F785JK63X", 16.0);
+		
+		cpu = portableService.saveCpu(cpu);
+		cpu2 = portableService.saveCpu(cpu2);
+		cpu3 = portableService.saveCpu(cpu3);
 
-		Memory memory = new Memory(12.5,12.5,"GHZ");
-		Memory memory2 = new Memory(14.5,75.5,"MHZ");
-		Memory memory3 = new Memory(12.0,12.5,"KHZ");
-
-		MeasureUnit measureUnit = new MeasureUnit("dm");
-		MeasureUnit measureUnit2 = new MeasureUnit("mm");
-		MeasureUnit measureUnit3 = new MeasureUnit("m");
+		Memory memory = new Memory(12.5,12.5,"GB");
+		Memory memory2 = new Memory(14.5,75.5,"MB");
+		Memory memory3 = new Memory(12.0,12.5,"KB");
+		
+		memory = portableService.saveMemory(memory);
+		memory2 = portableService.saveMemory(memory2);
+		memory3 = portableService.saveMemory(memory3);
+		
+		MeasureUnit carton = new MeasureUnit("Carton(s)");
+		MeasureUnit paquet = new MeasureUnit("Paquet(s)");
+		MeasureUnit paquet10 = new MeasureUnit("Paquet(s) de 10");
+		MeasureUnit cargaison = new MeasureUnit("Cargaison(s)");
+		
+		carton = productService.saveMeasureUnit(carton);
+		paquet = productService.saveMeasureUnit(paquet);
+		paquet10 = productService.saveMeasureUnit(paquet10);
+		cargaison = productService.saveMeasureUnit(cargaison);
 		
 		SystemOS os = new SystemOS("Android Oreo","7.0");
+		
+		os = portableService.saveSystemOS(os);
 
-		ProductCategory productCategory = new ProductCategory("Téléphone","RAS");
+		ProductCategory telephone = new ProductCategory("Téléphone","RAS");
+		
+		telephone = productService.saveProductCategory(telephone);
 		
 		AppColor redColor = new AppColor("RED");
 		AppColor blueColor = new AppColor("BLUE");
 		AppColor blackColor = new AppColor("BLACK");
 		AppColor whiteColor = new AppColor("WHITE"); 
+		
+		redColor = appColorService.saveAppColor(redColor);
+		blueColor = appColorService.saveAppColor(blueColor);
+		blackColor = appColorService.saveAppColor(blackColor);
+		whiteColor = appColorService.saveAppColor(whiteColor);
 
 		PortableCategory portableCategory = new PortableCategory(null,"SMART FAMILLY","Un pack complet pour la famille");
 		PortableCategory portableCategory2 = new PortableCategory(null,"XTouch Robot Family","Un pack complet pour les futuristes");
-		PortableCategory portableCategory3 = new PortableCategory(null,"SMART FAMILLY","GHZ");
-		PortableCategory portableCategory4 = new PortableCategory(null,"XTouch Robot Family","GHZ");
-		
+		PortableCategory portableCategory3 = new PortableCategory(null,"XTouch Tiny Tots","Un pack complet pour les simplistes");
+		PortableCategory portableCategory4 = new PortableCategory(null,"XTouch Humanoïd Family","Un pack complet avec IA");
+
+		portableCategory = portableService.savePortableCategory(portableCategory);
+		portableCategory2 = portableService.savePortableCategory(portableCategory2);
+		portableCategory3 = portableService.savePortableCategory(portableCategory3);
+		portableCategory4 = portableService.savePortableCategory(portableCategory4);
 		
 		Portable portable= new Portable(null, 2.0, new Date(), "XTOUCH X9", "XTOUCH_X9.jpeg", 85000.0, 75000.0, 800000.0, 
-				20.0, 50.0, 20.0, "FACE ID UNLOCK", state, emplacement1, measureUnit, productCategory, null,"C",5.5,"2400mAh", 
+				20.0, 50.0, 20.0, "FACE ID UNLOCK", state, emplacement1, carton, telephone, null,"C",5.5,"2400mAh", 
 				"Dual Sim 3G NetWork",960.0,138.0,"Ip64",false,false,false,false, null,memory,camera,cpu,os,
 				portableCategory,blueColor);
+	
+		Portable portable1= new Portable(null, 0.0, new Date(), "Xbot Senior", "Xbot_Senior.jpeg", 131000.0, 100000.0, 
+				110000.0, 100.0, 20.0, 2000.0, "No", state, emplacement4, cargaison, telephone, null,"C",2D,"B",
+				"Dual Sim 3G NetWork",2D,2D,"Ip",false,false,false,true,null,memory2,camera2,cpu2,os,portableCategory2,redColor);
 		
-		Portable portable1= new Portable(null, 0.0, new Date(), "Xbot Senior", "XTOUCH_Xbot_Senior.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
-				state, emplacement2, measureUnit3, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,false,false,
-				true,null,memory2,camera2,cpu2,os,portableCategory2,redColor);
+		Portable portable2= new Portable(null, 0.0, new Date(), "XTOUCH X", "XTOUCH_X.jpeg", 100000.0, 90000.0, 95000.0, 100.0, 
+				20.0, 2000.0, "No", 
+				state2, emplacement2, paquet, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,false,
+				true,null,memory3,camera2,cpu,os,portableCategory,blueColor);
 		
-		Portable portable2= new Portable(null, 0.0, new Date(), "XTOUCH X10", "XTOUCH_X10.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
-				state2, emplacement2, measureUnit, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,false,
-				true,null,memory3,camera2,cpu,os,portableCategory3,blueColor);
+		Portable portable3= new Portable(null, 0.0, new Date(), "Xbot Junior", "Xbot_Junior.jpeg", 115000.0, 110000.0, 0.0, 11300.0, 
+				20.0, 2000.0, "No", state2, emplacement3, paquet10, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
+				true,false,true, false,null,memory2,camera3,cpu3,os,portableCategory2,blackColor);
 		
-		Portable portable3= new Portable(null, 0.0, new Date(), "Xbot Senior", "XTOUCH_Xbot_Senior.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", 
-				state2, emplacement1, measureUnit2, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",true,false,true,
-				false,null,memory2,camera3,cpu3,os,portableCategory4,blackColor);
+		Portable portable4= new Portable(null, 0.0, new Date(), "XTOUCH E4", "XTOUCH_E4.jpeg", 60000.0, 50000.0, 55000.0, 100.0, 
+				20.0, 2000.0, "No", state3,emplacement1, cargaison, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
+				false,true,true,false,null,memory2,camera,cpu2,os,portableCategory,whiteColor);
 		
-		Portable portable4= new Portable(null, 0.0, new Date(), "XTOUCH E4", "XTOUCH_E4.jpeg", 0.0, 0.0, 0.0, 100.0, 20.0, 2000.0, "No", state3,
-				emplacement1, measureUnit3, productCategory, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,true,false,
-				null,memory2,camera,cpu2,os,portableCategory4,whiteColor);
+		Portable portable5= new Portable(null, 0.0, new Date(), "L4 Bar Phone", "L4_Bar_Phone.jpeg", 7000.0, 5000.0, 6000.0, 
+				100.0, 20.0, 2000.0, "No", state2, emplacement4, cargaison, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,
+				2D,"Ip",false,false,false,false, null,memory3,camera4,cpu2,os,portableCategory,whiteColor);
 		
-		
-		System.err.println("ready to save first product");
-		
-		portableService.save(portable);
-		portableService.save(portable1);
-		portableService.save(portable2);
-		portableService.save(portable3);
-		portableService.save(portable4);
+		portable = portableService.save(portable);
+		portable1 = portableService.save(portable1);
+		portable2 = portableService.save(portable2);
+		portable3 = portableService.save(portable3);
+		portable4 = portableService.save(portable4);
+		portable5 = portableService.save(portable5);
 
 
-		Mouvment mouvment1 = new Mouvment(null, "ML752P", new Date(), 0.0, 0.0, entrepot1, null, null, mouvmentType1, employee, recipient1);
-		Mouvment mouvment2 = new Mouvment(null, "OZ986E", new Date(), 0.0, 0.0, entrepot1, null, null, mouvmentType1, employee, recipient1);
+		Mouvment mouvment1 = new Mouvment(null, "ML752P", new Date(), 0.0, 0.0, entrepot1, null, null, mouvmentType1, employee, recipient3);
+		Mouvment mouvment2 = new Mouvment(null, "OZ986E", new Date(), 0.0, 0.0, entrepot2, null, null, mouvmentType1, employee, recipient4);
 
 		mouvment1 = mouvmentService.saveMouvment(mouvment1);
 		mouvment2 = mouvmentService.saveMouvment(mouvment2);

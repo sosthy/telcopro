@@ -23,7 +23,7 @@ public interface EntrepotRepository extends JpaRepository<Entrepot, Long>
 	
 	@Query("SELECT COUNT(item) FROM PortableItem item WHERE item.portable.emplacement.id = :id")
 	public Long getPortableItemCountOfEmplacement(@Param("id") Long id);
-	@Query("select distinct e from Entrepot e inner join e.emplacements ee inner join ee.products p where lower(e.name) like lower(:x) or "
-			+ "lower(ee.name) like lower(:x) or lower(p.designation) like lower(:x)")
+	@Query("select distinct e from Entrepot e where lower(e.name) like lower(:x) or lower(e.localisation) like lower(:x) or "
+			+ "(select count(em) from Emplacement em where lower(em.name) like lower(:x) and em.entrepot.id = e.id) > 0")
 	List<Entrepot> search(@Param("x") String keyWords);
 }
