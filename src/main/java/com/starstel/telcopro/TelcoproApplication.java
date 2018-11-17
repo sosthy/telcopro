@@ -100,14 +100,19 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	public void run(String... args) throws Exception 
 	{	
 		
-		AppMenu menuProduct= new AppMenu("Inventory", "fa-building-o", "Manage stocks");
-		AppMenu menuRh= new AppMenu("Resources", "fa-tachometer", "Manage resources");
+		AppMenu menuProduct= new AppMenu("Inventory", "fa-building-o", "/inventories", "bg-brown", "Stock Management");
+		AppMenu menuAccount= new AppMenu("Accounts", "fa-user-circle-o", "/accounts", "bg-green", "Users Accounts");
+		AppMenu menuRh= new AppMenu("Resources", "fa-user-o", "/rh", "bg-deep-purple", "Humans Resources Management");
 		menuRh=accountService.createAppMenu(menuRh);
 		menuProduct=accountService.createAppMenu(menuProduct);
+		menuAccount=accountService.createAppMenu(menuAccount);
 		
 		AppRole admin = new AppRole();
 		admin.setRoleName("ADMIN");
 		admin.setDescription("No Description");
+		admin.getMenus().add(menuProduct);
+		admin.getMenus().add(menuRh);
+		admin.getMenus().add(menuAccount);
 
 		AppRole magasinier = new AppRole();
 		magasinier.setRoleName("MAGASINIER");
@@ -152,7 +157,7 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		space= workSpaceService.saveWorkSpace(space);
 		space2= workSpaceService.saveWorkSpace(space2);
 		
-		Employee employee = new Employee(null,"NOUEBISSI NGHEMNIN","Sosthene","78221242","rsosthenegolden@gmail.com",
+		Employee employee = new Employee(null,"Sosthene","N.","78221242","sosthenegolden@gmail.com",
 				"M","KIT272","XXXX",new Date(),new Date(),Integer.valueOf(4),space);
 		
 		Employee employee2 = new Employee(null,"TCHECHE","Romeo","693936236","romeo.@gmail.com","M","475JHk5",

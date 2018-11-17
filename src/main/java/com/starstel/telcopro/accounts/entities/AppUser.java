@@ -48,7 +48,6 @@ public class AppUser implements Serializable
 
     @OneToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE })
     @JoinColumn(name = "EMPL_ID")
-    @JsonIgnore
     private Employee employee;
     
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE },
