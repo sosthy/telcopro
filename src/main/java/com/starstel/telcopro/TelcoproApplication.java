@@ -101,7 +101,7 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	{	
 		
 		AppMenu menuProduct= new AppMenu("Inventory", "fa-building-o", "/inventories", "bg-brown", "Stock Management");
-		AppMenu menuAccount= new AppMenu("Accounts", "fa-user-circle-o", "/accounts", "bg-green", "Users Accounts");
+		AppMenu menuAccount= new AppMenu("Accounts", "fa-user-circle-o", "/accounts/users", "bg-green", "Users Accounts");
 		AppMenu menuRh= new AppMenu("Resources", "fa-user-o", "/rh", "bg-deep-purple", "Humans Resources Management");
 		menuRh=accountService.createAppMenu(menuRh);
 		menuProduct=accountService.createAppMenu(menuProduct);
@@ -157,8 +157,23 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		space= workSpaceService.saveWorkSpace(space);
 		space2= workSpaceService.saveWorkSpace(space2);
 		
+		Entrepot entrepot1 = new Entrepot("Akwa", "Rond point 4ème", 0.0, 0.0, 100.0, 70.0);
+		Entrepot entrepot2 = new Entrepot("Deido", "Maképe Saint tropèze", 0.0, 0.0, 100.0, 70.0);
+		entrepot1 = entrepotService.saveEntrepot(entrepot1);
+		entrepot2 = entrepotService.saveEntrepot(entrepot2);
+		
+		Emplacement emplacement1 = new Emplacement(null, "ZONE A", entrepot1, null);
+		Emplacement emplacement2 = new Emplacement(null, "ZONE B", entrepot1, null);
+		Emplacement emplacement3 = new Emplacement(null, "RED PLACE", entrepot2, null);
+		Emplacement emplacement4 = new Emplacement(null, "BLACK PLACE", entrepot2, null);
+		
+		emplacement1 = entrepotService.saveEmplacement(emplacement1);
+		emplacement2 = entrepotService.saveEmplacement(emplacement2);
+		emplacement3 = entrepotService.saveEmplacement(emplacement3);
+		emplacement4 = entrepotService.saveEmplacement(emplacement4);
+		
 		Employee employee = new Employee(null,"Sosthene","N.","78221242","sosthenegolden@gmail.com",
-				"M","KIT272","XXXX",new Date(),new Date(),Integer.valueOf(4),space);
+				"M","KIT272","XXXX",new Date(),new Date(),Integer.valueOf(4),entrepot2);
 		
 		Employee employee2 = new Employee(null,"TCHECHE","Romeo","693936236","romeo.@gmail.com","M","475JHk5",
 				"romeo.png",new Date(),new Date(),Integer.valueOf(1),space2);
@@ -224,22 +239,6 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		mouvmentType2 = mouvmentService.saveMouvmentType(mouvmentType2);
 		mouvmentType3 = mouvmentService.saveMouvmentType(mouvmentType3);
 		mouvmentType4 = mouvmentService.saveMouvmentType(mouvmentType4);
-		
-		Entrepot entrepot1 = new Entrepot("Akwa", "Rond point 4ème", 0.0, 0.0, 100.0, 70.0);
-		Entrepot entrepot2 = new Entrepot("Deido", "Maképe Saint tropèze", 0.0, 0.0, 100.0, 70.0);
-		entrepot1 = entrepotService.saveEntrepot(entrepot1);
-		entrepot2 = entrepotService.saveEntrepot(entrepot2);
-		
-		Emplacement emplacement1 = new Emplacement(null, "ZONE A", entrepot1, null);
-		Emplacement emplacement2 = new Emplacement(null, "ZONE B", entrepot1, null);
-		Emplacement emplacement3 = new Emplacement(null, "RED PLACE", entrepot2, null);
-		Emplacement emplacement4 = new Emplacement(null, "BLACK PLACE", entrepot2, null);
-		
-		emplacement1 = entrepotService.saveEmplacement(emplacement1);
-		emplacement2 = entrepotService.saveEmplacement(emplacement2);
-		emplacement3 = entrepotService.saveEmplacement(emplacement3);
-		emplacement4 = entrepotService.saveEmplacement(emplacement4);
-		
 
 		Camera camera = new Camera(null, 8.0, 13.0);
 		Camera camera2 = new Camera(null, 10.0, 13.0);
