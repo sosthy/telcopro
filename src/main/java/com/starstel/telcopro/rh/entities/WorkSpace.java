@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +30,8 @@ import lombok.Setter;
  * @author TCHECHE ROMEO
  */
 @Entity
+@DiscriminatorColumn(name = "workSpaceType", discriminatorType = DiscriminatorType.STRING, length = 255)
+@DiscriminatorValue("Work Space")
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class WorkSpace implements Serializable{
 	@Id
@@ -34,6 +40,8 @@ public class WorkSpace implements Serializable{
 	private Long id;
 	private String name;
 	private String localisation;
+	@Column(name = "workSpaceType", insertable = false, updatable = false)
+    private String workSpaceType;
 	
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="workSpaceSource") /*Elle se situe dans la classe mère pour permettre le transfert de produit d'un point de vente à un autre point de vente (Osé à un peut modifier*/

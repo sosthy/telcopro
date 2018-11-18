@@ -146,7 +146,7 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		boutique2= pointOfSaleService.save(boutique2);
 		boutique3= pointOfSaleService.save(boutique3);
 		
-		WorkSpace space = new WorkSpace("Startel Deido","Douala Deido rue kotto à 100m d'ecoMarche");
+		WorkSpace space = new WorkSpace("Startel Deido","Douala Deido EcoMarche");
 		WorkSpace space2 = new WorkSpace("Startel Nyalla","Douala Nyalla à 100m de total Nyalla");
 
 		space= workSpaceService.saveWorkSpace(space);

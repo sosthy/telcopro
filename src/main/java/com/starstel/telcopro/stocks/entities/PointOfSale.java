@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.DiscriminatorValue;
 import com.starstel.telcopro.rh.entities.WorkSpace;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ import lombok.Setter;
  */
 
 @Entity
+@DiscriminatorValue("Point Of Sale")
 // @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class PointOfSale extends WorkSpace{
 	/* Spring à déranger sur ce coup. Il m'oblige à redefinir les constructeurs */
