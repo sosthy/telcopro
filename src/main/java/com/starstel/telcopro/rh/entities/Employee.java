@@ -34,6 +34,7 @@ public class Employee extends Person implements Serializable
 {
     private Date hiringDate;
     private Integer seniority;
+    private String poste;
     @JsonIgnore
     @OneToMany(mappedBy="user")
     private Set<Mouvment> mouvments;

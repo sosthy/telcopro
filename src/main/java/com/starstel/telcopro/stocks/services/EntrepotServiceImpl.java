@@ -115,6 +115,7 @@ public class EntrepotServiceImpl implements EntrepotService
 	@Override
 	public List<Emplacement> getAllEmplacementOfEntrepot(Long id)
 	{
+		System.out.println(id + "-----------------==========");
 		Entrepot entrepot = entrepotRepository.findById(id).get();
 		
 		if(entrepot != null)

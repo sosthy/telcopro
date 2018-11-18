@@ -30,19 +30,21 @@ public class AppMenu implements Serializable
 	
     private String name;
     private String icon;
-    private String description;
-    private String color;
     private String link;
+    private String color;
+    private String description;
     
     @ManyToMany(mappedBy="menus")
     @JsonIgnore
     private List<AppRole> roles = new ArrayList<>();
 
     
-	public AppMenu(String name, String icon, String description) 
+	public AppMenu(String name, String icon, String link, String color, String description) 
 	{
 		this.name = name;
 		this.icon = icon;
+		this.link = link;
+		this.color = color;
 		this.description = description;
 	}
 }
