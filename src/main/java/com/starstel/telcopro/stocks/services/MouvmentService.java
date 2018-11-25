@@ -27,7 +27,7 @@ public interface MouvmentService
 	List<Mouvment> search(String keyWords);
 
 	// MouvmentLine
-	List<MouvmentLine> listMouvmentLine();
+	Set<MouvmentLine> listMouvmentLine(Long id);
 	MouvmentLine saveMouvmentLine(MouvmentLine mouvmentLine);
 	Boolean deleteMouvmentLine(Long id);
 	Set<MouvmentLine> getAllMouvmentLineOfMouvmentType(Long id);

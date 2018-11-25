@@ -205,6 +205,11 @@ public class PortableRestController {
 	public List<PortableItem> getPortableItems() {
 		return portableItemService.getPortableItems();
 	}
+	
+	@RequestMapping(value="/items-of-portable/{id}", method = RequestMethod.GET)
+	public Set<PortableItem> getPortableItems(@PathVariable Long id) {
+		return portableItemService.getPortableItems(id);
+	}
 
 	@RequestMapping(value="/items/{id}", method = RequestMethod.GET)
 	public PortableItem getPortableItem(@PathVariable Long id) {

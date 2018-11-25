@@ -102,8 +102,8 @@ public class MouvmentServiceImpl implements MouvmentService
 	}
 
 	@Override
-	public List<MouvmentLine> listMouvmentLine() {
-		return mouvmentLineRepository.findAll();
+	public Set<MouvmentLine> listMouvmentLine(Long id) {
+		return mouvmentRepository.findById(id).get().getMouvmentLines();
 	}
 
 	@Override

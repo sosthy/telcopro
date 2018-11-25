@@ -14,12 +14,16 @@ import org.springframework.stereotype.Service;
 
 import com.starstel.telcopro.stocks.entities.PortableItem;
 import com.starstel.telcopro.stocks.repositories.PortableItemRepository;
+import com.starstel.telcopro.stocks.repositories.PortableRepository;
 
 @Service
 public class PortableItemServiceImpl implements PortableItemService {
 
 	@Autowired
 	PortableItemRepository portableItemRepository;
+	
+	@Autowired
+	PortableRepository portableRepository;
 	
 	@Override
 	public PortableItem save(PortableItem portableItem) {
@@ -48,6 +52,11 @@ public class PortableItemServiceImpl implements PortableItemService {
 	public List<PortableItem> searchItems(String mc) {
 		System.err.println("mc="+mc);
 		return portableItemRepository.searchItems("%"+mc+"%");
+	}
+
+	@Override
+	public Set<PortableItem> getPortableItems(Long id) {
+		return portableRepository.findById(id).get().getPortableItem();
 	}
 
 }
