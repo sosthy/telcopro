@@ -36,9 +36,9 @@ public class Employee extends Person implements Serializable
     private Integer seniority;
     private String poste;
     @JsonIgnore
-    @OneToMany(mappedBy="user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     private Set<Mouvment> mouvments;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "employee", cascade = {CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.DETACH,CascadeType.MERGE}, orphanRemoval = true)
     @JoinColumn(name = "USER_ID")
     @JsonIgnore
     private AppUser appUser;

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +35,7 @@ public class AppMenu implements Serializable
     private String color;
     private String description;
     
-    @ManyToMany(mappedBy="menus")
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "menus")
     @JsonIgnore
     private List<AppRole> roles = new ArrayList<>();
 

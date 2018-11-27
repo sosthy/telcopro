@@ -142,4 +142,9 @@ public class AccountRestController
 		return accountService.getAppMenu(id);
 	}
 	
+	@RequestMapping(value = "/menus/user/{username}", method = RequestMethod.GET)
+	public List<AppMenu> findMenusByUsername(@PathVariable String username) {
+		return accountService.getMenus(username);
+	}
+	
 }

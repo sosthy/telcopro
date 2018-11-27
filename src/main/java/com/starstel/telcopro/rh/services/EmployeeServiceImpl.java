@@ -29,11 +29,14 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public Employee createEmployee(Employee employee) 
 	{
-		
-	    Period period = Period.between(employee.getHiringDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), 
-	    						LocalDate.now());
-	    employee.setSeniority(period.getYears());
-		return employeeRepository.save(employee);
+		try {
+			Period period = Period.between(employee.getHiringDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), 
+								LocalDate.now());
+			employee.setSeniority(period.getYears());
+			return employeeRepository.save(employee);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override

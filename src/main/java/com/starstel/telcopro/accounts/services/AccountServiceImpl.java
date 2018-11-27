@@ -212,4 +212,14 @@ public class AccountServiceImpl implements AccountService
 	public List<Product> getProductsOfWorkSpace(AppUser user) {
 		return entrepotService.getProductsOfEntrepot(user.getEmployee().getWorkSpace().getId());
 	}
+
+	@Override
+	public AppUser createAppUser(AppUser appUser) {
+		return appUserRepository.save(appUser);
+	}
+
+	@Override
+	public List<AppMenu> getMenus(String username) {
+		return appMenuRepository.findMenuUser(username);
+	}
 }

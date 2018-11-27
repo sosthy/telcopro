@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,15 +41,12 @@ public class AppRole implements Serializable
     private String roleName;
     private String description;
     
-    @ManyToMany(cascade= {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
-    @JoinTable(name = "APPROLE_APPMENU",
-    		inverseJoinColumns = @JoinColumn(name = "MENU_ID", nullable = false, updatable = false),
-    		joinColumns = @JoinColumn(name = "ROLE_ID", nullable = false, updatable = false),
-    		foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
-    		inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    @ManyToMany(cascade= {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name = "APPROLE_APPMENU", inverseJoinColumns = @JoinColumn(name = "MENU_ID", nullable = false),
+		joinColumns = @JoinColumn(name = "ROLE_ID", nullable = false))
     private List<AppMenu> menus = new ArrayList<>();
     
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, mappedBy="roles")
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy="roles")
     @JsonIgnore
     private List<AppUser> users = new ArrayList<>();
 

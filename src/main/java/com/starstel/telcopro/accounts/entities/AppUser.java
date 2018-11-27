@@ -46,17 +46,14 @@ public class AppUser implements Serializable
     private String email;
     private Boolean lockStatus;
 
-    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE })
+    @OneToOne
     @JoinColumn(name = "EMPL_ID")
     private Employee employee;
     
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE },
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},
     		fetch = FetchType.EAGER )
-    @JoinTable(name = "APPUSER_APPROLE",
-    		inverseJoinColumns = @JoinColumn(name = "ROLE_ID", nullable = false, updatable = false),
-    		joinColumns = @JoinColumn(name = "USER_ID", nullable = false, updatable = false),
-    		foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
-    		inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    @JoinTable(name = "APPUSER_APPROLE", inverseJoinColumns = @JoinColumn(name = "ROLE_ID", nullable = false),
+		joinColumns = @JoinColumn(name = "USER_ID", nullable = false))
     private List<AppRole> roles = new ArrayList<>();
 
 	public AppUser(String username, String password, String email, Boolean lockStatus) {

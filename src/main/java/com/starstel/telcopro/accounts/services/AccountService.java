@@ -26,10 +26,12 @@ public interface AccountService
 	public Long rolesCount();
 	public AppUser saveUser(AppUserModel userModel);
 	public List<Product> getProductsOfWorkSpace(AppUser user);
+	List<AppUser> searchUsers(String keyWords);
 	
 	public List<AppUser> listAppUsers();
 	public AppUser getAppUser(Long id);
 	public AppUser createUserAccount(Employee employee);
+	public AppUser createAppUser(AppUser appUser);
 	public AppUser editAppUser(AppUser appUser);
 	public boolean deleteAppUser(Long id);
 	
@@ -37,6 +39,6 @@ public interface AccountService
 	public boolean deleteAppMenu(Long id);
 	public List<AppMenu> getAppMenus();
 	public AppMenu getAppMenu(Long id);
-	List<AppUser> searchUsers(String keyWords);
+	List<AppMenu> getMenus(String username);
 	
 }
