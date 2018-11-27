@@ -82,12 +82,12 @@ public class MouvmentRestController {
 		return mouvmentService.getProducts(mouvmentService.getMouvment(id));
 	}
 
-	@RequestMapping(value="/lines", method = RequestMethod.GET)
-	public List<MouvmentLine> listMouvmentLine() {
-		return mouvmentService.listMouvmentLine();
+	@RequestMapping(value="/lines/{id}", method = RequestMethod.GET)
+	public Set<MouvmentLine> listMouvmentLine(@PathVariable Long id) {
+		return mouvmentService.listMouvmentLine(id);
 	}
 
-	@RequestMapping(value="/lines/{id}", method = RequestMethod.POST)
+	@RequestMapping(value="/lines", method = RequestMethod.POST)
 	public MouvmentLine saveMouvmentLine(@RequestBody MouvmentLine mouvmentLine) {
 		return mouvmentService.saveMouvmentLine(mouvmentLine);
 	}

@@ -15,6 +15,7 @@ public interface PortableItemService
 	PortableItem save(PortableItem portableItem);
 	Boolean delete(Long id);
 	List<PortableItem> getPortableItems();
+	Set<PortableItem> getPortableItems(Long id);
 	PortableItem getPortableItem(Long id);
 	List<PortableItem> searchItems(String mc);
 }
