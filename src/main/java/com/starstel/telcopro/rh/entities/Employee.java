@@ -78,7 +78,7 @@ public class Employee extends Person implements Serializable
 				+ hashCode() + ", getName()=" + getName() + ", getSurname()=" + getSurname() + ", getWebsite()=" + getWebsite() 
 				+ ", getSex()=" + getSex() + ", getCni()=" + getCni()
 				+ ", getPhone()=" + getPhone() + ", getPhoto()=" + getPhoto() + ", getBirthday()=" + getBirthday()
-				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + "]";
+				+ ", AppUser="+ appUser +", toString()=" + super.toString() + "]";
 	}
     
 }

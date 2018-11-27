@@ -29,6 +29,14 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public Employee createEmployee(Employee employee) 
 	{
+
+		if(employee.getId() != null)
+		{
+			Employee emp = employee(employee.getId());
+			employee.setAppUser(emp.getAppUser());
+			employee.setMouvments(emp.getMouvments());
+			System.err.println(employee);
+		}
 		try {
 			Period period = Period.between(employee.getHiringDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), 
 								LocalDate.now());

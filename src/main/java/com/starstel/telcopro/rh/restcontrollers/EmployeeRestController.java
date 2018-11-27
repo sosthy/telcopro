@@ -76,7 +76,6 @@ public class EmployeeRestController
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public Employee createEmployee(@RequestBody Employee employee)
 	{
-		System.err.println(employee);
 		return employeeService.createEmployee(employee);
 	}
 	
