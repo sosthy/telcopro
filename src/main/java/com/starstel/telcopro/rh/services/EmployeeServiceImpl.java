@@ -9,6 +9,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.starstel.telcopro.accounts.entities.AppUser;
+import com.starstel.telcopro.accounts.repositories.AppUserRepository;
 import com.starstel.telcopro.accounts.services.AccountService;
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.repositories.EmployeeRepository;
@@ -19,6 +21,10 @@ public class EmployeeServiceImpl implements EmployeeService
 {
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private AppUserRepository appUserRepository;
+	
 	
 	@Override
 	public List<Employee> listEmployee() 
@@ -82,6 +88,12 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public List<Employee> searchEmployee(String keyWords) {
 		return employeeRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public Employee getEmployeeByUsername(Long id) {
+		AppUser user = this.appUserRepository.findById(id).get();
+		return user.getEmployee();
 	}
 
 }

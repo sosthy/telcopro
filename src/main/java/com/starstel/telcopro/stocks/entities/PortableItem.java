@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -32,8 +34,10 @@ public class PortableItem implements Serializable
 	private String codeBar;
 	private String serial;
 	private String reference;
-	@ManyToOne
+	@ManyToOne @JsonIgnore
 	private Portable portable;
+	@ManyToOne @JsonIgnore
+	private MouvmentLine mouvmentLine;
 	@Override
 	public int hashCode() {
 		final int prime = 37;
