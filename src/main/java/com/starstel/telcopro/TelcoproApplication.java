@@ -376,10 +376,10 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		MouvmentLine mouvmentLine4 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment1, portable4, null, "");
 		MouvmentLine mouvmentLine5 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable4, null, "");
 		
-		mouvmentLine1 = mouvmentService.saveMouvmentLine(mouvmentLine1);	
-		mouvmentLine2 = mouvmentService.saveMouvmentLine(mouvmentLine2);	
-		mouvmentLine3 = mouvmentService.saveMouvmentLine(mouvmentLine3);	
-		mouvmentLine4 = mouvmentService.saveMouvmentLine(mouvmentLine4);	
-		mouvmentLine5 = mouvmentService.saveMouvmentLine(mouvmentLine5);
+		mouvmentService.saveMouvmentLine(mouvmentLine1);	
+		mouvmentService.saveMouvmentLine(mouvmentLine2);	
+		mouvmentService.saveMouvmentLine(mouvmentLine3);	
+		mouvmentService.saveMouvmentLine(mouvmentLine4);	
+		mouvmentService.saveMouvmentLine(mouvmentLine5);
 	}
 }
