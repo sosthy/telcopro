@@ -13,10 +13,12 @@ import com.starstel.telcopro.rh.repositories.EmployeeRepository;
 import com.starstel.telcopro.stocks.entities.Mouvment;
 import com.starstel.telcopro.stocks.entities.MouvmentLine;
 import com.starstel.telcopro.stocks.entities.MouvmentType;
+import com.starstel.telcopro.stocks.entities.Portable;
 import com.starstel.telcopro.stocks.entities.Product;
 import com.starstel.telcopro.stocks.repositories.MouvmentLineRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentTypeRepository;
+import com.starstel.telcopro.stocks.repositories.PortableRepository;
 
 @Service
 public class MouvmentServiceImpl implements MouvmentService
@@ -29,6 +31,8 @@ public class MouvmentServiceImpl implements MouvmentService
 	private MouvmentLineRepository mouvmentLineRepository;
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	@Autowired
+	private PortableRepository portableRepository;
 	
 	
 	@Override
@@ -81,6 +85,21 @@ public class MouvmentServiceImpl implements MouvmentService
 	@Override
 	public Mouvment saveMouvment(Mouvment mouvment) 
 	{
+		if(mouvment.getMouvmentType() != null)
+			if(mouvment.getMouvmentType().getName().equals("APPROVISIONNEMENT")) {
+				if(mouvment.getMouvmentLines() != null)
+					mouvment.getMouvmentLines().forEach(mLine -> {
+						if(mLine.getProductsItem() != null) {
+							mLine.getProductsItem().forEach(item -> {
+								System.out.println(mLine.getProduct().getClass().getName());
+								Portable portable = portableRepository.findById(mLine.getProduct().getId()).get();
+								item.setMouvmentLine(mLine);
+								item.setPortable(portable);
+								portable.getPortableItem().add(item);
+							});
+						}
+				});
+			}
 		return mouvmentRepository.save(mouvment);
 	}
 	
@@ -104,6 +123,16 @@ public class MouvmentServiceImpl implements MouvmentService
 	@Override
 	public Set<MouvmentLine> listMouvmentLine(Long id) {
 		return mouvmentRepository.findById(id).get().getMouvmentLines();
+	}
+	
+	@Override
+	public MouvmentLine getMouvmentLine (Long id) {
+		return mouvmentLineRepository.findById(id).get();
+	}
+	
+	@Override
+	public Set<MouvmentLine> listMouvmentLine() {
+		return new HashSet<>(mouvmentLineRepository.findAll());
 	}
 
 	@Override

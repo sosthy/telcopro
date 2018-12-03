@@ -45,6 +45,12 @@ public class EmployeeRestController
 		return employeeService.employee(id);
 	}
 	
+	@RequestMapping(value="/user/{id}", method = RequestMethod.GET)
+	public Employee getEmployeeByUsername(@PathVariable Long id)
+	{
+		return employeeService.getEmployeeByUsername(id);
+	}
+	
 	@RequestMapping(value="/mouvment-of-employee/{id}", method = RequestMethod.GET)
 	public Set<Mouvment> getAllMouvmentOfEmployee(@PathVariable Long id)
 	{

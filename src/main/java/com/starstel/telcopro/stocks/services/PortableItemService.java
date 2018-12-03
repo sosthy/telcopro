@@ -17,5 +17,5 @@ public interface PortableItemService
 	List<PortableItem> getPortableItems();
 	Set<PortableItem> getPortableItems(Long id);
 	PortableItem getPortableItem(Long id);
-	List<PortableItem> searchItems(String mc);
+	List<PortableItem> searchItems(String mc, Long idPortable);
 }

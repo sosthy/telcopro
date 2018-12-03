@@ -13,8 +13,8 @@ import com.starstel.telcopro.stocks.entities.PortableItem;
 
 public interface PortableItemRepository extends JpaRepository<PortableItem, Long> {
 
-	@Query("select p from PortableItem p  where lower(p.codeQrc) like lower(:x) or lower(p.codeBar) like lower(:x) or "
-			+ "lower(p.reference) like lower(:x) or lower(p.serial) like lower(:x)")
-	List<PortableItem> searchItems(@Param("x")String mc);
+	@Query("select p from PortableItem p  where (lower(p.codeQrc) like lower(:x) or lower(p.codeBar) like lower(:x) or "
+			+ "lower(p.reference) like lower(:x) or lower(p.serial) like lower(:x)) and p.portable.id = :id")
+	List<PortableItem> searchItems(@Param("x")String mc, @Param("id") Long idPortable);
 
 }

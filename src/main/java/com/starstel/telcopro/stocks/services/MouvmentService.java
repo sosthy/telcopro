@@ -23,14 +23,16 @@ public interface MouvmentService
 	List<Mouvment> listMouvment();
 	Mouvment saveMouvment(Mouvment mouvment);
 	Boolean deleteMouvment(Long id);
+	Mouvment getMouvment(Long id);
 	Set<Product> getProducts(Mouvment mouvment);
 	List<Mouvment> search(String keyWords);
 
 	// MouvmentLine
+	Set<MouvmentLine> listMouvmentLine();
 	Set<MouvmentLine> listMouvmentLine(Long id);
+	MouvmentLine getMouvmentLine(Long id);
 	MouvmentLine saveMouvmentLine(MouvmentLine mouvmentLine);
 	Boolean deleteMouvmentLine(Long id);
 	Set<MouvmentLine> getAllMouvmentLineOfMouvmentType(Long id);
-	Mouvment getMouvment(Long id);
 	List<MouvmentLine> searchLine(String keyWords);
 }

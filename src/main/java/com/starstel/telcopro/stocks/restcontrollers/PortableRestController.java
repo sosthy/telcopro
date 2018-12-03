@@ -56,8 +56,7 @@ public class PortableRestController {
 	}
 
 	@RequestMapping(value="", method = RequestMethod.POST)
-	public Portable save(@RequestBody Portable portable, @RequestParam(name="photo") MultipartFile photo) {
-		storageable.store(photo);
+	public Portable save(@RequestBody Portable portable) { 
 		return portableService.save(portable);
 	}
 
@@ -217,7 +216,7 @@ public class PortableRestController {
 	}
 
 	@RequestMapping(value="/items", method = RequestMethod.POST)
-	public PortableItem saveItem(PortableItem portableItem) {
+	public PortableItem saveItem(@RequestBody PortableItem portableItem) {
 		return portableItemService.save(portableItem);
 	}
 
@@ -227,9 +226,10 @@ public class PortableRestController {
 		return true;
 	}
 
-	@RequestMapping(value="/search-items", method = RequestMethod.GET)
-	public List<PortableItem> getPortableItems(@RequestParam(name="mc",defaultValue="") String mc) {
-		return portableItemService.searchItems(mc);
+	@RequestMapping(value="/items/search", method = RequestMethod.GET)
+	public List<PortableItem> getPortableItems(@RequestParam(name="mc",defaultValue="") String mc,
+												@RequestParam(name="portable",defaultValue="0") Long idPortable) {
+		return portableItemService.searchItems(mc,idPortable);
 	}
 
 	@RequestMapping(value="/num/{numeroSerie}", method = RequestMethod.GET)

@@ -54,9 +54,14 @@ public class EntrepotRestController {
 		return entrepotService.search(keyWords);
 	}
 
+	@RequestMapping(value="/{idEntrepot}/emplacements",method=RequestMethod.GET)
+	public List<Emplacement> listEmplacements(@PathVariable Long idEntrepot) {
+		return entrepotService.listEmplacements(idEntrepot);
+	}
+
 	@RequestMapping(value="/emplacements",method=RequestMethod.GET)
 	public List<Emplacement> listEmplacement() {
-		return entrepotService.listEmplacement();
+		return entrepotService.listEmplacements();
 	}
 
 	@RequestMapping(value="/emplacement/{id}",method=RequestMethod.GET)

@@ -38,7 +38,6 @@ public class Mouvment implements Serializable
 	private WorkSpace workSpaceSource;
 	@ManyToOne
 	private WorkSpace workSpaceRecipient;
-	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="mouvment")
 	private Set<MouvmentLine> mouvmentLines = new HashSet<>();
 	@ManyToOne

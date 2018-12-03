@@ -3,11 +3,15 @@ package com.starstel.telcopro.stocks.entities;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,9 +30,11 @@ public class MouvmentLine implements Serializable
 	private Double quantity;
 	private Double priceUnit;
 	private Double priceTotal;
-	@ManyToOne
+	@ManyToOne @JsonIgnore
 	private Mouvment mouvment;
 	@ManyToOne
 	private Product product;
+	@OneToMany(cascade=CascadeType.ALL)
+	private Set<PortableItem> productsItem;
 	private String note;
 }

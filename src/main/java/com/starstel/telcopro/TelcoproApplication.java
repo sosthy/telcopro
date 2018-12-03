@@ -47,6 +47,7 @@ import com.starstel.telcopro.stocks.services.AppColorService;
 import com.starstel.telcopro.stocks.services.EntrepotService;
 import com.starstel.telcopro.stocks.services.MouvmentService;
 import com.starstel.telcopro.stocks.services.PointOfSaleService;
+import com.starstel.telcopro.stocks.services.PortableItemService;
 import com.starstel.telcopro.stocks.services.PortableService;
 import com.starstel.telcopro.stocks.services.ProductService;
 import com.starstel.telcopro.stocks.services.RecipientService;
@@ -71,6 +72,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	private EntrepotService entrepotService;
 	@Autowired
 	private PortableService portableService;
+	@Autowired
+	private PortableItemService portableItemService;
 	@Autowired
 	private PointOfSaleService pointOfSaleService;
 	
@@ -157,8 +160,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		space= workSpaceService.saveWorkSpace(space);
 		space2= workSpaceService.saveWorkSpace(space2);
 		
-		Entrepot entrepot1 = new Entrepot("Akwa", "Rond point 4ème", 0.0, 0.0, 100.0, 70.0);
-		Entrepot entrepot2 = new Entrepot("Deido", "Maképe Saint tropèze", 0.0, 0.0, 100.0, 70.0);
+		Entrepot entrepot1 = new Entrepot("Akwa", "Rond point 4ème", 0.0, 0.0, 60.0, 70.0);
+		Entrepot entrepot2 = new Entrepot("Deido", "Maképe Saint tropèze", 0.0, 0.0, 63.0, 100.0);
 		entrepot1 = entrepotService.saveEntrepot(entrepot1);
 		entrepot2 = entrepotService.saveEntrepot(entrepot2);
 		
@@ -278,11 +281,13 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		MeasureUnit paquet = new MeasureUnit("Paquet(s)");
 		MeasureUnit paquet10 = new MeasureUnit("Paquet(s) de 10");
 		MeasureUnit cargaison = new MeasureUnit("Cargaison(s)");
+		MeasureUnit unite = new MeasureUnit("Unité(s)");
 		
 		carton = productService.saveMeasureUnit(carton);
 		paquet = productService.saveMeasureUnit(paquet);
 		paquet10 = productService.saveMeasureUnit(paquet10);
 		cargaison = productService.saveMeasureUnit(cargaison);
+		unite = productService.saveMeasureUnit(unite);
 		
 		SystemOS os = new SystemOS("Android Oreo","7.0");
 		
@@ -312,30 +317,30 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		portableCategory3 = portableService.savePortableCategory(portableCategory3);
 		portableCategory4 = portableService.savePortableCategory(portableCategory4);
 		
-		Portable portable= new Portable(null, 2.0, new Date(), "XTOUCH X9", "XTOUCH_X9.jpeg", 85000.0, 75000.0, 800000.0, 
-				20.0, 50.0, 20.0, "FACE ID UNLOCK", state, emplacement1, carton, telephone, null,"C",5.5,"2400mAh", 
+		Portable portable= new Portable(null, 1.0, new Date(), "XTOUCH X9", "XTOUCH_X9.jpeg", 85000.0, 75000.0, 800000.0, 
+				20.0, 50.0, 20.0, "FACE ID UNLOCK", state, emplacement1, unite, telephone, null,"C",5.5,"2400mAh", 
 				"Dual Sim 3G NetWork",960.0,138.0,"Ip64",false,false,false,false, null,memory,camera,cpu,os,
 				portableCategory,blueColor);
 	
 		Portable portable1= new Portable(null, 0.0, new Date(), "Xbot Senior", "Xbot_Senior.jpeg", 131000.0, 100000.0, 
-				110000.0, 100.0, 20.0, 2000.0, "No", state, emplacement4, cargaison, telephone, null,"C",2D,"B",
+				110000.0, 100.0, 2000.0, 20.0, "No", state, emplacement4, cargaison, telephone, null,"C",2D,"B",
 				"Dual Sim 3G NetWork",2D,2D,"Ip",false,false,false,true,null,memory2,camera2,cpu2,os,portableCategory2,redColor);
 		
-		Portable portable2= new Portable(null, 0.0, new Date(), "XTOUCH X", "XTOUCH_X.jpeg", 100000.0, 90000.0, 95000.0, 100.0, 
-				20.0, 2000.0, "No", 
-				state2, emplacement2, paquet, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,false,
+		Portable portable2= new Portable(null, 1.0, new Date(), "XTOUCH X", "XTOUCH_X.jpeg", 100000.0, 90000.0, 95000.0, 100.0, 
+				20.0, 25.0, "No", 
+				state2, emplacement2, unite, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,false,
 				true,null,memory3,camera2,cpu,os,portableCategory,blueColor);
 		
-		Portable portable3= new Portable(null, 0.0, new Date(), "Xbot Junior", "Xbot_Junior.jpeg", 115000.0, 110000.0, 0.0, 11300.0, 
-				20.0, 2000.0, "No", state2, emplacement3, paquet10, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
+		Portable portable3= new Portable(null, 1.0, new Date(), "Xbot Junior", "Xbot_Junior.jpeg", 115000.0, 110000.0, 0.0, 11300.0, 
+				20.0, 20.0, "No", state2, emplacement3, paquet10, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
 				true,false,true, false,null,memory2,camera3,cpu3,os,portableCategory2,blackColor);
 		
 		Portable portable4= new Portable(null, 0.0, new Date(), "XTOUCH E4", "XTOUCH_E4.jpeg", 60000.0, 50000.0, 55000.0, 100.0, 
-				20.0, 2000.0, "No", state3,emplacement1, cargaison, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
+				20.0, 18.0, "No", state3,emplacement1, cargaison, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
 				false,true,true,false,null,memory2,camera,cpu2,os,portableCategory,whiteColor);
 		
-		Portable portable5= new Portable(null, 0.0, new Date(), "L4 Bar Phone", "L4_Bar_Phone.jpeg", 7000.0, 5000.0, 6000.0, 
-				100.0, 20.0, 2000.0, "No", state2, emplacement4, cargaison, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,
+		Portable portable5= new Portable(null, 3.0, new Date(), "L4 Bar Phone", "L4_Bar_Phone.jpeg", 7000.0, 5000.0, 6000.0, 
+				100.0, 20.0, 10.0, "No", state2, emplacement4, unite, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,
 				2D,"Ip",false,false,false,false, null,memory3,camera4,cpu2,os,portableCategory,whiteColor);
 		
 		portable = portableService.save(portable);
@@ -345,23 +350,36 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		portable4 = portableService.save(portable4);
 		portable5 = portableService.save(portable5);
 
-
+		PortableItem item = new PortableItem(null, "££@3&dk&ld", "123456646789", "417854552112/4455778522147", "PIO", portable5);
+		PortableItem item2 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "417854552112/4455778522147", "PIO", portable5);
+		PortableItem item3 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552112/4455778522147", "PIO", portable5);
+		PortableItem item4 = new PortableItem(null, "££@3&dk&ld", "123456646789", "4178285757112/45275225222147", "PIO", portable);
+		PortableItem item5 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "415727522/445272727", "PIO", portable2);
+		PortableItem item6 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552527112/442758522147", "PIO", portable3);
+		
+		item = portableItemService.save(item);
+		item2 = portableItemService.save(item2);
+		item3 = portableItemService.save(item3);
+		item4 = portableItemService.save(item4);
+		item5 = portableItemService.save(item5);
+		item6 = portableItemService.save(item6);
+		
 		Mouvment mouvment1 = new Mouvment(null, "ML752P", new Date(), 0.0, 0.0, entrepot1, null, null, mouvmentType1, employee, recipient3);
 		Mouvment mouvment2 = new Mouvment(null, "OZ986E", new Date(), 0.0, 0.0, entrepot2, null, null, mouvmentType1, employee, recipient4);
 
 		mouvment1 = mouvmentService.saveMouvment(mouvment1);
 		mouvment2 = mouvmentService.saveMouvment(mouvment2);
 		
-		MouvmentLine mouvmentLine1 = new MouvmentLine(null, 10D, 60000D, 600000D, mouvment1, portable,"");
-		MouvmentLine mouvmentLine2 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable2,"");
-		MouvmentLine mouvmentLine3 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable3,"");
-		MouvmentLine mouvmentLine4 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment1, portable4,"");
-		MouvmentLine mouvmentLine5 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable4,"");
+		MouvmentLine mouvmentLine1 = new MouvmentLine(null, 10D, 60000D, 600000D, mouvment1, portable, null, "");
+		MouvmentLine mouvmentLine2 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable2, null, "");
+		MouvmentLine mouvmentLine3 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable3, null, "");
+		MouvmentLine mouvmentLine4 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment1, portable4, null, "");
+		MouvmentLine mouvmentLine5 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable4, null, "");
 		
-		mouvmentService.saveMouvmentLine(mouvmentLine1);	
-		mouvmentService.saveMouvmentLine(mouvmentLine2);	
-		mouvmentService.saveMouvmentLine(mouvmentLine3);	
-		mouvmentService.saveMouvmentLine(mouvmentLine4);	
-		mouvmentService.saveMouvmentLine(mouvmentLine5);
+		mouvmentLine1 = mouvmentService.saveMouvmentLine(mouvmentLine1);	
+		mouvmentLine2 = mouvmentService.saveMouvmentLine(mouvmentLine2);	
+		mouvmentLine3 = mouvmentService.saveMouvmentLine(mouvmentLine3);	
+		mouvmentLine4 = mouvmentService.saveMouvmentLine(mouvmentLine4);	
+		mouvmentLine5 = mouvmentService.saveMouvmentLine(mouvmentLine5);
 	}
 }

@@ -27,7 +27,8 @@ public interface EntrepotService
 	Boolean isAddPossible(Entrepot entrepot, Set<Product> product);
 	
 	// Emplacement
-	List<Emplacement> listEmplacement();
+	List<Emplacement> listEmplacements();
+	List<Emplacement> listEmplacements(Long idEntrepot);
 	Emplacement getEmplacement(Long id);
 	Emplacement saveEmplacement(Emplacement emplacement);
 	Boolean deleteEmplacement(Long id);

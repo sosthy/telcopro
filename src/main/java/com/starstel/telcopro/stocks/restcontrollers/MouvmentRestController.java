@@ -82,9 +82,19 @@ public class MouvmentRestController {
 		return mouvmentService.getProducts(mouvmentService.getMouvment(id));
 	}
 
+	@RequestMapping(value="/{idMouvment}/lines", method = RequestMethod.GET)
+	public Set<MouvmentLine> listMouvmentLine(@PathVariable Long idMouvment) {
+		return mouvmentService.listMouvmentLine(idMouvment);
+	}
+
+	@RequestMapping(value="/lines", method = RequestMethod.GET)
+	public Set<MouvmentLine> listMouvmentLine() {
+		return mouvmentService.listMouvmentLine();
+	}
+
 	@RequestMapping(value="/lines/{id}", method = RequestMethod.GET)
-	public Set<MouvmentLine> listMouvmentLine(@PathVariable Long id) {
-		return mouvmentService.listMouvmentLine(id);
+	public MouvmentLine getMouvmentLine(@PathVariable Long id) {
+		return mouvmentService.getMouvmentLine(id);
 	}
 
 	@RequestMapping(value="/lines", method = RequestMethod.POST)

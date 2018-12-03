@@ -49,9 +49,9 @@ public class PortableItemServiceImpl implements PortableItemService {
 	}
 
 	@Override
-	public List<PortableItem> searchItems(String mc) {
+	public List<PortableItem> searchItems(String mc, Long idPortable) {
 		System.err.println("mc="+mc);
-		return portableItemRepository.searchItems("%"+mc+"%");
+		return portableItemRepository.searchItems("%"+mc+"%", idPortable);
 	}
 
 	@Override

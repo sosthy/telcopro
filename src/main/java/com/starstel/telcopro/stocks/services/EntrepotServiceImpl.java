@@ -48,10 +48,15 @@ public class EntrepotServiceImpl implements EntrepotService
 	}
 
 	@Override
-	public List<Emplacement> listEmplacement() 
+	public List<Emplacement> listEmplacements() 
 	{
-		List<Emplacement> list=emplacementRepository.findAll();
-		return list;
+		return emplacementRepository.findAll();
+	}
+
+	@Override
+	public List<Emplacement> listEmplacements(Long idEntrepot) 
+	{
+		return new ArrayList<>(getEntrepot(idEntrepot).getEmplacements());
 	}
 
 	@Override
