@@ -7,6 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -34,7 +37,11 @@ public class MouvmentLine implements Serializable
 	private Mouvment mouvment;
 	@ManyToOne
 	private Product product;
-	@OneToMany(cascade=CascadeType.ALL)
+	@ManyToMany
+	@JoinTable(name="mouvlineProdItem",
+	    joinColumns=@JoinColumn(name="mouvlines"),
+	    inverseJoinColumns=@JoinColumn(name="prodsitems")
+	  )
 	private Set<PortableItem> productsItem;
 	private String note;
 }

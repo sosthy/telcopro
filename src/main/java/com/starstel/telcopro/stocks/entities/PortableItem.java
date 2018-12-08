@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -34,10 +35,11 @@ public class PortableItem implements Serializable
 	private String codeBar;
 	private String serial;
 	private String reference;
+	private Boolean isAvailable;
 	@ManyToOne @JsonIgnore
 	private Portable portable;
-	@ManyToOne @JsonIgnore
-	private MouvmentLine mouvmentLine;
+	@ManyToMany @JsonIgnore
+	private Set<MouvmentLine> mouvmentLine;
 	@Override
 	public int hashCode() {
 		final int prime = 37;

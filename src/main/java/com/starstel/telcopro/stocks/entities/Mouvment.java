@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.entities.WorkSpace;
@@ -27,9 +30,11 @@ import lombok.Setter;
 public class Mouvment implements Serializable
 {
 	@Id
-	@SequenceGenerator(initialValue = 1, sequenceName = "TRANS_SEQ", allocationSize = 1, name = "trans_id")
+	// @SequenceGenerator(initialValue = 1, sequenceName = "TRANS_SEQ", allocationSize = 1, name = "trans_id")
     @GeneratedValue(generator = "trans_id")
-	private Long id;
+    @GenericGenerator(name = "trans_id", 
+      parameters = @Parameter(name = "prefix", value = "REF"), 
+      strategy = "com.starstel.telcopro.CustomGenerator")
 	private String reference;
 	private Date date;
 	private Double quantity;
@@ -51,7 +56,6 @@ public class Mouvment implements Serializable
 		final int prime = 37;
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((priceTotal == null) ? 0 : priceTotal.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
@@ -70,11 +74,6 @@ public class Mouvment implements Serializable
 			if (other.date != null)
 				return false;
 		} else if (!date.equals(other.date))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (priceTotal == null) {
 			if (other.priceTotal != null)
