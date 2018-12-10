@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.starstel.telcopro.stocks.entities.Camera;
 import com.starstel.telcopro.stocks.entities.Cpu;
@@ -23,6 +24,7 @@ public interface PortableService
 {
 	// Portable
 	Portable save(Portable portable);
+	Portable save(MultipartFile portableImageFile, Portable portable);
 	Boolean delete(Long id);
 	List<Portable> getPortables();
 	Portable getPortable(Long id);

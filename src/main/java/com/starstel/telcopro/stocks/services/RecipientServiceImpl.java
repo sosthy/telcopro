@@ -5,19 +5,27 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.starstel.telcopro.stocks.entities.Product;
 import com.starstel.telcopro.stocks.entities.Recipient;
 import com.starstel.telcopro.stocks.entities.RecipientGroupe;
 import com.starstel.telcopro.stocks.repositories.RecipientGroupeRepository;
 import com.starstel.telcopro.stocks.repositories.RecipientRepository;
+import com.starstel.telcopro.storage.entities.Storage;
+import com.starstel.telcopro.storage.services.Storageable;
 
 @Service
 public class RecipientServiceImpl implements RecipientService
 {
 	@Autowired
 	private RecipientRepository recipientRepository;
+	
 	@Autowired
 	private RecipientGroupeRepository recipientGroupeRepository;
+	
+	@Autowired
+	private Storageable storager;
 	
 	@Override
 	public List<RecipientGroupe> listRecipientGroupe() 
@@ -64,6 +72,28 @@ public class RecipientServiceImpl implements RecipientService
 	public Recipient createRecipient(Recipient recipient) 
 	{
 		return recipientRepository.save(recipient);
+	}
+
+	@Override
+	public Recipient createRecipient(MultipartFile recipientImageFile, Recipient recipient) 
+	{
+		String imageName = storager.store(recipientImageFile, Storage.DIRECTORY_RECIPIENTS_IMAGES);
+		
+		if (recipient.getId() == null) {
+			recipient.setImage(imageName);
+		}
+		else if(recipientImageFile != null) {
+				storager.delete(recipient.getImage());
+				recipient.setImage(imageName);
+			}
+			else {
+				if (recipient.getImage().isEmpty()) {
+					Recipient rep = getRecipient(recipient.getId());
+					if(!rep.getImage().isEmpty()) 
+						storager.delete(rep.getImage());
+				}
+			}
+		return createRecipient(recipient);
 	}
 
 	@Override

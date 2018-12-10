@@ -1,5 +1,7 @@
 package com.starstel.telcopro;
 
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -51,7 +53,8 @@ import com.starstel.telcopro.stocks.services.PortableItemService;
 import com.starstel.telcopro.stocks.services.PortableService;
 import com.starstel.telcopro.stocks.services.ProductService;
 import com.starstel.telcopro.stocks.services.RecipientService;
-import com.starstel.telcopro.storage.Storageable;
+import com.starstel.telcopro.storage.entities.Storage;
+import com.starstel.telcopro.storage.services.Storageable;
 
 @SpringBootApplication
 public class TelcoproApplication extends SpringBootServletInitializer implements CommandLineRunner
@@ -102,6 +105,7 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	@Override
 	public void run(String... args) throws Exception 
 	{	
+		storageable.init();
 		
 		AppMenu menuProduct= new AppMenu("Inventory", "fa-building-o", "/inventories", "bg-brown", "Stock Management");
 		AppMenu menuAccount= new AppMenu("Accounts", "fa-user-circle-o", "/accounts/users", "bg-green", "Users Accounts");
@@ -350,12 +354,12 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		portable4 = portableService.save(portable4);
 		portable5 = portableService.save(portable5);
 
-		PortableItem item = new PortableItem(null, "££@3&dk&ld", "123456646789", "417854552112/4455778522147", "PIO", portable5);
-		PortableItem item2 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "417854552112/4455778522147", "PIO", portable5);
-		PortableItem item3 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552112/4455778522147", "PIO", portable5);
-		PortableItem item4 = new PortableItem(null, "££@3&dk&ld", "123456646789", "4178285757112/45275225222147", "PIO", portable);
-		PortableItem item5 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "415727522/445272727", "PIO", portable2);
-		PortableItem item6 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552527112/442758522147", "PIO", portable3);
+		PortableItem item = new PortableItem(null, "££@3&dk&ld", "123456646789", "417854552112/4455778522147", "PIO", portable5,null);
+		PortableItem item2 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "417854552112/4455778522147", "PIO", portable5,null);
+		PortableItem item3 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552112/4455778522147", "PIO", portable5,null);
+		PortableItem item4 = new PortableItem(null, "££@3&dk&ld", "123456646789", "4178285757112/45275225222147", "PIO", portable,null);
+		PortableItem item5 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "415727522/445272727", "PIO", portable2,null);
+		PortableItem item6 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552527112/442758522147", "PIO", portable3,null);
 		
 		item = portableItemService.save(item);
 		item2 = portableItemService.save(item2);

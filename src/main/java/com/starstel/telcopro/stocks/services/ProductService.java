@@ -3,6 +3,8 @@ package com.starstel.telcopro.stocks.services;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.starstel.telcopro.stocks.entities.MeasureUnit;
 import com.starstel.telcopro.stocks.entities.Mouvment;
 import com.starstel.telcopro.stocks.entities.Product;
@@ -15,6 +17,7 @@ public interface ProductService
 	// Product
 	List<Product> listProducts();
 	Product saveProduct(Product product);
+	Product saveProduct(MultipartFile productImageFile, Product product);
 	Boolean deleteProduct(Long id);
 	Product getProduct(Long id);
 	List<Product> searchProducts(String keyWords);

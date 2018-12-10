@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.starstel.telcopro.stocks.entities.ProductCategory;
 import com.starstel.telcopro.stocks.entities.SystemOS;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.starstel.telcopro.rh.services.EmployeeService;
 import com.starstel.telcopro.stocks.entities.AppColor;
 import com.starstel.telcopro.stocks.entities.Camera;
@@ -57,10 +59,18 @@ public class StockRestController
 		return productService.getProduct(id);
 	}
 
-
 	@RequestMapping(value="",method=RequestMethod.POST)
-	public Product saveProduct(@RequestBody Product product) {
-		return productService.saveProduct(product);
+	public Product saveProduct(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("product") String productJsonStringify) {
+		try 
+		{
+			Product product = new ObjectMapper().readValue(productJsonStringify, Product.class);
+
+			return productService.saveProduct(file, product);
+		} 
+		catch (Exception e) 
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.stocks.entities.AppColor;
 import com.starstel.telcopro.stocks.entities.Camera;
 import com.starstel.telcopro.stocks.entities.Cpu;
@@ -32,7 +34,7 @@ import com.starstel.telcopro.stocks.entities.SystemOS;
 import com.starstel.telcopro.stocks.services.AppColorService;
 import com.starstel.telcopro.stocks.services.PortableItemService;
 import com.starstel.telcopro.stocks.services.PortableService;
-import com.starstel.telcopro.storage.Storageable;
+import com.starstel.telcopro.storage.services.Storageable;
 
 @CrossOrigin("*")
 @RestController
@@ -45,8 +47,6 @@ public class PortableRestController {
 	private AppColorService appColorService;
 	@Autowired
 	private PortableItemService portableItemService;
-	@Autowired
-	private Storageable storageable;
 	
 
 	@RequestMapping(value="", method = RequestMethod.GET)
@@ -56,8 +56,18 @@ public class PortableRestController {
 	}
 
 	@RequestMapping(value="", method = RequestMethod.POST)
-	public Portable save(@RequestBody Portable portable) { 
-		return portableService.save(portable);
+	public Portable save(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("portable") String portableJsonStringify)
+	{
+		try 
+		{
+			Portable portable = new ObjectMapper().readValue(portableJsonStringify, Portable.class);
+
+			return portableService.save(file, portable);
+		} 
+		catch (Exception e) 
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)

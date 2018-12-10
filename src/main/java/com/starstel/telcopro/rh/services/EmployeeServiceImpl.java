@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.starstel.telcopro.accounts.entities.AppUser;
 import com.starstel.telcopro.accounts.repositories.AppUserRepository;
@@ -15,6 +16,9 @@ import com.starstel.telcopro.accounts.services.AccountService;
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.repositories.EmployeeRepository;
 import com.starstel.telcopro.stocks.entities.Mouvment;
+import com.starstel.telcopro.stocks.entities.Product;
+import com.starstel.telcopro.storage.entities.Storage;
+import com.starstel.telcopro.storage.services.Storageable;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService
@@ -24,6 +28,9 @@ public class EmployeeServiceImpl implements EmployeeService
 	
 	@Autowired
 	private AppUserRepository appUserRepository;
+	
+	@Autowired
+	private Storageable storager;
 	
 	
 	@Override
@@ -35,32 +42,54 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public Employee createEmployee(Employee employee) 
 	{
-		if(employee.getId() != null && employee.getAppUser() == null )
-		{
-			Employee emp = employee(employee.getId());
-			employee.setAppUser(emp.getAppUser());
-			employee.setMouvments(emp.getMouvments());
-		}
 		try {
+			if (employee.getId() != null && employee.getAppUser() == null )
+			{
+				Employee emp = employee(employee.getId());
+				employee.setAppUser(emp.getAppUser());
+				employee.setMouvments(emp.getMouvments());
+			}
 			Period period = Period.between(employee.getHiringDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), 
 								LocalDate.now());
 			employee.setSeniority(period.getYears());
 			return employeeRepository.save(employee);
 		} catch (Exception e) {
-			return null;
+			throw new RuntimeException("Fail to save Employee "+employee.getName()+". Raison -> "+e.getMessage());
 		}
 	}
 
 	@Override
-	public Employee editEmployee(Employee employee) 
+	public Employee createEmployee(MultipartFile employeeImageFile, Employee employee) 
 	{
-		return createEmployee(employee);
+		String photoName = storager.store(employeeImageFile, Storage.DIRECTORY_EMPLOYEES_IMAGES);
+		try {
+			if (employee.getId() == null) {
+				employee.setPhoto(photoName);
+			}
+			else if(employeeImageFile != null) {
+					storager.delete(employee.getPhoto());
+					employee.setPhoto(photoName);
+				}
+				else {
+					if (employee.getPhoto().isEmpty()) {
+						Employee emp = employee(employee.getId());
+						if(!emp.getPhoto().isEmpty()) 
+							storager.delete(emp.getPhoto());
+					}
+				}
+			return createEmployee(employee);
+		} catch (Exception e) {
+			throw new RuntimeException("Fail to save Employee "+employee.getName()+". Raison -> "+e.getMessage());
+		}
 	}
-
+	
 	@Override
 	public Boolean deleteEmployee(Long id) 
 	{
+		String photoName = employee(id).getPhoto();
 		employeeRepository.deleteById(id);
+		if(!photoName.isEmpty()) 
+			storager.delete(photoName);
 		return true;
 	}
 

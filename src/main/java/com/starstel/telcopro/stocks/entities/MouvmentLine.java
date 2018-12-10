@@ -34,7 +34,7 @@ public class MouvmentLine implements Serializable
 	private Mouvment mouvment;
 	@ManyToOne
 	private Product product;
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade= {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH}, mappedBy="mouvmentLine")
 	private Set<PortableItem> productsItem;
 	private String note;
 }

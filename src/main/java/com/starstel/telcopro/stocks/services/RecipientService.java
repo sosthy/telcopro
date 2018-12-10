@@ -3,6 +3,8 @@ package com.starstel.telcopro.stocks.services;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.starstel.telcopro.stocks.entities.Recipient;
 import com.starstel.telcopro.stocks.entities.RecipientGroupe;
 
@@ -19,6 +21,7 @@ public interface RecipientService
 	// Recipient
 	List<Recipient> listRecipient();
 	Recipient createRecipient(Recipient recipient);
+	Recipient createRecipient(MultipartFile portableImageFile, Recipient recipient);
 	Recipient editRecipient(Recipient recipient);
 	Boolean deleteRecipient(Long id);
 	Recipient getRecipient(Long id);
