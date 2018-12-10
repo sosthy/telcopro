@@ -354,12 +354,12 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		portable4 = portableService.save(portable4);
 		portable5 = portableService.save(portable5);
 
-		PortableItem item = new PortableItem(null, "££@3&dk&ld", "123456646789", "417854552112/4455778522147", "PIO", portable5,null);
-		PortableItem item2 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "417854552112/4455778522147", "PIO", portable5,null);
-		PortableItem item3 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552112/4455778522147", "PIO", portable5,null);
-		PortableItem item4 = new PortableItem(null, "££@3&dk&ld", "123456646789", "4178285757112/45275225222147", "PIO", portable,null);
-		PortableItem item5 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "415727522/445272727", "PIO", portable2,null);
-		PortableItem item6 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552527112/442758522147", "PIO", portable3,null);
+		PortableItem item = new PortableItem(null, "££@3&dk&ld", "123456646789", "417854552112/4455778522147", "PIO", true, portable5, null);
+		PortableItem item2 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "417854552112/4455778522147", "PIO", true, portable5, null);
+		PortableItem item3 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552112/4455778522147", "PIO", true, portable5, null);
+		PortableItem item4 = new PortableItem(null, "££@3&dk&ld", "123456646789", "4178285757112/45275225222147", "PIO", true, portable, null);
+		PortableItem item5 = new PortableItem(null, "££@3&dk&ld", "1234114456789", "415727522/445272727", "PIO", true, portable2, null);
+		PortableItem item6 = new PortableItem(null, "££@3&dk&ld", "123451126789", "417854552527112/442758522147", "PIO", true, portable3, null);
 		
 		item = portableItemService.save(item);
 		item2 = portableItemService.save(item2);
@@ -368,8 +368,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		item5 = portableItemService.save(item5);
 		item6 = portableItemService.save(item6);
 		
-		Mouvment mouvment1 = new Mouvment(null, "ML752P", new Date(), 0.0, 0.0, entrepot1, null, null, mouvmentType1, employee, recipient3);
-		Mouvment mouvment2 = new Mouvment(null, "OZ986E", new Date(), 0.0, 0.0, entrepot2, null, null, mouvmentType1, employee, recipient4);
+		Mouvment mouvment1 = new Mouvment(null, new Date(), 0.0, 0.0, entrepot1, null, null, mouvmentType1, employee, recipient3);
+		Mouvment mouvment2 = new Mouvment(null, new Date(), 0.0, 0.0, entrepot2, null, null, mouvmentType1, employee, recipient4);
 
 		mouvment1 = mouvmentService.saveMouvment(mouvment1);
 		mouvment2 = mouvmentService.saveMouvment(mouvment2);

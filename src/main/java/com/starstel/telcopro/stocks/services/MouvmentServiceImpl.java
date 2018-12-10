@@ -89,13 +89,25 @@ public class MouvmentServiceImpl implements MouvmentService
 			if(mouvment.getMouvmentType().getName().equals("APPROVISIONNEMENT")) {
 				if(mouvment.getMouvmentLines() != null)
 					mouvment.getMouvmentLines().forEach(mLine -> {
+						mLine.setMouvment(mouvment);
 						if(mLine.getProductsItem() != null) {
 							mLine.getProductsItem().forEach(item -> {
 								System.out.println(mLine.getProduct().getClass().getName());
 								Portable portable = portableRepository.findById(mLine.getProduct().getId()).get();
-								item.setMouvmentLine(mLine);
 								item.setPortable(portable);
+								item.setIsAvailable(true);
 								portable.getPortableItem().add(item);
+							});
+						}
+				});
+			}
+			else if(mouvment.getMouvmentType().getName().equals("LIVRAISON")) {
+				if(mouvment.getMouvmentLines() != null)
+					mouvment.getMouvmentLines().forEach(mLine -> {
+						mLine.setMouvment(mouvment);
+						if(mLine.getProductsItem() != null) {
+							mLine.getProductsItem().forEach(item -> {
+								item.setIsAvailable(false);
 							});
 						}
 				});
