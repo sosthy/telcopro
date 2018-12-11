@@ -105,7 +105,10 @@ public class RecipientServiceImpl implements RecipientService
 	@Override
 	public Boolean deleteRecipient(Long id) 
 	{
+		String imageName = getRecipient(id).getImage();
 		recipientRepository.deleteById(id);
+		if(!imageName.isEmpty()) 
+			storager.delete(imageName);
 		return true;
 	}
 

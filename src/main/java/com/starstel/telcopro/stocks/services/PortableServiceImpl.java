@@ -89,7 +89,10 @@ public class PortableServiceImpl implements PortableService {
 	
 	@Override
 	public Boolean delete(Long id) {
+		String imageName = getPortable(id).getImage();
 		portableRepository.deleteById(id);
+		if(!imageName.isEmpty()) 
+			storager.delete(imageName);
 		return true;
 	}
 

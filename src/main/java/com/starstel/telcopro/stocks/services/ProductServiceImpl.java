@@ -97,7 +97,10 @@ public class ProductServiceImpl implements ProductService
 	}
 	@Override
 	public Boolean deleteProduct(Long id) {
+		String imageName = getProduct(id).getImage();
 		productRepository.deleteById(id);
+		if(!imageName.isEmpty()) 
+			storager.delete(imageName);
 		return true;
 	}
 	@Override

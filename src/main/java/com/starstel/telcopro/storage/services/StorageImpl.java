@@ -1,14 +1,17 @@
 package com.starstel.telcopro.storage.services;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +32,8 @@ public class StorageImpl implements Storageable
 			fileName = file.getOriginalFilename().replace(".", "_"+System.currentTimeMillis()+".");
 			try
 			{
-				Files.copy(file.getInputStream(), storage.getPath().resolve(fileName));
+				Files.copy(file.getInputStream(), storage.getPath().resolve(fileName), 
+						StandardCopyOption.REPLACE_EXISTING);
 			}
 			catch(Exception e)
 			{
@@ -37,50 +41,6 @@ public class StorageImpl implements Storageable
 			}
 		}
 		return fileName;
-	}
-
-	@Override
-	public Resource loadFile(String fileName) 
-	{
-		try
-		{
-			Path file = getFile(fileName);
-			Resource resource = new UrlResource(file.toUri());
-		
-			if(resource.exists() || resource.isReadable()) 
-			{
-				return resource;
-			}
-			else
-			{
-				throw new RuntimeException("Fail !");
-			}
-			
-		}
-		catch(Exception e)
-		{
-			throw new RuntimeException("Error ! -> Message = " + e.getMessage());
-		}
-	}
-
-	@Override
-	public List<Resource> loadFiles(List<String> filesName) 
-	{
-		List<Resource> resources = new ArrayList<>();
-		try
-		{
-			filesName.forEach(name -> {
-				try {
-					resources.add(loadFile(name));
-				} catch (Exception e) {
-				}
-			});
-		}
-		catch(Exception e)
-		{
-			throw new RuntimeException("Error ! -> Message = " + e.getMessage());
-		}
-		return resources;
 	}
 
 	@Override
@@ -106,7 +66,82 @@ public class StorageImpl implements Storageable
 	}
 
 	@Override
-	public Stream<Path> loadFiles()
+	public List<String> loadFiles()
+	{
+		List<String> files = new ArrayList<String>();
+		
+		getStoreFiles().forEach(file -> {
+			files.add(encodeToString(file.toFile()));
+		});
+		return files;
+	}
+
+	@Override
+	public File getFile(String fileName) {
+		try {
+			return getStoreFiles().filter(path -> path.toFile().getName().equals(fileName)).findFirst().get().toFile();
+		} catch (Exception e) {
+			throw new RuntimeException("Can't found File: "+fileName+ ". Raison: -> " + e.getMessage());
+		}
+	}
+
+	@Override
+	public boolean delete(String fileName) {
+		try
+		{
+			return getFile(fileName).delete();
+		}
+		catch (Exception e) {
+			throw new RuntimeException("Failed to delete file "+fileName+ ". Raison: -> " + e.getMessage());
+		}
+	}
+
+	@Override
+	public String loadFile(String fileName) {
+		return encodeToString(getFile(fileName));
+	}
+
+	@Override
+	public List<String> loadFiles(Storage storage) {
+		List<String> images = new ArrayList<String>();
+		File fileFolder = new File(storage.getName());
+		if(fileFolder != null) {
+			for(final File file: fileFolder.listFiles()) {
+				if(!file.isDirectory()) {
+					String encodeBase64 = null;
+					try {
+						String extension = FilenameUtils.getExtension(file.getName());
+						FileInputStream fileInputStream = new FileInputStream(file);
+						byte[] bytes = new byte[(int)file.length()];
+						fileInputStream.read(bytes);
+						encodeBase64 = Base64.getEncoder().encodeToString(bytes);
+						images.add(file.getName()+"$data:image/"+extension+";base64,"+encodeBase64);
+						fileInputStream.close();
+					}catch(Exception e) {
+						
+					}
+				}
+			}
+		}
+		return images;
+	}
+	
+	public String encodeToString(File file) {
+		String encodeBase64 = null;
+		try {
+			String extension = FilenameUtils.getExtension(file.getName());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			byte[] bytes = new byte[(int)file.length()];
+			fileInputStream.read(bytes);
+			encodeBase64 = Base64.getEncoder().encodeToString(bytes);
+			fileInputStream.close();
+			return file.getName()+"$data:image/"+extension+";base64,"+encodeBase64;
+		}catch(Exception e) {
+			throw new RuntimeException("Fail to encoding file " + file.getName() + ". Raison: -> " + e.getMessage());
+		}
+	}
+
+	public Stream<Path> getStoreFiles()
 	{
 		try
 		{
@@ -116,22 +151,6 @@ public class StorageImpl implements Storageable
 		catch(IOException e)
 		{
 			throw new RuntimeException("Failed to read stored file");
-		}
-	}
-
-	@Override
-	public Path getFile(String fileName) {
-		return loadFiles().filter(path -> path.toFile().getName().equals(fileName)).findFirst().get();
-	}
-
-	@Override
-	public boolean delete(String fileName) {
-		try
-		{
-			return getFile(fileName).toFile().delete();
-		}
-		catch (Exception e) {
-			throw new RuntimeException("Failed to delete file "+fileName);
 		}
 	}
 }

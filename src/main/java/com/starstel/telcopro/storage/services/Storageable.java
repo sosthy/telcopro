@@ -1,5 +1,6 @@
 package com.starstel.telcopro.storage.services;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
@@ -13,17 +14,17 @@ public interface Storageable
 {
 	public String store(MultipartFile file, Storage storage);
 	
-	public Resource loadFile(String fileName);
+	public String loadFile(String fileName);
 	
-	public Path getFile(String fileName);
+	public File getFile(String fileName);
 	
 	public void deleteAll();
 	
-	public List<Resource> loadFiles(List<String> filesName);
+	public List<String> loadFiles(Storage storage);
 	
 	public boolean delete(String fileName);
 	
 	public void init();
 	
-	public Stream<Path> loadFiles();
+	public List<String> loadFiles();
 }
