@@ -32,6 +32,11 @@ public class MouvmentRestController {
 		return mouvmentService.listMouvmentType();
 	}
 
+	@RequestMapping(value="/types/{id}", method = RequestMethod.GET)
+	public MouvmentType getMouvmentType(@PathVariable Long id) {
+		return mouvmentService.getMouvmentType(id);
+	}
+
 	@RequestMapping(value="/types", method = RequestMethod.POST)
 	public MouvmentType saveMouvmentType(@RequestBody MouvmentType mouvmentType) {
 		return mouvmentService.saveMouvmentType(mouvmentType);
