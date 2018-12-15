@@ -44,4 +44,16 @@ public class MouvmentLine implements Serializable
 	  )
 	private Set<PortableItem> productsItem;
 	private String note;
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) return true;
+		if(!(obj instanceof MouvmentLine)) return false;
+		return id != null && id.equals(((MouvmentLine) obj).id);
+	}
+	
+	@Override
+	public int hashCode() {
+		return id.hashCode() + quantity.hashCode();
+	}
 }

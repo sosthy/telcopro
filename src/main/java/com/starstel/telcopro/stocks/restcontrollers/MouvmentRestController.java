@@ -67,9 +67,9 @@ public class MouvmentRestController {
 		return mouvmentService.saveMouvment(mouvment);
 	}
 
-	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-	public Boolean deleteMouvment(@PathVariable Long id) {
-		return mouvmentService.deleteMouvment(id);
+	@RequestMapping(value="/{reference}", method = RequestMethod.DELETE)
+	public Boolean deleteMouvment(@PathVariable String reference) {
+		return mouvmentService.deleteMouvment(reference);
 	}
 
 	@RequestMapping(value="/search",method=RequestMethod.GET)
@@ -83,7 +83,7 @@ public class MouvmentRestController {
 	}
 
 	@RequestMapping(value="/{idMouvment}/lines", method = RequestMethod.GET)
-	public Set<MouvmentLine> listMouvmentLine(@PathVariable Long idMouvment) {
+	public List<MouvmentLine> listMouvmentLine(@PathVariable Long idMouvment) {
 		return mouvmentService.listMouvmentLine(idMouvment);
 	}
 
