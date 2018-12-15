@@ -1,12 +1,16 @@
 package com.starstel.telcopro.rh.restcontrollers;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,10 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.services.EmployeeService;
 import com.starstel.telcopro.stocks.entities.Mouvment;
+import com.starstel.telcopro.storage.entities.Storage;
+import com.starstel.telcopro.storage.services.Storageable;
 
 @CrossOrigin("*")
 @RestController
@@ -57,38 +65,20 @@ public class EmployeeRestController
 		return employeeService.listMouvmentOfEmployee(id);
 	}
 	
-	/*
+	
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public Employee save(@RequestParam("photo") MultipartFile file, 
-								@RequestParam("employee") String obj)
+	public Employee save(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("employee") String employeeJsonStringify)
 	{
-		System.err.println("UploadFile name: "+file.getName());
-		
-		ObjectMapper mapper = new ObjectMapper();
-		Employee employee = new Employee();
-		
 		try 
 		{
-			employee = mapper.readValue(obj, Employee.class);
-			return employeeService.createEmployee(employee);
+			Employee employee = new ObjectMapper().readValue(employeeJsonStringify, Employee.class);
+			
+			return employeeService.createEmployee(file, employee);
 		} 
 		catch (Exception e) 
 		{
 			throw new RuntimeException(e);
 		}
-		
-	}*/
-	
-	@RequestMapping(value="", method = RequestMethod.POST)
-	public Employee createEmployee(@RequestBody Employee employee)
-	{
-		return employeeService.createEmployee(employee);
-	}
-	
-	@RequestMapping(value="", method = RequestMethod.PUT)
-	public Employee editEmployee(@RequestBody Employee employee)
-	{
-		return employeeService.editEmployee(employee);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)

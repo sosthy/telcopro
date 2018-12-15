@@ -13,6 +13,7 @@ public interface MouvmentService
 {
 	// MouvmentType
 	List<MouvmentType> listMouvmentType();
+	MouvmentType getMouvmentType(Long id);
 	MouvmentType saveMouvmentType(MouvmentType mouvmentType);
 	Boolean deleteMouvmentType(Long id);
 	Set<Mouvment> getAllMouvmentOfMouvmentType(Long id);

@@ -1,5 +1,7 @@
 package com.starstel.telcopro.stocks.services;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -47,6 +49,12 @@ public class MouvmentServiceImpl implements MouvmentService
 	public MouvmentType saveMouvmentType(MouvmentType mouvmentType) 
 	{
 		return mouvmentTypeRepository.save(mouvmentType);
+	}
+	
+	@Override
+	public MouvmentType getMouvmentType(Long id) 
+	{
+		return mouvmentTypeRepository.findById(id).get();
 	}
 	
 	@Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.starstel.telcopro.stocks.entities.Camera;
 import com.starstel.telcopro.stocks.entities.Cpu;
@@ -13,6 +14,7 @@ import com.starstel.telcopro.stocks.entities.Mouvment;
 import com.starstel.telcopro.stocks.entities.Portable;
 import com.starstel.telcopro.stocks.entities.PortableCategory;
 import com.starstel.telcopro.stocks.entities.PortableUnit;
+import com.starstel.telcopro.stocks.entities.Product;
 import com.starstel.telcopro.stocks.entities.SystemOS;
 import com.starstel.telcopro.stocks.repositories.AppColorRepository;
 import com.starstel.telcopro.stocks.repositories.CameraRepository;
@@ -22,6 +24,8 @@ import com.starstel.telcopro.stocks.repositories.PortableCategoryRepository;
 import com.starstel.telcopro.stocks.repositories.PortableRepository;
 import com.starstel.telcopro.stocks.repositories.PortableUnitRepository;
 import com.starstel.telcopro.stocks.repositories.SystemOSRepository;
+import com.starstel.telcopro.storage.entities.Storage;
+import com.starstel.telcopro.storage.services.Storageable;
 
 
 @Service
@@ -54,14 +58,41 @@ public class PortableServiceImpl implements PortableService {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private Storageable storager;
+	
 	@Override
 	public Portable save(Portable portable) {
 		return portableRepository.save(portable);
 	}
 	
 	@Override
+	public Portable save(MultipartFile portableImageFile, Portable portable) {
+		String imageName = storager.store(portableImageFile, Storage.DIRECTORY_PORTABLES_IMAGES);
+		
+		if (portable.getId() == null) {
+			portable.setImage(imageName);
+		}
+		else if(portableImageFile != null) {
+				storager.delete(portable.getImage());
+				portable.setImage(imageName);
+			}
+			else {
+				if (portable.getImage().isEmpty()) {
+					Portable port = getPortable(portable.getId());
+					if(!port.getImage().isEmpty()) 
+						storager.delete(port.getImage());
+				}
+			}
+		return save(portable);
+	}
+	
+	@Override
 	public Boolean delete(Long id) {
+		String imageName = getPortable(id).getImage();
 		portableRepository.deleteById(id);
+		if(!imageName.isEmpty()) 
+			storager.delete(imageName);
 		return true;
 	}
 

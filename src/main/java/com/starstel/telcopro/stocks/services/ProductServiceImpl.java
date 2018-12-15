@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.starstel.telcopro.rh.repositories.EmployeeRepository;
 import com.starstel.telcopro.stocks.entities.ProductCategory;
@@ -32,6 +33,8 @@ import com.starstel.telcopro.stocks.repositories.ProductRepository;
 import com.starstel.telcopro.stocks.repositories.RecipientGroupeRepository;
 import com.starstel.telcopro.stocks.repositories.RecipientRepository;
 import com.starstel.telcopro.stocks.repositories.StateRepository;
+import com.starstel.telcopro.storage.entities.Storage;
+import com.starstel.telcopro.storage.services.Storageable;
 import com.starstel.telcopro.stocks.repositories.ProductRepository;
 
 @Service
@@ -59,6 +62,9 @@ public class ProductServiceImpl implements ProductService
 	@Autowired
 	private ProductCategoryRepository productCategoryRepository;
 	
+	@Autowired
+	private Storageable  storager;
+	
 	
 	@Override
 	public List<Product> listProducts() {
@@ -69,8 +75,32 @@ public class ProductServiceImpl implements ProductService
 		return productRepository.save(product);
 	}
 	@Override
+	public Product saveProduct(MultipartFile productImageFile, Product product) {
+
+		String imageName = storager.store(productImageFile, Storage.DIRECTORY_PRODUCTS_IMAGES);
+		
+		if (product.getId() == null) {
+			product.setImage(imageName);
+		}
+		else if(productImageFile != null) {
+				storager.delete(product.getImage());
+				product.setImage(imageName);
+			}
+			else {
+				if (product.getImage().isEmpty()) {
+					Product prod = getProduct(product.getId());
+					if(!prod.getImage().isEmpty()) 
+						storager.delete(prod.getImage());
+				}	
+			}
+		return saveProduct(product);
+	}
+	@Override
 	public Boolean deleteProduct(Long id) {
+		String imageName = getProduct(id).getImage();
 		productRepository.deleteById(id);
+		if(!imageName.isEmpty()) 
+			storager.delete(imageName);
 		return true;
 	}
 	@Override

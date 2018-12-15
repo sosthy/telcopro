@@ -34,6 +34,7 @@ public class Recipient implements Serializable
     private String location;
     private String website;
     private String phone;
+    private String image;
     @ManyToOne
     private RecipientGroupe groupe;
     @JsonIgnore

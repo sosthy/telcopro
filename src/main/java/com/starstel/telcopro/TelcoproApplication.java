@@ -1,5 +1,7 @@
 package com.starstel.telcopro;
 
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -51,7 +53,8 @@ import com.starstel.telcopro.stocks.services.PortableItemService;
 import com.starstel.telcopro.stocks.services.PortableService;
 import com.starstel.telcopro.stocks.services.ProductService;
 import com.starstel.telcopro.stocks.services.RecipientService;
-import com.starstel.telcopro.storage.Storageable;
+import com.starstel.telcopro.storage.entities.Storage;
+import com.starstel.telcopro.storage.services.Storageable;
 
 @SpringBootApplication
 public class TelcoproApplication extends SpringBootServletInitializer implements CommandLineRunner
@@ -102,7 +105,8 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	@Override
 	public void run(String... args) throws Exception 
 	{	
-		
+		storageable.init();
+
 		AppMenu menuProduct= new AppMenu("Inventory", "fa-building-o", "/inventories", "bg-brown", "Stock Management");
 		AppMenu menuAccount= new AppMenu("Accounts", "fa-user-circle-o", "/accounts/users", "bg-green", "Users Accounts");
 		AppMenu menuRh= new AppMenu("Resources", "fa-user-o", "/rh", "bg-deep-purple", "Humans Resources Management");
@@ -233,10 +237,10 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		recipient5.setGroupe(groupe2);
 		recipient5 = recipientService.createRecipient(recipient5);
 		
-		MouvmentType mouvmentType1 = new MouvmentType(null, "APPROVISIONNEMENT", null, "No Description");
-		MouvmentType mouvmentType2 = new MouvmentType(null, "RETOUR", null, "No Description");
-		MouvmentType mouvmentType3 = new MouvmentType(null, "LIVRAISON", null, "No Description");
-		MouvmentType mouvmentType4 = new MouvmentType(null, "TRANSFERT", null, "No Description");
+		MouvmentType mouvmentType1 = new MouvmentType(null, "APPROVISIONNEMENT",true,true,"Fournisseur/Client", null, "No Description");
+		MouvmentType mouvmentType2 = new MouvmentType(null, "RETOUR PRODUCT",true,false,"Fournisseur/Client", null, "No Description");
+		MouvmentType mouvmentType3 = new MouvmentType(null, "LIVRAISON",false,false,"Fournisseur/Client", null, "No Description");
+		MouvmentType mouvmentType4 = new MouvmentType(null, "TRANSFERT",false,false,"WorkSpace", null, "No Description");
 		
 		mouvmentType1 = mouvmentService.saveMouvmentType(mouvmentType1);
 		mouvmentType2 = mouvmentService.saveMouvmentType(mouvmentType2);
@@ -317,29 +321,29 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		portableCategory3 = portableService.savePortableCategory(portableCategory3);
 		portableCategory4 = portableService.savePortableCategory(portableCategory4);
 		
-		Portable portable= new Portable(null, 1.0, new Date(), "XTOUCH X9", "XTOUCH_X9.jpeg", 85000.0, 75000.0, 800000.0, 
+		Portable portable= new Portable(null, 1.0, new Date(), "XTOUCH A4", "XTOUCH_A4.png", 85000.0, 75000.0, 800000.0, 
 				20.0, 50.0, 20.0, "FACE ID UNLOCK", state, emplacement1, unite, telephone, null,"C",5.5,"2400mAh", 
 				"Dual Sim 3G NetWork",960.0,138.0,"Ip64",false,false,false,false, null,memory,camera,cpu,os,
 				portableCategory,blueColor);
 	
-		Portable portable1= new Portable(null, 0.0, new Date(), "Xbot Senior", "Xbot_Senior.jpeg", 131000.0, 100000.0, 
+		Portable portable1= new Portable(null, 0.0, new Date(), "Xbot Senior", "Xbot_Senior.png", 131000.0, 100000.0, 
 				110000.0, 100.0, 2000.0, 20.0, "No", state, emplacement4, cargaison, telephone, null,"C",2D,"B",
 				"Dual Sim 3G NetWork",2D,2D,"Ip",false,false,false,true,null,memory2,camera2,cpu2,os,portableCategory2,redColor);
 		
-		Portable portable2= new Portable(null, 1.0, new Date(), "XTOUCH X", "XTOUCH_X.jpeg", 100000.0, 90000.0, 95000.0, 100.0, 
+		Portable portable2= new Portable(null, 1.0, new Date(), "XTOUCH X", "XTOUCH_X.png", 100000.0, 90000.0, 95000.0, 100.0, 
 				20.0, 25.0, "No", 
 				state2, emplacement2, unite, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,false,
 				true,null,memory3,camera2,cpu,os,portableCategory,blueColor);
 		
-		Portable portable3= new Portable(null, 1.0, new Date(), "Xbot Junior", "Xbot_Junior.jpeg", 115000.0, 110000.0, 0.0, 11300.0, 
+		Portable portable3= new Portable(null, 1.0, new Date(), "Xbot Junior", "Xbot_Junior.png", 115000.0, 110000.0, 0.0, 11300.0, 
 				20.0, 20.0, "No", state2, emplacement3, paquet10, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
 				true,false,true, false,null,memory2,camera3,cpu3,os,portableCategory2,blackColor);
 		
-		Portable portable4= new Portable(null, 0.0, new Date(), "XTOUCH E4", "XTOUCH_E4.jpeg", 60000.0, 50000.0, 55000.0, 100.0, 
+		Portable portable4= new Portable(null, 0.0, new Date(), "XTOUCH E4", "XTOUCH_E4.png", 60000.0, 50000.0, 55000.0, 100.0, 
 				20.0, 18.0, "No", state3,emplacement1, cargaison, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
 				false,true,true,false,null,memory2,camera,cpu2,os,portableCategory,whiteColor);
 		
-		Portable portable5= new Portable(null, 3.0, new Date(), "L4 Bar Phone", "L4_Bar_Phone.jpeg", 7000.0, 5000.0, 6000.0, 
+		Portable portable5= new Portable(null, 3.0, new Date(), "L4 Bar Phone", "L4_Bar_Phone.png", 7000.0, 5000.0, 6000.0, 
 				100.0, 20.0, 10.0, "No", state2, emplacement4, unite, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,
 				2D,"Ip",false,false,false,false, null,memory3,camera4,cpu2,os,portableCategory,whiteColor);
 		

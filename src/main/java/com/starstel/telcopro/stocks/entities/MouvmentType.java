@@ -28,6 +28,9 @@ public class MouvmentType implements Serializable
     @GeneratedValue(generator = "transt_id")
 	private Long id;
 	private String name;
+	private boolean entries;
+	private boolean createNewItem;
+	private String natureSecondaryActor;
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="mouvmentType")
 	private Set<Mouvment> mouvments = new HashSet<>();

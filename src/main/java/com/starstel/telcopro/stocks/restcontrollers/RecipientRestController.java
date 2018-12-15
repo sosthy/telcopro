@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.starstel.telcopro.stocks.entities.Portable;
 import com.starstel.telcopro.stocks.entities.Recipient;
 import com.starstel.telcopro.stocks.entities.RecipientGroupe;
 import com.starstel.telcopro.stocks.services.RecipientService;
@@ -31,10 +34,20 @@ public class RecipientRestController {
 	public List<Recipient> listRecipient() {
 		return recipientService.listRecipient();
 	}
-
+	
 	@RequestMapping(value="", method = RequestMethod.POST)
-	public Recipient createRecipient(@RequestBody Recipient recipient) {
-		return recipientService.createRecipient(recipient);
+	public Recipient createRecipient(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("recipient") String recipientJsonStringify) {
+
+		try 
+		{
+			Recipient recipient = new ObjectMapper().readValue(recipientJsonStringify, Recipient.class);
+
+			return recipientService.createRecipient(file, recipient);
+		} 
+		catch (Exception e) 
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@RequestMapping(value="", method = RequestMethod.PUT)
