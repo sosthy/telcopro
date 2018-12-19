@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.starstel.telcopro.rh.entities.Employee;
 import com.starstel.telcopro.rh.repositories.EmployeeRepository;
@@ -23,6 +24,7 @@ import com.starstel.telcopro.stocks.repositories.MouvmentTypeRepository;
 import com.starstel.telcopro.stocks.repositories.PortableRepository;
 
 @Service
+@Transactional
 public class MouvmentServiceImpl implements MouvmentService
 {
 	@Autowired
@@ -124,9 +126,10 @@ public class MouvmentServiceImpl implements MouvmentService
 	}
 	
 	@Override
-	public Boolean deleteMouvment(Long id) 
+	public Boolean deleteMouvment(String reference) 
 	{
-		mouvmentRepository.deleteById(id);
+		Mouvment m = (Mouvment) mouvmentRepository.getByReference(reference);
+		mouvmentRepository.delete(m);
 		return true;
 	}
 
@@ -141,7 +144,7 @@ public class MouvmentServiceImpl implements MouvmentService
 	}
 
 	@Override
-	public Set<MouvmentLine> listMouvmentLine(Long id) {
+	public List<MouvmentLine> listMouvmentLine(Long id) {
 		return mouvmentRepository.findById(id).get().getMouvmentLines();
 	}
 	
