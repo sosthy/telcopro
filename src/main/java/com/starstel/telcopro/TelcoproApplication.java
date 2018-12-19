@@ -237,10 +237,10 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		recipient5.setGroupe(groupe2);
 		recipient5 = recipientService.createRecipient(recipient5);
 		
-		MouvmentType mouvmentType1 = new MouvmentType(null, "APPROVISIONNEMENT",true,true,"Fournisseur/Client", null, "No Description");
-		MouvmentType mouvmentType2 = new MouvmentType(null, "RETOUR PRODUCT",true,false,"Fournisseur/Client", null, "No Description");
-		MouvmentType mouvmentType3 = new MouvmentType(null, "LIVRAISON",false,false,"Fournisseur/Client", null, "No Description");
-		MouvmentType mouvmentType4 = new MouvmentType(null, "TRANSFERT",false,false,"WorkSpace", null, "No Description");
+		MouvmentType mouvmentType1 = new MouvmentType(null, "APPROVISIONNEMENT", null, "No Description");
+		MouvmentType mouvmentType2 = new MouvmentType(null, "RETOUR", null, "No Description");
+		MouvmentType mouvmentType3 = new MouvmentType(null, "LIVRAISON", null, "No Description");
+		MouvmentType mouvmentType4 = new MouvmentType(null, "TRANSFERT", null, "No Description");
 		
 		mouvmentType1 = mouvmentService.saveMouvmentType(mouvmentType1);
 		mouvmentType2 = mouvmentService.saveMouvmentType(mouvmentType2);
