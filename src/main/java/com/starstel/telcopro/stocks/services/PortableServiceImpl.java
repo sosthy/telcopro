@@ -47,9 +47,6 @@ public class PortableServiceImpl implements PortableService {
 	private PortableCategoryRepository portableCategoryRepository;
 	
 	@Autowired
-	private AppColorRepository appColorRepository;
-	
-	@Autowired
 	private MemoryRepository memoryRepository;
 	
 	@Autowired
@@ -63,7 +60,7 @@ public class PortableServiceImpl implements PortableService {
 	
 	@Override
 	public Portable save(Portable portable) {
-		return portableRepository.save(portable);
+		return loadCalculatedField(portableRepository.save(portable));
 	}
 	
 	@Override
@@ -98,7 +95,11 @@ public class PortableServiceImpl implements PortableService {
 
 	@Override
 	public List<Portable> getPortables() {
-		return portableRepository.findAll();
+		List<Portable> portables = portableRepository.findAll();
+		portables.forEach(portable -> {
+			portable = loadCalculatedField(portable);
+		});
+		return portables;
 	}
 
 	@Override
@@ -286,5 +287,10 @@ public class PortableServiceImpl implements PortableService {
 	@Override
 	public List<Cpu> searchCpus(String keyWords) {
 		return cpuRepository.search("%"+keyWords+"%");
+	}
+	
+	public Portable loadCalculatedField(Portable portable) {
+		portable.setQuantity(portableRepository.countItem(portable.getId()));
+		return portable;
 	}
 }

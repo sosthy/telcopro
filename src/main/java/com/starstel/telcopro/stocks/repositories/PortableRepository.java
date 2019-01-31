@@ -27,6 +27,7 @@ public interface PortableRepository extends JpaRepository<Portable, Long> {
 			+ "lower(p.codeBar) like lower(:x) or lower(p.serial) like lower(:x) or "
 			+ "lower(p.reference) like lower(:x)")
 	public Portable getPortable(@Param("x") String numeroSerie);
+	
 	@Query("select p from Portable p")
 	/*@Query("select p from Portable p where lower(p.appColor.name) like lower(:x) or "
 			+ "lower(p.designation) like lower(:x) or lower(p.portableCategory.name) like lower(:x) or "
@@ -38,5 +39,8 @@ public interface PortableRepository extends JpaRepository<Portable, Long> {
 			+ "lower(p.battery) like lower(:x) or lower(p.ipRating) like lower(:x) or lower(concat(p.quantity,'')) like lower(:x) or " 
 			+ "lower(p.emplacement.name) like lower(:x) or lower(p.emplacement.entrepot.name) like lower(:x)")
 	public List<Portable> searchPortable(@Param("x") String motCle);
+
+	@Query("select count(p) from PortableItem p where p.portable.id = :id and p.isAvailable = true")
+	public Double countItem(@Param("id") Long id);
 	
 }

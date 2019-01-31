@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starstel.telcopro.accounts.entities.AppUser;
@@ -32,6 +34,7 @@ import lombok.Setter;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Employee extends Person implements Serializable 
 {
+    @Temporal(TemporalType.DATE)
     private Date hiringDate;
     private Integer seniority;
     private String poste;
@@ -64,10 +67,11 @@ public class Employee extends Person implements Serializable
 
 
 	public Employee(Long id, String name, String surname, String phone, String website, String sex, String cni,
-			 String photo, Date birthday, Date hiring_date, Integer seniority, WorkSpace workSpace) {
+			 String photo, Date birthday, Date hiring_date, Integer seniority, String poste, WorkSpace workSpace) {
 		super(id, name, surname, phone, website, sex, cni, photo, birthday);
 		this.hiringDate = hiring_date;
 		this.seniority = seniority;
+		this.poste = poste;
 		this.workSpace = workSpace;
 	}
 

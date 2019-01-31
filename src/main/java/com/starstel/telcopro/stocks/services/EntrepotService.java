@@ -21,6 +21,9 @@ public interface EntrepotService
 	Long getProductItemCountOfEntrepot(Long id);
 	Long getPortableItemCountOfEntrepot(Long id);
 	List<Entrepot> search(String keyWords);
+	Double getNbOfProduct(Long id);
+	Double getBusyVolume(Long id);
+	Double getTotalPriceOfProducts(Long id);
 
 	Boolean isSpaced(Entrepot entrepot);
 	Boolean isAddPossible(Entrepot entrepot, Product product);

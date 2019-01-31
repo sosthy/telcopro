@@ -180,22 +180,22 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		emplacement4 = entrepotService.saveEmplacement(emplacement4);
 		
 		Employee employee = new Employee(null,"Sosthene","N.","78221242","sosthenegolden@gmail.com",
-				"M","KIT272","XXXX",new Date(),new Date(),Integer.valueOf(4),entrepot2);
+				"M","KIT272","XXXX",new Date(),new Date(),Integer.valueOf(4), "Chef équipe DEV",entrepot2);
 		
 		Employee employee2 = new Employee(null,"TCHECHE","Romeo","693936236","romeo.@gmail.com","M","475JHk5",
-				"romeo.png",new Date(),new Date(),Integer.valueOf(1),space2);
+				"romeo.png",new Date(),new Date(),Integer.valueOf(1), "Developpeur",space2);
 		
 		Employee employee3 = new Employee(null,"NZUKO","QUEVIN","52481234","fabien.@gmail.com","M","785427JKDF3",
-				"romeo.png",new Date(),new Date(),Integer.valueOf(1),space);
+				"romeo.png",new Date(),new Date(),Integer.valueOf(1), "Developpeur",space);
 		
-		Employee employee4 = new Employee(null,"TAMO","FRANCIS","6952478625","francis.@gmail.com","M","8966J245M",
-				"francis.png",new Date(),new Date(),Integer.valueOf(1),boutique);
+		Employee employee4 = new Employee(null,"SIAKA","FRANCIS","6952478625","francis.@gmail.com","M","8966J245M",
+				"francis.png",new Date(),new Date(),Integer.valueOf(1), "Marketeur",boutique);
 		
-		Employee employee5 = new Employee(null,"MAMI","GAELLE","52244452524","gaelle.@gmail.com","F","4513GJDJ7",
-				"gaelle.png",new Date(),new Date(),Integer.valueOf(1),boutique2);
+		Employee employee5 = new Employee(null,"Yimga","GAELLE","52244452524","gaelle.@gmail.com","F","4513GJDJ7",
+				"gaelle.png",new Date(),new Date(),Integer.valueOf(1), "Marketeuse",boutique2);
 		
 		Employee employee6 = new Employee(null,"EBOUA","OSE","5282283","ose.@gmail.com","M","782LLM3",
-				"ose.png",new Date(),new Date(),Integer.valueOf(1),boutique3);
+				"ose.png",new Date(),new Date(),Integer.valueOf(1), "Superviseur équipe DEV",boutique3);
 		
 		employee=employeeService.createEmployee(employee);
 		employee2=employeeService.createEmployee(employee2);
@@ -323,29 +323,28 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		
 		Portable portable= new Portable(null, 1.0, new Date(), "XTOUCH A4", "XTOUCH_A4.png", 85000.0, 75000.0, 800000.0, 
 				20.0, 50.0, 20.0, "FACE ID UNLOCK", state, emplacement1, unite, telephone, null,"C",5.5,"2400mAh", 
-				"Dual Sim 3G NetWork",960.0,138.0,"Ip64",false,false,false,false, null,memory,camera,cpu,os,
+				"Dual Sim 3G NetWork",960.0,138.0,"Ip64", null,memory,camera,cpu,os,
 				portableCategory,blueColor);
 	
 		Portable portable1= new Portable(null, 0.0, new Date(), "Xbot Senior", "Xbot_Senior.png", 131000.0, 100000.0, 
 				110000.0, 100.0, 2000.0, 20.0, "No", state, emplacement4, cargaison, telephone, null,"C",2D,"B",
-				"Dual Sim 3G NetWork",2D,2D,"Ip",false,false,false,true,null,memory2,camera2,cpu2,os,portableCategory2,redColor);
+				"Dual Sim 3G NetWork",2D,2D,"Ip",null,memory2,camera2,cpu2,os,portableCategory2,redColor);
 		
 		Portable portable2= new Portable(null, 1.0, new Date(), "XTOUCH X", "XTOUCH_X.png", 100000.0, 90000.0, 95000.0, 100.0, 
-				20.0, 25.0, "No", 
-				state2, emplacement2, unite, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",false,true,false,
-				true,null,memory3,camera2,cpu,os,portableCategory,blueColor);
+				20.0, 25.0, "No", state2, emplacement2, unite, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
+				null,memory3,camera2,cpu,os,portableCategory,blueColor);
 		
 		Portable portable3= new Portable(null, 1.0, new Date(), "Xbot Junior", "Xbot_Junior.png", 115000.0, 110000.0, 0.0, 11300.0, 
 				20.0, 20.0, "No", state2, emplacement3, paquet10, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
-				true,false,true, false,null,memory2,camera3,cpu3,os,portableCategory2,blackColor);
+				null,memory2,camera3,cpu3,os,portableCategory2,blackColor);
 		
 		Portable portable4= new Portable(null, 0.0, new Date(), "XTOUCH E4", "XTOUCH_E4.png", 60000.0, 50000.0, 55000.0, 100.0, 
 				20.0, 18.0, "No", state3,emplacement1, cargaison, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,2D,"Ip",
-				false,true,true,false,null,memory2,camera,cpu2,os,portableCategory,whiteColor);
+				null,memory2,camera,cpu2,os,portableCategory,whiteColor);
 		
 		Portable portable5= new Portable(null, 3.0, new Date(), "L4 Bar Phone", "L4_Bar_Phone.png", 7000.0, 5000.0, 6000.0, 
 				100.0, 20.0, 10.0, "No", state2, emplacement4, unite, telephone, null,"C",2D,"B","Dual Sim 3G NetWork",2D,
-				2D,"Ip",false,false,false,false, null,memory3,camera4,cpu2,os,portableCategory,whiteColor);
+				2D,"Ip", null,memory3,camera4,cpu2,os,portableCategory,whiteColor);
 		
 		portable = portableService.save(portable);
 		portable1 = portableService.save(portable1);

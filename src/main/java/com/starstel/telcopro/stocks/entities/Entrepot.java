@@ -7,9 +7,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starstel.telcopro.rh.entities.WorkSpace;
+import com.starstel.telcopro.stocks.repositories.EntrepotRepository;
+import com.starstel.telcopro.stocks.services.EntrepotService;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,13 +25,17 @@ import lombok.Setter;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Entrepot extends WorkSpace
 {
+	@Transient
 	private Double nbOfProduct;
+	@Transient
 	private Double priceTotal;
+	@Transient
 	private Double volume;
 	private Double volumeSecurity;
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="entrepot")
 	private Set<Emplacement> emplacements = new HashSet<>();
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,8 +100,4 @@ public class Entrepot extends WorkSpace
 		this.volume = volume;
 		this.volumeSecurity = volumeSecurity;
 	}
-	
-	
-	
-	
 }

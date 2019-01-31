@@ -29,8 +29,8 @@ public class Emplacement implements Serializable
     @GeneratedValue(generator = "emplac_id")
 	private Long id;
 	private String name;
-	private String nbOfProduct;
-	private String priceTotalOfProduct;
+	private Double nbOfProduct;
+	private Double priceTotalOfProduct;
 	@ManyToOne
 	private Entrepot entrepot;
 	@JsonIgnore

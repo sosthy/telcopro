@@ -34,10 +34,6 @@ public class Portable extends Product
 	private Double dimension;
 	private Double weight;
 	private String ipRating;
-	private Boolean fingerprint;
-	private Boolean waterproof;
-	private Boolean splashproof;
-	private Boolean dushproof;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="portable")
 	@JsonIgnore
 	private Set<PortableItem> portableItem = new HashSet<>();
@@ -56,8 +52,7 @@ public class Portable extends Product
 			Double priceUnitWholesaler, Double priceUnitSemiWholesaler, Double stockMinim, Double stockAlert,
 			Double volume, String note, State state, Emplacement emplacement, MeasureUnit measureUnit,
 			ProductCategory productCategory, Set<MouvmentLine> mouvmentLines, String connection, Double screen,
-			String battery, String sim, Double dimension, Double weight, String ipRating, Boolean fingerprint,
-			Boolean waterproof, Boolean splashproof, Boolean dushproof, Set<PortableItem> portableItem, Memory memoire,
+			String battery, String sim, Double dimension, Double weight, String ipRating, Set<PortableItem> portableItem, Memory memoire,
 			Camera camera, Cpu cpu, SystemOS os, PortableCategory portableCategory, AppColor appColor) {
 		super(id, quantity, dateCreation, designation, image, priceUnit, priceUnitWholesaler, priceUnitSemiWholesaler,
 				stockMinim, stockAlert, volume, note, state, emplacement, measureUnit, productCategory, appColor,mouvmentLines);
@@ -68,10 +63,6 @@ public class Portable extends Product
 		this.dimension = dimension;
 		this.weight = weight;
 		this.ipRating = ipRating;
-		this.fingerprint = fingerprint;
-		this.waterproof = waterproof;
-		this.splashproof = splashproof;
-		this.dushproof = dushproof;
 		this.portableItem = portableItem;
 		this.memory = memoire;
 		this.camera = camera;
@@ -87,13 +78,9 @@ public class Portable extends Product
 		result = prime * result + ((battery == null) ? 0 : battery.hashCode());
 		result = prime * result + ((connection == null) ? 0 : connection.hashCode());
 		result = prime * result + ((dimension == null) ? 0 : dimension.hashCode());
-		result = prime * result + ((dushproof == null) ? 0 : dushproof.hashCode());
-		result = prime * result + ((fingerprint == null) ? 0 : fingerprint.hashCode());
 		result = prime * result + ((ipRating == null) ? 0 : ipRating.hashCode());
 		result = prime * result + ((screen == null) ? 0 : screen.hashCode());
 		result = prime * result + ((sim == null) ? 0 : sim.hashCode());
-		result = prime * result + ((splashproof == null) ? 0 : splashproof.hashCode());
-		result = prime * result + ((waterproof == null) ? 0 : waterproof.hashCode());
 		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
 		return result;
 	}
@@ -122,16 +109,6 @@ public class Portable extends Product
 				return false;
 		} else if (!dimension.equals(other.dimension))
 			return false;
-		if (dushproof == null) {
-			if (other.dushproof != null)
-				return false;
-		} else if (!dushproof.equals(other.dushproof))
-			return false;
-		if (fingerprint == null) {
-			if (other.fingerprint != null)
-				return false;
-		} else if (!fingerprint.equals(other.fingerprint))
-			return false;
 		if (ipRating == null) {
 			if (other.ipRating != null)
 				return false;
@@ -147,16 +124,6 @@ public class Portable extends Product
 				return false;
 		} else if (!sim.equals(other.sim))
 			return false;
-		if (splashproof == null) {
-			if (other.splashproof != null)
-				return false;
-		} else if (!splashproof.equals(other.splashproof))
-			return false;
-		if (waterproof == null) {
-			if (other.waterproof != null)
-				return false;
-		} else if (!waterproof.equals(other.waterproof))
-			return false;
 		if (weight == null) {
 			if (other.weight != null)
 				return false;
@@ -168,9 +135,8 @@ public class Portable extends Product
 	@Override
 	public String toString() {
 		return "Portable [id="+getId()+"connection=" + connection + ", screen=" + screen + ", battery=" + battery + ", sim=" + sim
-				+ ", dimension=" + dimension + ", weight=" + weight + ", ipRating=" + ipRating + ", fingerprint="
-				+ fingerprint + ", waterproof=" + waterproof + ", splashproof=" + splashproof + ", dushproof="
-				+ dushproof + ", portableItem=" + portableItem + ", memory=" + memory + ", camera=" + camera + ", cpu="
+				+ ", dimension=" + dimension + ", weight=" + weight + ", ipRating=" + ipRating
+				+ ", portableItem=" + portableItem + ", memory=" + memory + ", camera=" + camera + ", cpu="
 				+ cpu + ", os=" + os + ", portableCategory=" + portableCategory + "]";
 	}
 	

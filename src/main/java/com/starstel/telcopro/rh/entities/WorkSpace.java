@@ -37,7 +37,7 @@ public class WorkSpace implements Serializable{
 	@Id
 	@SequenceGenerator(initialValue = 1, sequenceName = "WORK_SEQ", allocationSize = 1, name = "work_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "work_id")
-	private Long id;
+	protected Long id;
 	private String name;
 	private String localisation;
 	@Column(name = "workSpaceType", insertable = false, updatable = false)

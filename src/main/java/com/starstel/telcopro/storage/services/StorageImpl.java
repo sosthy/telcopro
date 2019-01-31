@@ -3,6 +3,7 @@ package com.starstel.telcopro.storage.services;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -11,8 +12,12 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.apache.commons.io.FilenameUtils;
+
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -151,6 +156,29 @@ public class StorageImpl implements Storageable
 		catch(IOException e)
 		{
 			throw new RuntimeException("Failed to read stored file");
+		}
+	}
+
+	@Override
+	public Resource getData(String fileName) {
+		try
+		{
+			Path file = getFile(fileName).toPath();
+			Resource resource = new UrlResource(file.toUri());
+		
+			if(resource.exists() || resource.isReadable()) 
+			{
+				return resource;
+			}
+			else
+			{
+				throw new RuntimeException("Fail !");
+			}
+			
+		}
+		catch(MalformedURLException e)
+		{
+			throw new RuntimeException("Error ! -> Message = " + e.getMessage());
 		}
 	}
 }

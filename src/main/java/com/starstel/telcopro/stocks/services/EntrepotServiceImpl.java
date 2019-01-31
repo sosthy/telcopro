@@ -21,11 +21,16 @@ public class EntrepotServiceImpl implements EntrepotService
 	private EntrepotRepository entrepotRepository;
 	@Autowired
 	private EmplacementRepository emplacementRepository;
+	
 
 	@Override
 	public List<Entrepot> listEntrepot() 
 	{
-		return  entrepotRepository.findAll();
+		List<Entrepot> listEntrepot = entrepotRepository.findAll();
+		listEntrepot.forEach(entrepot -> {
+			entrepot = loadCalculatedField(entrepot);
+		});
+		return  listEntrepot;
 	}
 
 	@Override
@@ -37,7 +42,7 @@ public class EntrepotServiceImpl implements EntrepotService
 	@Override
 	public Entrepot saveEntrepot(Entrepot entrepot)
 	{
-		return entrepotRepository.save(entrepot);
+		return loadCalculatedField(entrepotRepository.save(entrepot));
 	}
 
 	@Override
@@ -191,5 +196,27 @@ public class EntrepotServiceImpl implements EntrepotService
 	@Override
 	public List<Emplacement> searchEmplacement(String keyWords) {
 		return emplacementRepository.search("%"+keyWords+"%");
+	}
+
+	@Override
+	public Double getNbOfProduct(Long id) {
+		return entrepotRepository.getNbOfProduct(id);
+	}
+
+	@Override
+	public Double getBusyVolume(Long id) {
+		return entrepotRepository.getBusyVolume(id);
+	}
+
+	@Override
+	public Double getTotalPriceOfProducts(Long id) {
+		return entrepotRepository.getTotalPriceOfProducts(id);
+	}
+	
+	public Entrepot loadCalculatedField (Entrepot entrepot) {
+		entrepot.setNbOfProduct(getNbOfProduct(entrepot.getId()));
+		entrepot.setPriceTotal(getTotalPriceOfProducts(entrepot.getId()));
+		entrepot.setVolume(getBusyVolume(entrepot.getId()));
+		return entrepot;
 	}
 }
