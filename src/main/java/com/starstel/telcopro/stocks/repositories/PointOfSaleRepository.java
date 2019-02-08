@@ -10,6 +10,6 @@ import com.starstel.telcopro.stocks.entities.PointOfSale;
 
 public interface PointOfSaleRepository extends JpaRepository<PointOfSale, Long>
 {
-	@Query("select p from PointOfSale p where lower(p.name) like lower(:x) or lower(p.localisation) like lower(:x)")
+	@Query("select p from PointOfSale p where lower(p.name) like lower(:x) or lower(p.location) like lower(:x)")
 	List<PointOfSale> search(@Param("x") String keyWords);
 }

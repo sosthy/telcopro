@@ -37,7 +37,7 @@ public class CustomGenerator implements IdentifierGenerator, Configurable
 			prefix = mv.getMouvmentType().getName().substring(0, 2);
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyykkmm");
 			String dateAsString = simpleDateFormat.format(new Date());
-			prefix += "*" + dateAsString;
+			prefix += "_" + dateAsString;
 		}
  
         return prefix + "-" + (max + 1);

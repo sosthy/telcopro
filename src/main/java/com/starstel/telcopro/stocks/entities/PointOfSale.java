@@ -32,8 +32,8 @@ import lombok.Setter;
 // @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class PointOfSale extends WorkSpace{
 	/* Spring à déranger sur ce coup. Il m'oblige à redefinir les constructeurs */
-	public PointOfSale(String name, String localisation) {
-		super(name, localisation);
+	public PointOfSale(String name, String localisation, String phone, String email, String website) {
+		super(name, localisation, phone, email, website);
 	}
 	public PointOfSale() {
 		super();

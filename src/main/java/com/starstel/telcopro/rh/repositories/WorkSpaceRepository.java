@@ -12,7 +12,7 @@ import com.starstel.telcopro.stocks.entities.Mouvment;
 
 public interface WorkSpaceRepository extends JpaRepository<WorkSpace, Long> 
 {
-	@Query("select w from WorkSpace w where lower(w.name) like lower(:x) or lower(w.localisation) like lower(:x) or "
+	@Query("select w from WorkSpace w where lower(w.name) like lower(:x) or lower(w.location) like lower(:x) or "
 			+ "lower(w.workSpaceType) like lower(:x)")
 	public List<WorkSpace> search(@Param("x") String keyWords);
 	@Query("select m from Mouvment m")

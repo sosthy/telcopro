@@ -39,12 +39,15 @@ public class WorkSpace implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "work_id")
 	protected Long id;
 	private String name;
-	private String localisation;
+	private String phone;
+	private String email;
+	private String website;
+	private String location;
 	@Column(name = "workSpaceType", insertable = false, updatable = false)
     private String workSpaceType;
 	
 	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="workSpaceSource") /*Elle se situe dans la classe mère pour permettre le transfert de produit d'un point de vente à un autre point de vente (Osé à un peut modifier*/
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="workSpaceReceiver") /*Elle se situe dans la classe mère pour permettre le transfert de produit d'un point de vente à un autre point de vente (Osé à un peut modifier*/
 	private Set<Mouvment> mouvments = new HashSet<>();
 	
     @OneToMany(cascade= CascadeType.ALL, mappedBy="workSpace")
@@ -56,6 +59,10 @@ public class WorkSpace implements Serializable{
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((website == null) ? 0 : website.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		return result;
 	}
 	@Override
@@ -77,12 +84,35 @@ public class WorkSpace implements Serializable{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (website == null) {
+			if (other.website != null)
+				return false;
+		} else if (!website.equals(other.website))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
 		return true;
 	}
-	public WorkSpace(String name, String localisation) {
+	public WorkSpace(String name, String location, String phone, String email, String website) {
 		super();
 		this.name = name;
-		this.localisation = localisation;
+		this.phone = phone;
+		this.email = email;
+		this.website = website;
+		this.location = location;
 	}
 	
 	

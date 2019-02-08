@@ -1,11 +1,5 @@
 package com.starstel.telcopro;
 
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +22,7 @@ import com.starstel.telcopro.rh.services.EmployeeService;
 import com.starstel.telcopro.rh.services.WorkSpaceService;
 import com.starstel.telcopro.stocks.entities.AppColor;
 import com.starstel.telcopro.stocks.entities.Camera;
+import com.starstel.telcopro.stocks.entities.Commande;
 import com.starstel.telcopro.stocks.entities.Cpu;
 import com.starstel.telcopro.stocks.entities.Emplacement;
 import com.starstel.telcopro.stocks.entities.Entrepot;
@@ -54,6 +49,8 @@ import com.starstel.telcopro.stocks.services.PortableService;
 import com.starstel.telcopro.stocks.services.ProductService;
 import com.starstel.telcopro.stocks.services.RecipientService;
 import com.starstel.telcopro.storage.entities.Storage;
+import com.starstel.telcopro.storage.services.ReportManager;
+import com.starstel.telcopro.storage.services.Reportable;
 import com.starstel.telcopro.storage.services.Storageable;
 
 @SpringBootApplication
@@ -79,7 +76,6 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	private PortableItemService portableItemService;
 	@Autowired
 	private PointOfSaleService pointOfSaleService;
-	
 	@Autowired
 	private AppColorService appColorService;
 	
@@ -150,22 +146,22 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		AppUserModel user3 = new AppUserModel("admin3","admin3","fabien@gmail.com",Boolean.FALSE);
 		user3.getRoles().add(humanRessource);
 		
-		PointOfSale boutique = new PointOfSale("Boutique 2B","Douala Marché central");
-		PointOfSale boutique2 = new PointOfSale("Boutique 14M","Douala Marché Dakar");
-		PointOfSale boutique3 = new PointOfSale("Boutique 75FG","Douala Marché Bonamoussadi");
+		PointOfSale boutique = new PointOfSale("Boutique 2B","Douala Marché central","+237 695 71 53 54", "cameroon@xtouchdevice.com", "www.cameroon.xtouchdevice.com");
+		PointOfSale boutique2 = new PointOfSale("Boutique 14M","Douala Marché Dakar","+237 695 71 53 54", "cameroon@xtouchdevice.com", "www.cameroon.xtouchdevice.com");
+		PointOfSale boutique3 = new PointOfSale("Boutique 75FG","Douala Marché Bonamoussadi","+237 695 71 53 54", "cameroon@xtouchdevice.com", "www.cameroon.xtouchdevice.com");
 		
 		boutique= pointOfSaleService.save(boutique);
 		boutique2= pointOfSaleService.save(boutique2);
 		boutique3= pointOfSaleService.save(boutique3);
 		
-		WorkSpace space = new WorkSpace("Startel Deido","Douala Deido EcoMarche");
-		WorkSpace space2 = new WorkSpace("Startel Nyalla","Douala Nyalla à 100m de total Nyalla");
+		WorkSpace space = new WorkSpace("Startel Deido","Douala Deido EcoMarche","+237 695 71 53 54", "cameroon@xtouchdevice.com", "www.cameroon.xtouchdevice.com");
+		WorkSpace space2 = new WorkSpace("Startel Nyalla","Douala Nyalla à 100m de total Nyalla","+237 695 71 53 54", "cameroon@xtouchdevice.com", "www.cameroon.xtouchdevice.com");
 
 		space= workSpaceService.saveWorkSpace(space);
 		space2= workSpaceService.saveWorkSpace(space2);
 		
-		Entrepot entrepot1 = new Entrepot("Akwa", "Rond point 4ème", 0.0, 0.0, 60.0, 70.0);
-		Entrepot entrepot2 = new Entrepot("Deido", "Maképe Saint tropèze", 0.0, 0.0, 63.0, 100.0);
+		Entrepot entrepot1 = new Entrepot("Akwa", "Rond point 4ème", "+237 695 71 53 54", "cameroon@xtouchdevice.com", "www.cameroon.xtouchdevice.com", 0.0, 0.0, 60.0, 70.0);
+		Entrepot entrepot2 = new Entrepot("Deido", "Maképe Saint tropèze", "+237 695 71 53 54", "cameroon@xtouchdevice.com", "www.cameroon.xtouchdevice.com", 0.0, 0.0, 63.0, 100.0);
 		entrepot1 = entrepotService.saveEntrepot(entrepot1);
 		entrepot2 = entrepotService.saveEntrepot(entrepot2);
 		
@@ -367,22 +363,21 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		item5 = portableItemService.save(item5);
 		item6 = portableItemService.save(item6);
 		
-		Mouvment mouvment1 = new Mouvment(null, new Date(), 0.0, 0.0, entrepot1, null, null, mouvmentType1, employee, recipient3);
-		Mouvment mouvment2 = new Mouvment(null, new Date(), 0.0, 0.0, entrepot2, null, null, mouvmentType1, employee, recipient4);
+		Mouvment mouvment1 = new Mouvment(null, new Date(), 0.0, 0.0, null, null, mouvmentType1, employee, null, recipient3);
+		Mouvment mouvment2 = new Mouvment(null, new Date(), 0.0, 0.0, entrepot2, null, mouvmentType1, employee, null, recipient4);
 
 		mouvment1 = mouvmentService.saveMouvment(mouvment1);
 		mouvment2 = mouvmentService.saveMouvment(mouvment2);
-		
 		MouvmentLine mouvmentLine1 = new MouvmentLine(null, 10D, 60000D, 600000D, mouvment1, portable, null, "");
 		MouvmentLine mouvmentLine2 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable2, null, "");
 		MouvmentLine mouvmentLine3 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable3, null, "");
 		MouvmentLine mouvmentLine4 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment1, portable4, null, "");
 		MouvmentLine mouvmentLine5 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable4, null, "");
 		
-		mouvmentService.saveMouvmentLine(mouvmentLine1);	
-		mouvmentService.saveMouvmentLine(mouvmentLine2);	
-		mouvmentService.saveMouvmentLine(mouvmentLine3);	
-		mouvmentService.saveMouvmentLine(mouvmentLine4);	
-		mouvmentService.saveMouvmentLine(mouvmentLine5);
+		mouvmentLine1 = mouvmentService.saveMouvmentLine(mouvmentLine1);	
+		mouvmentLine2 = mouvmentService.saveMouvmentLine(mouvmentLine2);	
+		mouvmentLine3 = mouvmentService.saveMouvmentLine(mouvmentLine3);	
+		mouvmentLine4 = mouvmentService.saveMouvmentLine(mouvmentLine4);	
+		mouvmentLine5 = mouvmentService.saveMouvmentLine(mouvmentLine5);
 	}
 }

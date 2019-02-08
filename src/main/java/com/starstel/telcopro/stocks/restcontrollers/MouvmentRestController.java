@@ -18,6 +18,7 @@ import com.starstel.telcopro.stocks.entities.MouvmentLine;
 import com.starstel.telcopro.stocks.entities.MouvmentType;
 import com.starstel.telcopro.stocks.entities.Product;
 import com.starstel.telcopro.stocks.services.MouvmentService;
+import com.starstel.telcopro.storage.services.Reportable;
 
 @CrossOrigin("*")
 @RestController
@@ -26,6 +27,8 @@ public class MouvmentRestController {
 	
 	@Autowired
 	private MouvmentService mouvmentService;
+	@Autowired
+	private Reportable reporter;
 
 	@RequestMapping(value="/types", method = RequestMethod.GET)
 	public List<MouvmentType> listMouvmentType() {

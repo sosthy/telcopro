@@ -22,6 +22,7 @@ import com.starstel.telcopro.stocks.repositories.MouvmentLineRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentTypeRepository;
 import com.starstel.telcopro.stocks.repositories.PortableRepository;
+import com.starstel.telcopro.storage.services.Reportable;
 
 @Service
 @Transactional

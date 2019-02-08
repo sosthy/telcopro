@@ -42,15 +42,15 @@ public class Mouvment implements Serializable
 	private Double quantity;
 	private Double priceTotal;
 	@ManyToOne
-	private WorkSpace workSpaceSource;
-	@ManyToOne
-	private WorkSpace workSpaceRecipient;
+	private WorkSpace workSpaceReceiver;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="mouvment")
 	private List<MouvmentLine> mouvmentLines = new ArrayList<>();
 	@ManyToOne
 	private MouvmentType mouvmentType;
 	@ManyToOne
 	private Employee user;
+	@ManyToOne
+	private Employee receiver;
 	@ManyToOne
 	private Recipient recipient;
 	@Override

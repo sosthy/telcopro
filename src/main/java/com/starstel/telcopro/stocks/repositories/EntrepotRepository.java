@@ -18,7 +18,7 @@ public interface EntrepotRepository extends JpaRepository<Entrepot, Long>
 	@Query("select count(*) FROM Entrepot")
 	public Double getPortableItemCountOfEntrepot();
 	
-	@Query("SELECT mouvment FROM Mouvment mouvment WHERE mouvment.workSpaceSource.id = :id")
+	@Query("SELECT mouvment FROM Mouvment mouvment WHERE mouvment.user.workSpace.id = :id")
 	public List<Mouvment> getAllMouvmentOfEntrepot(@Param("id") Long id);
 	
 	@Query("SELECT COUNT(item) FROM PortableItem item WHERE item.portable.emplacement.entrepot.id = :id")
@@ -26,7 +26,7 @@ public interface EntrepotRepository extends JpaRepository<Entrepot, Long>
 	
 	@Query("SELECT COUNT(item) FROM PortableItem item WHERE item.portable.emplacement.id = :id")
 	public Long getPortableItemCountOfEmplacement(@Param("id") Long id);
-	@Query("select distinct e from Entrepot e where lower(e.name) like lower(:x) or lower(e.localisation) like lower(:x) or "
+	@Query("select distinct e from Entrepot e where lower(e.name) like lower(:x) or lower(e.location) like lower(:x) or "
 			+ "(select count(em) from Emplacement em where lower(em.name) like lower(:x) and em.entrepot.id = e.id) > 0")
 	List<Entrepot> search(@Param("x") String keyWords);
 	

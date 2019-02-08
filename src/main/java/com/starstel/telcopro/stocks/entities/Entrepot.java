@@ -87,17 +87,18 @@ public class Entrepot extends WorkSpace
 	
 	@Override
 	public String toString() {
-		return "Entrepot [id=" + getId() + ", name=" + getName() + ", localisation=" + getLocalisation()
+		return "Entrepot [id=" + getId() + ", name=" + getName() + ", location=" + getLocation()
 				+", nbOfProduct=" + nbOfProduct + ", priceTotal=" + priceTotal + ", volume=" + volume
 				+ ", volumeSecurity=" + volumeSecurity + ", emplacements=" + emplacements
-				+ ", id=" + getId() + ", name=" + getName() + ", localisation=" + getLocalisation()+ "]";
+				+ ", id=" + getId() + ", name=" + getName() + ", location=" + getLocation()+ "]";
 	}
-	public Entrepot(String name, String localisation, Double nbOfProduct, Double priceTotal, Double volume,
-			Double volumeSecurity) {
-		super(name, localisation);
+	public Entrepot(String name, String localisation, String phone, String email, String website, Double nbOfProduct,
+			Double priceTotal, Double volume, Double volumeSecurity) {
+		super(name, localisation, phone, email, website);
 		this.nbOfProduct = nbOfProduct;
 		this.priceTotal = priceTotal;
 		this.volume = volume;
 		this.volumeSecurity = volumeSecurity;
 	}
+	
 }

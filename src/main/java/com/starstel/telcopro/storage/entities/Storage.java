@@ -5,11 +5,12 @@ import java.nio.file.Paths;
 
 public enum Storage {
 	ROOT("Telcopro"),
-	DIRECTORY_EMPLOYEES_IMAGES("Telcopro/Employees/Images"),
-	DIRECTORY_RECIPIENTS_IMAGES("Telcopro/Recipients/Images"),
-	DIRECTORY_PRODUCTS_IMAGES("Telcopro/Products/Images"),
-	DIRECTORY_PORTABLES_IMAGES("Telcopro/Portables/Images"),
-	DIRECTORY_MOUVMENTS_DOCS("Telcopro/Mouvments/Documents");
+	DIRECTORY_EMPLOYEES_IMAGES("Telcopro/Employees/Images/"),
+	DIRECTORY_RECIPIENTS_IMAGES("Telcopro/Recipients/Images/"),
+	DIRECTORY_PRODUCTS_IMAGES("Telcopro/Products/Images/"),
+	DIRECTORY_PORTABLES_IMAGES("Telcopro/Portables/Images/"),
+	DIRECTORY_MOUVMENTS_DOCS("Telcopro/Mouvments/Documents/"),
+	DIRECTORY_COMMANDES_DOCS("Telcopro/Commandes/Documents/");
 	
 	private String path;
 
