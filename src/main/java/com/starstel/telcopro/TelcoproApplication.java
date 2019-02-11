@@ -1,6 +1,9 @@
 package com.starstel.telcopro;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -41,6 +44,7 @@ import com.starstel.telcopro.stocks.entities.RecipientGroupe;
 import com.starstel.telcopro.stocks.entities.State;
 import com.starstel.telcopro.stocks.entities.SystemOS;
 import com.starstel.telcopro.stocks.services.AppColorService;
+import com.starstel.telcopro.stocks.services.CommandeService;
 import com.starstel.telcopro.stocks.services.EntrepotService;
 import com.starstel.telcopro.stocks.services.MouvmentService;
 import com.starstel.telcopro.stocks.services.PointOfSaleService;
@@ -78,9 +82,13 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 	private PointOfSaleService pointOfSaleService;
 	@Autowired
 	private AppColorService appColorService;
+	@Autowired
+	private CommandeService commandeService;
 	
 	@Autowired
 	private Storageable storageable;
+	@Autowired
+	private Reportable reporter;
 	
 	public static void main(String[] args) 
 	{
@@ -363,21 +371,74 @@ public class TelcoproApplication extends SpringBootServletInitializer implements
 		item5 = portableItemService.save(item5);
 		item6 = portableItemService.save(item6);
 		
+		Set<PortableItem> items = new HashSet<>();
+		items.add(item);
+		items.add(item2);
+		Set<PortableItem> items2 = new HashSet<>();
+		items2.add(item3);
+		items2.add(item4);
+		Set<PortableItem> items3 = new HashSet<>();
+		items3.add(item5);
+		items3.add(item6);
+		
+		
 		Mouvment mouvment1 = new Mouvment(null, new Date(), 0.0, 0.0, null, null, mouvmentType1, employee, null, recipient3);
 		Mouvment mouvment2 = new Mouvment(null, new Date(), 0.0, 0.0, entrepot2, null, mouvmentType1, employee, null, recipient4);
 
 		mouvment1 = mouvmentService.saveMouvment(mouvment1);
 		mouvment2 = mouvmentService.saveMouvment(mouvment2);
-		MouvmentLine mouvmentLine1 = new MouvmentLine(null, 10D, 60000D, 600000D, mouvment1, portable, null, "");
-		MouvmentLine mouvmentLine2 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable2, null, "");
-		MouvmentLine mouvmentLine3 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable3, null, "");
-		MouvmentLine mouvmentLine4 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment1, portable4, null, "");
-		MouvmentLine mouvmentLine5 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable4, null, "");
+		MouvmentLine mouvmentLine1 = new MouvmentLine(null, 10D, 60000D, 600000D, mouvment1, portable, items, "");
+		MouvmentLine mouvmentLine2 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable2, items, "");
+		MouvmentLine mouvmentLine3 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable3, items2, "");
+		MouvmentLine mouvmentLine4 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment1, portable4, items2, "");
+		MouvmentLine mouvmentLine5 = new MouvmentLine(null, 10D, 80000D, 800000D, mouvment2, portable4, items3, "");
 		
 		mouvmentLine1 = mouvmentService.saveMouvmentLine(mouvmentLine1);	
 		mouvmentLine2 = mouvmentService.saveMouvmentLine(mouvmentLine2);	
 		mouvmentLine3 = mouvmentService.saveMouvmentLine(mouvmentLine3);	
 		mouvmentLine4 = mouvmentService.saveMouvmentLine(mouvmentLine4);	
 		mouvmentLine5 = mouvmentService.saveMouvmentLine(mouvmentLine5);
+		
+		Commande commande = new Commande(mouvment1, true, new Date());
+		Commande commande2 = new Commande(mouvment1, false, new Date());
+		Commande commande3 = new Commande(mouvment2, true, new Date());
+		Commande commande4 = new Commande(mouvment2, false, new Date());
+
+		commandeService.saveCommande(commande);
+		commandeService.saveCommande(commande2);
+		commandeService.saveCommande(commande3);
+		commandeService.saveCommande(commande4);
+
+		
+		commande.setMouvmentLines(new ArrayList<>());
+		commande2.setMouvmentLines(new ArrayList<>());
+		commande3.setMouvmentLines(new ArrayList<>());
+		commande4.setMouvmentLines(new ArrayList<>());
+		
+		commande.getMouvmentLines().add(mouvmentLine1);
+		commande.getMouvmentLines().add(mouvmentLine4);
+		commande2.getMouvmentLines().add(mouvmentLine1);
+		commande2.getMouvmentLines().add(mouvmentLine4);
+
+		commande3.getMouvmentLines().add(mouvmentLine1);
+		commande3.getMouvmentLines().add(mouvmentLine4);
+		commande4.getMouvmentLines().add(mouvmentLine1);
+		commande4.getMouvmentLines().add(mouvmentLine4);
+
+		mouvment1.setMouvmentLines(new ArrayList<>());
+		mouvment2.setMouvmentLines(new ArrayList<>());
+		mouvment1.getMouvmentLines().add(mouvmentLine1);
+		mouvment1.getMouvmentLines().add(mouvmentLine4);
+		mouvment2.getMouvmentLines().add(mouvmentLine2);
+		mouvment2.getMouvmentLines().add(mouvmentLine3);
+		mouvment2.getMouvmentLines().add(mouvmentLine5);
+		
+		reporter.reportCommande(commande);
+		reporter.reportCommande(commande2);
+		reporter.reportCommande(commande3);
+		reporter.reportCommande(commande4);
+		
+		reporter.reportOutPut(mouvment1);
+		reporter.reportOutPut(mouvment2);
 	}
 }

@@ -4,7 +4,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public enum Report {
-	COMMANDE("Reports/Bon_de_commande.jrxml");
+	COMMANDE("Reports/Bon_de_commande.jrxml"),
+	OUTPUT("Reports/Bon_de_sortie.jrxml");
 	
 	private String path;
 

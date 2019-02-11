@@ -21,8 +21,6 @@ public class CommandeServiceImpl implements CommandeService
 {
 	@Autowired
 	private CommandeRepository commandeRepository;
-	@Autowired
-	private Reportable reporter;
 	
 	@Override
 	public List<Commande> listCommande() 
@@ -37,9 +35,7 @@ public class CommandeServiceImpl implements CommandeService
 			commande.getMouvmentLines().forEach(mLine -> {
 				mLine.setMouvment(commande);
 		});
-		Commande commandeTest = commandeRepository.save(commande);
-		reporter.reportCommande(commandeTest);
-		return commandeTest;
+		return commandeRepository.save(commande);
 	}
 	
 	@Override

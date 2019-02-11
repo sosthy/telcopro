@@ -5,24 +5,20 @@
  */
 package com.starstel.telcopro.storage.services;
 
-import java.awt.Desktop;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.mockito.internal.util.Platform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import com.starstel.telcopro.stocks.entities.Commande;
+import com.starstel.telcopro.stocks.entities.Mouvment;
+import com.starstel.telcopro.stocks.entities.PortableItem;
 import com.starstel.telcopro.storage.entities.Report;
 import com.starstel.telcopro.storage.entities.Storage;
 
@@ -34,8 +30,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -49,9 +43,30 @@ public class ReportManager implements Reportable {
     
     @Autowired
     private ResourceLoader  loader;
-     
+
+    /**
+	 * Méthode permettant de créer un bon de commande
+	 * 
+	 * @param commande 
+	 * La commande du bon.
+	 */
+	@Override
     public void reportCommande(Commande commande) {
-    	this.report(Report.COMMANDE, commande.getMouvmentLines(), getBonCommandeParameters(commande), Storage.DIRECTORY_COMMANDES_DOCS, commande.getReference());
+    	this.report(Report.COMMANDE, commande.getMouvmentLines(), toParameters("commande",commande), Storage.DIRECTORY_COMMANDES_DOCS, commande.getReference());
+    }
+    /**
+	 * Méthode permettant de créer un bon de sortie
+	 * 
+	 * @param mouvment 
+	 * Les transactions du bon.
+	 */
+	@Override
+    public void reportOutPut(Mouvment mouvment) {
+		Set<PortableItem> items = new HashSet<>();
+		mouvment.getMouvmentLines().forEach(ml -> {
+			items.addAll(ml.getProductsItem());
+		});
+		this.report(Report.OUTPUT, items, toParameters("mouvment", mouvment), Storage.DIRECTORY_MOUVMENTS_DOCS, mouvment.getReference());
     }
     /**
      * Méthode permettant de créer un état à partir du fichier jrxml et une source de données
@@ -67,6 +82,7 @@ public class ReportManager implements Reportable {
      * @param fileName
      * Le nom du fichier à produire.
      */
+	@Override
     public void report(Report report, Collection<?> dataSource, HashMap<String,Object> parameters, Storage directory, String fileName)
     {
     	File file = new File(directory.getName() + fileName + ".pdf");
@@ -79,14 +95,17 @@ public class ReportManager implements Reportable {
         	System.err.println("Error ReportManager.report = " + ex.getMessage());
         }
     }
-    public HashMap<String,Object> getBonCommandeParameters(Commande commande)
+    
+	@Override
+    public HashMap<String,Object> toParameters(String key, Object value)
     {
         HashMap<String,Object> parameters= new HashMap<String,Object>();
 
-        parameters.put("commande", commande);
+        parameters.put(key, value);
         
         return parameters;
     }
+    
 	@Override
 	public String getPathResourceFile(String fileName) {
 

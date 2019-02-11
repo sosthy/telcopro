@@ -15,6 +15,7 @@ import org.hibernate.id.IdentifierGenerator;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.Type;
 
+import com.starstel.telcopro.stocks.entities.Commande;
 import com.starstel.telcopro.stocks.entities.Mouvment;
 
 public class CustomGenerator implements IdentifierGenerator, Configurable 
@@ -25,6 +26,7 @@ public class CustomGenerator implements IdentifierGenerator, Configurable
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object obj) throws HibernateException 
 	{
+		prefix = "";
 		String query = String.format("select %s from %s", session.getEntityPersister(obj.getClass().getName(), obj)
 				.getIdentifierPropertyName(), obj.getClass().getSimpleName());
 		
@@ -34,12 +36,15 @@ public class CustomGenerator implements IdentifierGenerator, Configurable
 		
 		if(obj instanceof Mouvment) {
 			Mouvment mv = (Mouvment) obj;
-			prefix = mv.getMouvmentType().getName().substring(0, 2);
+			if(obj instanceof Commande) {
+				prefix = "CO_";
+			}
+			prefix += mv.getMouvmentType().getName().substring(0, 2);
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyykkmm");
 			String dateAsString = simpleDateFormat.format(new Date());
 			prefix += "_" + dateAsString;
 		}
- 
+		
         return prefix + "-" + (max + 1);
 	}
 

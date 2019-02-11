@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bon_de_commande" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f05d0f81-0100-4292-a117-1ef7b113fb5d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="mouvment" class="com.starstel.telcopro.stocks.entities.Mouvment"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="portable" class="com.starstel.telcopro.stocks.entities.Product"/>
+	<field name="serial" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="191" splitType="Stretch">
+			<image>
+				<reportElement x="96" y="2" width="130" height="47" uuid="97bf04be-53b7-4ca4-a082-014755f3d989"/>
+				<imageExpression><![CDATA["Telcopro/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="243" y="36" width="50" height="11" uuid="16aca971-e9c9-4f95-9cee-f4a8adac08f2"/>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Website: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="243" y="21" width="36" height="11" uuid="766f920c-8fb0-43fc-934f-53a60ad5141e"/>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="243" y="6" width="36" height="11" uuid="69646709-b9d6-4943-8a1c-674d8c06b93f"/>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Phone:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="285" y="6" width="261" height="11" uuid="6434b93d-13cb-440e-9028-d3892358d64e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{mouvment}).getUser().getWorkSpace().getWebsite();]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="285" y="36" width="261" height="11" uuid="50863f5d-c2ae-4487-9821-59a35097a6e0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{mouvment}).getUser().getWorkSpace().getEmail();]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="285" y="21" width="261" height="11" uuid="a3b29844-06f6-4fc8-aeb0-4cc23cc2a9be"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{mouvment}).getUser().getWorkSpace().getPhone();]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="0" y="55" width="555" height="136" uuid="71c73385-cde1-4275-b77b-f16a69f23c0c"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<frame>
+					<reportElement x="0" y="18" width="281" height="39" uuid="9a8deae0-a32e-43dd-858a-b9fdd7e27d56"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textField isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="281" height="39" uuid="a1c420d3-113f-4569-bc9c-b8257a52aac8"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($P{mouvment}).getUser().getWorkSpace().getLocation();]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="57" width="281" height="50" uuid="bdf3656c-9ab6-40c1-8068-f85cf596501e"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<staticText>
+						<reportElement x="19" y="1" width="42" height="11" uuid="3e1ced90-24ee-495a-bc6a-6c44e113defc"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Order To: ]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement x="61" y="1" width="216" height="11" uuid="d248b076-fa6d-41b3-944c-36a904b6c002"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($P{mouvment}).getUser().getName();]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="19" y="13" width="50" height="11" uuid="bdb5d0c1-9573-4df0-96f2-4c1e63991bf9"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Work Space: ]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement x="69" y="13" width="209" height="11" uuid="674ee82a-d277-4956-8014-eb8b526e424f"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($P{mouvment}).getUser().getWorkSpace().getName();]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="61" y="25" width="217" height="11" uuid="7abf71f6-e7f6-4160-b207-789bab152e9d"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($P{mouvment}).getUser().getWebsite();]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="61" y="37" width="217" height="11" uuid="ad4943e4-1332-4f99-b1b8-3dbb7e11e746"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($P{mouvment}).getUser().getPhone();]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="19" y="25" width="42" height="11" uuid="76b55356-bc4b-499e-bf0a-9d091ba35f28"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Email:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="19" y="37" width="42" height="11" uuid="d2fb94f6-0f53-4ac0-a7bf-fe9715b1446c"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Phone:]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="281" y="57" width="274" height="50" uuid="92f2e200-eb32-416f-8b50-17b01f305dfc"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textField isBlankWhenNull="true">
+						<reportElement x="60" y="1" width="214" height="11" uuid="39301684-3ef0-4f0d-bada-c5f40347ffa6"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(($P{mouvment}).getWorkSpaceReceiver() != null) ? ($P{mouvment}).getWorkSpaceReceiver().getName() : (($P{mouvment}).getReceiver() != null) ? ($P{mouvment}).getReceiver().getName() : (($P{mouvment}).getRecipient() != null ? ($P{mouvment}).getRecipient().getDesignation() : null);]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="60" y="37" width="214" height="11" uuid="4fd86b22-3406-46e7-8773-a2a3fc933777"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(($P{mouvment}).getWorkSpaceReceiver() != null) ? ($P{mouvment}).getWorkSpaceReceiver().getPhone() : (($P{mouvment}).getReceiver() != null) ? ($P{mouvment}).getReceiver().getPhone() : (($P{mouvment}).getRecipient() != null ? ($P{mouvment}).getRecipient().getPhone() : null);]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="60" y="13" width="214" height="11" uuid="3f027449-aa32-40d8-bee6-1835aefe8c43"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(($P{mouvment}).getWorkSpaceReceiver() != null) ? ($P{mouvment}).getWorkSpaceReceiver().getLocation() : (($P{mouvment}).getReceiver() != null) ? ($P{mouvment}).getReceiver().getWorkSpace().getLocation() : (($P{mouvment}).getRecipient() != null ? ($P{mouvment}).getRecipient().getLocation() : null);]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="19" y="37" width="40" height="11" uuid="9ccce951-69bd-4dac-bdf8-c432a9d4c076"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Phone:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="19" y="13" width="40" height="11" uuid="56492b42-5000-4341-b585-fd62e87e85f0"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Location:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="19" y="1" width="40" height="11" uuid="9029a13e-88f4-4db6-a2ec-ec2180663947"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Ship to:]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement x="60" y="25" width="214" height="11" uuid="ce82a68d-501f-4e47-9182-5e614d7778d9"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(($P{mouvment}).getWorkSpaceReceiver() != null) ? ($P{mouvment}).getWorkSpaceReceiver().getEmail() : (($P{mouvment}).getReceiver() != null) ? ($P{mouvment}).getReceiver().getWebsite() : (($P{mouvment}).getRecipient() != null ? ($P{mouvment}).getRecipient().getWebsite () : null);]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="19" y="25" width="40" height="11" uuid="89248af0-6f87-4987-9d08-705c238f4545"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Email: ]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="281" y="18" width="274" height="39" uuid="2c3ea343-0bce-4539-959d-729562603859"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<staticText>
+						<reportElement x="19" y="3" width="40" height="11" uuid="cb988dc3-8296-4ea7-97b8-e487efd8dbe5"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Order ID: ]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement x="60" y="3" width="213" height="11" uuid="6d39ae96-bacc-4685-9df7-b876f284b1f4"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($P{mouvment}).getReference();]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="19" y="15" width="40" height="11" uuid="6d00b49f-e4a2-4a05-9e7a-93702c9aba36"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Oder Date:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="19" y="27" width="40" height="11" uuid="eb5bc1f9-f128-48f2-b21c-114a75510731"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Order by:]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement x="60" y="27" width="212" height="11" uuid="b4008453-eaf6-4ec2-81ec-ccc112ea9364"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($P{mouvment}).getUser().getName();]]></textFieldExpression>
+					</textField>
+					<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+						<reportElement x="60" y="15" width="212" height="11" uuid="ed038fae-f579-435d-85d1-57d24bd84b88"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+							<paragraph lineSpacing="AtLeast"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($P{mouvment}).getDate();]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement x="0" y="121" width="555" height="14" uuid="915338ab-ad96-4250-aa11-06fdd5566c16"/>
+					<box>
+						<pen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Order Summary]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="555" height="18" uuid="15b135cd-c720-4c97-89bb-4df5c77f58ab"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[OUTPUT ORDER]]></text>
+				</staticText>
+				<frame>
+					<reportElement x="0" y="107" width="555" height="13" backcolor="#4472C4" uuid="24a01770-6563-4ad0-b736-dd111b8ae7c5"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<frame>
+						<reportElement x="0" y="0" width="281" height="13" backcolor="#4472C4" uuid="a9d1b832-d582-4964-9527-df0f4a57641a"/>
+						<box>
+							<pen lineWidth="1.0"/>
+						</box>
+						<textField isBlankWhenNull="true">
+							<reportElement isPrintRepeatedValues="false" x="97" y="0" width="182" height="13" uuid="ff5ca0ef-9c91-4010-b68e-69381822de13"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="8" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[($P{mouvment}).getQuantity();]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="17" y="0" width="80" height="13" uuid="27991f80-09c9-47e4-a6ea-3a93dc3580e2"/>
+							<box>
+								<pen lineWidth="0.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="8" isBold="true"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<text><![CDATA[TOTAL PRODUCTS:]]></text>
+						</staticText>
+					</frame>
+					<frame>
+						<reportElement x="281" y="0" width="274" height="13" backcolor="#4472C4" uuid="7b2280fa-64dd-42aa-bf6b-df83f3880d38"/>
+						<box>
+							<pen lineWidth="1.0"/>
+						</box>
+						<textField isBlankWhenNull="true">
+							<reportElement x="113" y="0" width="160" height="13" uuid="bd2ef2d5-e62b-401c-b836-b27828494603"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="8" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[($P{mouvment}).getPriceTotal();]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="18" y="0" width="91" height="13" uuid="f5fd26e8-7cc0-42a5-a4ec-1efba3aab2ff"/>
+							<box>
+								<pen lineWidth="0.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="8" isBold="true"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<text><![CDATA[TOTAL TRANSACTION:]]></text>
+						</staticText>
+					</frame>
+				</frame>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="13" backcolor="#4472C4" uuid="06810136-6184-43a2-b081-0a6dad08c4b4"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<frame>
+					<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="13" backcolor="#4472C4" uuid="66c09be8-9d37-4d9d-b121-931a24238d51"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement x="0" y="0" width="50" height="13" uuid="e8a122f8-01f4-4d5a-a808-90aa563c1478"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<text><![CDATA[#]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="50" y="0" width="180" height="13" backcolor="#4472C4" uuid="2098af5e-3b0b-49d4-b197-3b514abe9791"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement x="0" y="0" width="180" height="13" uuid="f0dc973c-38b4-4f6b-b66c-c5ea59c69f2e"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<text><![CDATA[DESIGNATION]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="230" y="0" width="220" height="13" backcolor="#4472C4" uuid="fe53f49a-6924-4b0d-9e11-6efbf3356048"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement x="0" y="0" width="220" height="13" uuid="6361ef91-eb56-4623-924e-1767e557b9b8"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<text><![CDATA[SERIALS]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="450" y="0" width="104" height="13" backcolor="#4472C4" uuid="e1ecbea0-c34c-45e1-a945-5be8241e4a69"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement x="0" y="0" width="104" height="13" uuid="8bb7e2bd-5a3e-42c7-92fa-e7c19d69a4ff"/>
+						<box>
+							<pen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<text><![CDATA[P.U]]></text>
+					</staticText>
+				</frame>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="13" backcolor="#4472C4" uuid="ded9b321-71eb-4977-bb67-2fedf6eb1479"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<frame>
+					<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="13" backcolor="#4472C4" uuid="73a53ad9-c111-4d04-9c3a-2a22131b4f2d"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textField isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="50" height="13" uuid="e69c84a7-c573-4fc3-af5b-2141643a2373"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="50" y="0" width="180" height="13" backcolor="#4472C4" uuid="2ee0f8f2-f933-4cf3-a467-db8c06f9044b"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textField isBlankWhenNull="true">
+						<reportElement x="11" y="0" width="169" height="13" uuid="ab764a9f-3bba-4468-85d2-c0110d1bb7ff"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($F{portable}).getDesignation();]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="450" y="0" width="104" height="13" backcolor="#4472C4" uuid="cc24f638-f406-4659-9086-c1fa1c2cd7f3"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textField isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="104" height="13" uuid="3f6d4d11-1dc8-4921-a284-55498a18ea1d"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[($F{portable}).getPriceUnit();]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="230" y="0" width="220" height="13" backcolor="#4472C4" uuid="7ca01a3d-903d-437b-bd81-9a1ff11dd55c"/>
+					<box>
+						<pen lineWidth="1.0"/>
+					</box>
+					<textField isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="220" height="13" uuid="1857d1dd-7ae4-4ce4-b814-3403a0cdc765"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{serial}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="80" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="227" y="58" width="100" height="20" uuid="20cf1cc7-b377-4bee-a6e2-f309d0ea4bca"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="480" y="58" width="40" height="20" uuid="3289c122-7b40-46ad-a62d-e56ef281e838"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="58" width="66" height="20" uuid="129c7a8e-b174-4133-a762-cc85dad7f481"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="58" width="37" height="20" uuid="82218b2e-3bbf-4c07-8303-c8c75f701b92"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none"/>
+				<text><![CDATA[Made it:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="17" width="257" height="21" uuid="e566778f-6a26-4628-9de6-9ba511ab405e">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIGNATURE MANAGER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="16" width="257" height="21" uuid="b8fa580a-2ab0-44f5-a43b-78a41d2bffc9">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIGNATURE RECEIVER]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

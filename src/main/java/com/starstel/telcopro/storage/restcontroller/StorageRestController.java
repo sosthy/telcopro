@@ -1,21 +1,18 @@
 package com.starstel.telcopro.storage.restcontroller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,14 +58,30 @@ public class StorageRestController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
 	}
-	@GetMapping(value = "/api/image/logo")
-    public ResponseEntity<InputStreamResource> getImage() throws IOException {
- 
-        ClassPathResource imgFile = new ClassPathResource("image/grokonez-logo.png");
- 
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.IMAGE_PNG)
-                .body(new InputStreamResource(imgFile.getInputStream()));
-    }
+	
+	@RequestMapping(value="/resources/download-pdf-file/{fileName}", method=RequestMethod.GET)
+	public ResponseEntity<Object> getPdf(@PathVariable String fileName){
+
+	    Resource resource = storager.getData(fileName);
+	    long r = 0;
+	    InputStream is=null;
+	    HttpHeaders headers = new HttpHeaders();
+	    
+	    headers.add("Content-Disposition", "attachment;filename=\"" + fileName + "\"");
+	    headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+	    headers.add("Pragma", "no-cache");
+	    headers.add("Expires", "0");
+	    
+	    try {
+	        is = resource.getInputStream();
+	        r = resource.contentLength();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return ResponseEntity.ok().headers(headers).contentLength(r)
+            .contentType(MediaType.parseMediaType("application/pdf"))
+            .body(new InputStreamResource(is));
+
+	}
 }

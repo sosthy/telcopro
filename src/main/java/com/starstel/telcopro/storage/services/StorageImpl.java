@@ -181,4 +181,16 @@ public class StorageImpl implements Storageable
 			throw new RuntimeException("Error ! -> Message = " + e.getMessage());
 		}
 	}
+
+	@Override
+	public boolean fileExists(File file) {
+		try {
+			getFile(file.getName());
+    		System.err.println("File: " + file.getName() + " exists.");
+			return true;
+		} catch (Exception e) {
+    		System.err.println("File: " + file.getName() + " not exists.");
+		}
+		return false;
+	}
 }

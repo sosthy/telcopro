@@ -32,7 +32,6 @@ import lombok.Setter;
 public class Mouvment implements Serializable
 {
 	@Id
-	// @SequenceGenerator(initialValue = 1, sequenceName = "TRANS_SEQ", allocationSize = 1, name = "trans_id")
     @GeneratedValue(generator = "trans_id")
     @GenericGenerator(name = "trans_id", 
       parameters = @Parameter(name = "prefix", value = "REF"), 

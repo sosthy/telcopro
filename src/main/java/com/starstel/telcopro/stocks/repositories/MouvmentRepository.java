@@ -28,5 +28,5 @@ public interface MouvmentRepository extends JpaRepository<Mouvment, Long>
 	void deleteByReference(@Param("ref") String reference);
 	
 	@Query("SELECT m FROM Mouvment m WHERE  lower(m.reference) = lower(:ref)")
-	Object getByReference(@Param("ref") String reference);
+	Mouvment getByReference(@Param("ref") String reference);
 }

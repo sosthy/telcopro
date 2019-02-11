@@ -55,7 +55,9 @@ public class CommandeRestController {
 
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public Commande saveCommande(@RequestBody Commande commande) {
-		return commandeService.saveCommande(commande);
+		Commande commandeTest = commandeService.saveCommande(commande);
+		reporter.reportCommande(commandeTest);
+		return commandeTest;
 	}
 
 	@RequestMapping(value="/{reference}", method = RequestMethod.DELETE)

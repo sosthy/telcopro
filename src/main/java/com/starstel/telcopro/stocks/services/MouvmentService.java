@@ -24,7 +24,7 @@ public interface MouvmentService
 	List<Mouvment> listMouvment();
 	Mouvment saveMouvment(Mouvment mouvment);
 	Boolean deleteMouvment(String reference);
-	Mouvment getMouvment(Long id);
+	Mouvment getMouvment(String reference);
 	Set<Product> getProducts(Mouvment mouvment);
 	List<Mouvment> search(String keyWords);
 

@@ -17,14 +17,14 @@ import lombok.Setter;
 @Entity
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Commande extends Mouvment implements Serializable {
-	private boolean confirmer;
-	private Date dateLimiteAttente;
+	private boolean succeed;
+	private Date limitDelayDate;
 	public Commande(Mouvment mouvment, boolean confirmer, Date dateLimiteAttente) {
-		super(mouvment.getReference(), mouvment.getDate(), mouvment.getQuantity(), mouvment.getPriceTotal(), 
+		super(null, mouvment.getDate(), mouvment.getQuantity(), mouvment.getPriceTotal(), 
 				mouvment.getWorkSpaceReceiver(), mouvment.getMouvmentLines(),
 				mouvment.getMouvmentType(),mouvment.getUser(), mouvment.getReceiver(), mouvment.getRecipient());
-		this.confirmer = confirmer;
-		this.dateLimiteAttente = dateLimiteAttente;
+		this.succeed = confirmer;
+		this.limitDelayDate = dateLimiteAttente;
 	}
 	
 }

@@ -1,9 +1,6 @@
 package com.starstel.telcopro.stocks.services;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +19,6 @@ import com.starstel.telcopro.stocks.repositories.MouvmentLineRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentRepository;
 import com.starstel.telcopro.stocks.repositories.MouvmentTypeRepository;
 import com.starstel.telcopro.stocks.repositories.PortableRepository;
-import com.starstel.telcopro.storage.services.Reportable;
 
 @Service
 @Transactional
@@ -129,7 +125,7 @@ public class MouvmentServiceImpl implements MouvmentService
 	@Override
 	public Boolean deleteMouvment(String reference) 
 	{
-		Mouvment m = (Mouvment) mouvmentRepository.getByReference(reference);
+		Mouvment m = mouvmentRepository.getByReference(reference);
 		mouvmentRepository.delete(m);
 		return true;
 	}
@@ -181,8 +177,8 @@ public class MouvmentServiceImpl implements MouvmentService
 	}
 
 	@Override
-	public Mouvment getMouvment(Long id) {
-		return mouvmentRepository.findById(id).get();
+	public Mouvment getMouvment(String reference) {
+		return mouvmentRepository.getByReference(reference);
 	}
 
 	@Override

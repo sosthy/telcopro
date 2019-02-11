@@ -28,4 +28,6 @@ public interface Storageable
 	public List<String> loadFiles();
 
 	public Resource getData(String filename);
+	
+	public boolean fileExists(File file);
 }

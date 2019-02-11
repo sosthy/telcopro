@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.starstel.telcopro.stocks.entities.Commande;
 import com.starstel.telcopro.stocks.entities.Entrepot;
 import com.starstel.telcopro.stocks.entities.Mouvment;
 import com.starstel.telcopro.stocks.entities.MouvmentLine;
@@ -72,7 +73,9 @@ public class MouvmentRestController {
 
 	@RequestMapping(value="", method = RequestMethod.POST)
 	public Mouvment saveMouvment(@RequestBody Mouvment mouvment) {
-		return mouvmentService.saveMouvment(mouvment);
+		Mouvment mouvmentTest = mouvmentService.saveMouvment(mouvment);
+		reporter.reportOutPut(mouvmentTest);
+		return mouvmentTest;
 	}
 
 	@RequestMapping(value="/{reference}", method = RequestMethod.DELETE)
@@ -85,9 +88,9 @@ public class MouvmentRestController {
 		return mouvmentService.search(keyWords);
 	}
 
-	@RequestMapping(value="/products-of-mouvment/{id}", method = RequestMethod.GET)
-	public Set<Product> getProducts(@PathVariable Long id) {
-		return mouvmentService.getProducts(mouvmentService.getMouvment(id));
+	@RequestMapping(value="/products-of-mouvment/{reference}", method = RequestMethod.GET)
+	public Set<Product> getProducts(@PathVariable String reference) {
+		return mouvmentService.getProducts(mouvmentService.getMouvment(reference));
 	}
 
 	@RequestMapping(value="/{idMouvment}/lines", method = RequestMethod.GET)
